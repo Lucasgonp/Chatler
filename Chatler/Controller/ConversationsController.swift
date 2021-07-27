@@ -69,7 +69,7 @@ class ConversationsController: UIViewController {
     }
     
     @objc func showProfile() {
-        
+        print("show profile")
     }
 }
 
