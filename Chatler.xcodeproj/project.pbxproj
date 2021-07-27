@@ -15,6 +15,7 @@
 		B1B0265726AF660B008F726F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B1B0265526AF660B008F726F /* LaunchScreen.storyboard */; };
 		B1B0266226AF660B008F726F /* ChatlerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1B0266126AF660B008F726F /* ChatlerTests.swift */; };
 		B1B0266D26AF660B008F726F /* ChatlerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1B0266C26AF660B008F726F /* ChatlerUITests.swift */; };
+		B1B0268326AF66D0008F726F /* ConversationsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1B0268226AF66D0008F726F /* ConversationsController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +50,7 @@
 		B1B0266826AF660B008F726F /* ChatlerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ChatlerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B1B0266C26AF660B008F726F /* ChatlerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatlerUITests.swift; sourceTree = "<group>"; };
 		B1B0266E26AF660B008F726F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B1B0268226AF66D0008F726F /* ConversationsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationsController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +101,12 @@
 		B1B0264926AF6609008F726F /* Chatler */ = {
 			isa = PBXGroup;
 			children = (
+				B1B0268126AF6657008F726F /* Model */,
+				B1B0268026AF6655008F726F /* View */,
+				B1B0267F26AF6654008F726F /* ViewModel */,
+				B1B0267E26AF6653008F726F /* Controller */,
+				B1B0267D26AF6651008F726F /* API */,
+				B1B0267A26AF6648008F726F /* Utils */,
 				B1B0264A26AF6609008F726F /* AppDelegate.swift */,
 				B1B0264C26AF6609008F726F /* SceneDelegate.swift */,
 				B1B0264E26AF6609008F726F /* ViewController.swift */,
@@ -126,6 +134,49 @@
 				B1B0266E26AF660B008F726F /* Info.plist */,
 			);
 			path = ChatlerUITests;
+			sourceTree = "<group>";
+		};
+		B1B0267A26AF6648008F726F /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		B1B0267D26AF6651008F726F /* API */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
+		B1B0267E26AF6653008F726F /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				B1B0268226AF66D0008F726F /* ConversationsController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		B1B0267F26AF6654008F726F /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		B1B0268026AF6655008F726F /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		B1B0268126AF6657008F726F /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -260,6 +311,7 @@
 			files = (
 				B1B0264F26AF6609008F726F /* ViewController.swift in Sources */,
 				B1B0264B26AF6609008F726F /* AppDelegate.swift in Sources */,
+				B1B0268326AF66D0008F726F /* ConversationsController.swift in Sources */,
 				B1B0264D26AF6609008F726F /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
