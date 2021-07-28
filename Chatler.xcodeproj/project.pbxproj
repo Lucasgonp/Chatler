@@ -3,19 +3,33 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		019FC209E60C87AA085AD48B /* Pods_ChatlerTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B32AF8336502DA5C67FFDCDD /* Pods_ChatlerTests.framework */; };
+		6F3439A6995E7F1FE565F2D4 /* Pods_Chatler_ChatlerUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B7BB4CAEBCD6BD01190D34D /* Pods_Chatler_ChatlerUITests.framework */; };
+		730F5A0C3F72C5254FAB69EA /* Pods_Chatler.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F6BA2C3012B5FA06F4A80E98 /* Pods_Chatler.framework */; };
+		B17BD9CF26B0886C0010CF3B /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = B17BD9CE26B0886C0010CF3B /* CustomTextField.swift */; };
+		B17BD9D126B090210010CF3B /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = B17BD9D026B090210010CF3B /* Colors.swift */; };
+		B17BD9D326B09ECD0010CF3B /* Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = B17BD9D226B09ECD0010CF3B /* Images.swift */; };
+		B17BD9E026B0A8D70010CF3B /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = B17BD9DF26B0A8D70010CF3B /* Strings.swift */; };
+		B17BD9E226B0AEB70010CF3B /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = B17BD9E126B0AEB70010CF3B /* Fonts.swift */; };
+		B17BDAAC26B1BCDD0010CF3B /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = B17BDAAB26B1BCDD0010CF3B /* Localizable.strings */; };
+		B17BDAAF26B1FCE70010CF3B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B17BDAAE26B1FCE70010CF3B /* ViewController.swift */; };
+		B17BDAB126B2125F0010CF3B /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B17BDAB026B2125F0010CF3B /* CustomButton.swift */; };
 		B1B0264B26AF6609008F726F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1B0264A26AF6609008F726F /* AppDelegate.swift */; };
 		B1B0264D26AF6609008F726F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1B0264C26AF6609008F726F /* SceneDelegate.swift */; };
-		B1B0264F26AF6609008F726F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1B0264E26AF6609008F726F /* ViewController.swift */; };
 		B1B0265226AF6609008F726F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B1B0265026AF6609008F726F /* Main.storyboard */; };
 		B1B0265426AF660A008F726F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B1B0265326AF660A008F726F /* Assets.xcassets */; };
 		B1B0265726AF660B008F726F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B1B0265526AF660B008F726F /* LaunchScreen.storyboard */; };
 		B1B0266226AF660B008F726F /* ChatlerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1B0266126AF660B008F726F /* ChatlerTests.swift */; };
 		B1B0266D26AF660B008F726F /* ChatlerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1B0266C26AF660B008F726F /* ChatlerUITests.swift */; };
 		B1B0268326AF66D0008F726F /* ConversationsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1B0268226AF66D0008F726F /* ConversationsController.swift */; };
+		B1B0268626B03141008F726F /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1B0268526B03141008F726F /* LoginController.swift */; };
+		B1B0268826B0314B008F726F /* RegistrationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1B0268726B0314B008F726F /* RegistrationController.swift */; };
+		B1B026EB26B0378C008F726F /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1B026EA26B0378C008F726F /* Extensions.swift */; };
+		B1B026ED26B048AA008F726F /* InputContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1B026EC26B048AA008F726F /* InputContainerView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,10 +50,23 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2B7BB4CAEBCD6BD01190D34D /* Pods_Chatler_ChatlerUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Chatler_ChatlerUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3F20A7756668B5AB356FBE62 /* Pods-Chatler-ChatlerUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Chatler-ChatlerUITests.release.xcconfig"; path = "Target Support Files/Pods-Chatler-ChatlerUITests/Pods-Chatler-ChatlerUITests.release.xcconfig"; sourceTree = "<group>"; };
+		46077ADC570858C6EE51FCFB /* Pods-Chatler-ChatlerUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Chatler-ChatlerUITests.debug.xcconfig"; path = "Target Support Files/Pods-Chatler-ChatlerUITests/Pods-Chatler-ChatlerUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		986805C7F5E9451ECBC0323E /* Pods-Chatler.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Chatler.release.xcconfig"; path = "Target Support Files/Pods-Chatler/Pods-Chatler.release.xcconfig"; sourceTree = "<group>"; };
+		B17BD9CE26B0886C0010CF3B /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
+		B17BD9D026B090210010CF3B /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
+		B17BD9D226B09ECD0010CF3B /* Images.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Images.swift; sourceTree = "<group>"; };
+		B17BD9D426B0A6010010CF3B /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/Main.strings"; sourceTree = "<group>"; };
+		B17BD9D526B0A6010010CF3B /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
+		B17BD9DF26B0A8D70010CF3B /* Strings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
+		B17BD9E126B0AEB70010CF3B /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
+		B17BDAAB26B1BCDD0010CF3B /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
+		B17BDAAE26B1FCE70010CF3B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		B17BDAB026B2125F0010CF3B /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
 		B1B0264726AF6608008F726F /* Chatler.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Chatler.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B1B0264A26AF6609008F726F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B1B0264C26AF6609008F726F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		B1B0264E26AF6609008F726F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		B1B0265126AF6609008F726F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		B1B0265326AF660A008F726F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B1B0265626AF660B008F726F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -51,6 +78,15 @@
 		B1B0266C26AF660B008F726F /* ChatlerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatlerUITests.swift; sourceTree = "<group>"; };
 		B1B0266E26AF660B008F726F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B1B0268226AF66D0008F726F /* ConversationsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationsController.swift; sourceTree = "<group>"; };
+		B1B0268526B03141008F726F /* LoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
+		B1B0268726B0314B008F726F /* RegistrationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationController.swift; sourceTree = "<group>"; };
+		B1B026EA26B0378C008F726F /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		B1B026EC26B048AA008F726F /* InputContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputContainerView.swift; sourceTree = "<group>"; };
+		B32AF8336502DA5C67FFDCDD /* Pods_ChatlerTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChatlerTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D3CC46EFE99BDEAC9AE8FE22 /* Pods-ChatlerTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChatlerTests.release.xcconfig"; path = "Target Support Files/Pods-ChatlerTests/Pods-ChatlerTests.release.xcconfig"; sourceTree = "<group>"; };
+		F6BA2C3012B5FA06F4A80E98 /* Pods_Chatler.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Chatler.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F876ABDB1A2C253BF6184429 /* Pods-Chatler.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Chatler.debug.xcconfig"; path = "Target Support Files/Pods-Chatler/Pods-Chatler.debug.xcconfig"; sourceTree = "<group>"; };
+		FCB3A5936EBEA6503B2CC13F /* Pods-ChatlerTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChatlerTests.debug.xcconfig"; path = "Target Support Files/Pods-ChatlerTests/Pods-ChatlerTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +94,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				730F5A0C3F72C5254FAB69EA /* Pods_Chatler.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -65,6 +102,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				019FC209E60C87AA085AD48B /* Pods_ChatlerTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -72,12 +110,52 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6F3439A6995E7F1FE565F2D4 /* Pods_Chatler_ChatlerUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4D0C4315F1B084124422F21C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				F6BA2C3012B5FA06F4A80E98 /* Pods_Chatler.framework */,
+				2B7BB4CAEBCD6BD01190D34D /* Pods_Chatler_ChatlerUITests.framework */,
+				B32AF8336502DA5C67FFDCDD /* Pods_ChatlerTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		6505F9F9F84C51811E5FF40F /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				F876ABDB1A2C253BF6184429 /* Pods-Chatler.debug.xcconfig */,
+				986805C7F5E9451ECBC0323E /* Pods-Chatler.release.xcconfig */,
+				46077ADC570858C6EE51FCFB /* Pods-Chatler-ChatlerUITests.debug.xcconfig */,
+				3F20A7756668B5AB356FBE62 /* Pods-Chatler-ChatlerUITests.release.xcconfig */,
+				FCB3A5936EBEA6503B2CC13F /* Pods-ChatlerTests.debug.xcconfig */,
+				D3CC46EFE99BDEAC9AE8FE22 /* Pods-ChatlerTests.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		B17BD9D626B0A62B0010CF3B /* Localizable */ = {
+			isa = PBXGroup;
+			children = (
+				B17BDAAB26B1BCDD0010CF3B /* Localizable.strings */,
+			);
+			path = Localizable;
+			sourceTree = "<group>";
+		};
+		B17BDAAD26B1FCC80010CF3B /* ViewConfiguration */ = {
+			isa = PBXGroup;
+			children = (
+				B17BDAAE26B1FCE70010CF3B /* ViewController.swift */,
+			);
+			path = ViewConfiguration;
+			sourceTree = "<group>";
+		};
 		B1B0263E26AF6608008F726F = {
 			isa = PBXGroup;
 			children = (
@@ -85,6 +163,8 @@
 				B1B0266026AF660B008F726F /* ChatlerTests */,
 				B1B0266B26AF660B008F726F /* ChatlerUITests */,
 				B1B0264826AF6608008F726F /* Products */,
+				6505F9F9F84C51811E5FF40F /* Pods */,
+				4D0C4315F1B084124422F21C /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -101,6 +181,7 @@
 		B1B0264926AF6609008F726F /* Chatler */ = {
 			isa = PBXGroup;
 			children = (
+				B17BD9D626B0A62B0010CF3B /* Localizable */,
 				B1B0268126AF6657008F726F /* Model */,
 				B1B0268026AF6655008F726F /* View */,
 				B1B0267F26AF6654008F726F /* ViewModel */,
@@ -109,7 +190,6 @@
 				B1B0267A26AF6648008F726F /* Utils */,
 				B1B0264A26AF6609008F726F /* AppDelegate.swift */,
 				B1B0264C26AF6609008F726F /* SceneDelegate.swift */,
-				B1B0264E26AF6609008F726F /* ViewController.swift */,
 				B1B0265026AF6609008F726F /* Main.storyboard */,
 				B1B0265326AF660A008F726F /* Assets.xcassets */,
 				B1B0265526AF660B008F726F /* LaunchScreen.storyboard */,
@@ -139,6 +219,12 @@
 		B1B0267A26AF6648008F726F /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				B17BDAAD26B1FCC80010CF3B /* ViewConfiguration */,
+				B1B026EA26B0378C008F726F /* Extensions.swift */,
+				B17BD9D026B090210010CF3B /* Colors.swift */,
+				B17BD9D226B09ECD0010CF3B /* Images.swift */,
+				B17BD9DF26B0A8D70010CF3B /* Strings.swift */,
+				B17BD9E126B0AEB70010CF3B /* Fonts.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -153,6 +239,7 @@
 		B1B0267E26AF6653008F726F /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				B1B0268426B0312C008F726F /* Authentication */,
 				B1B0268226AF66D0008F726F /* ConversationsController.swift */,
 			);
 			path = Controller;
@@ -168,6 +255,9 @@
 		B1B0268026AF6655008F726F /* View */ = {
 			isa = PBXGroup;
 			children = (
+				B1B026EC26B048AA008F726F /* InputContainerView.swift */,
+				B17BD9CE26B0886C0010CF3B /* CustomTextField.swift */,
+				B17BDAB026B2125F0010CF3B /* CustomButton.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -179,6 +269,15 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		B1B0268426B0312C008F726F /* Authentication */ = {
+			isa = PBXGroup;
+			children = (
+				B1B0268526B03141008F726F /* LoginController.swift */,
+				B1B0268726B0314B008F726F /* RegistrationController.swift */,
+			);
+			path = Authentication;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -186,9 +285,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = B1B0267126AF660B008F726F /* Build configuration list for PBXNativeTarget "Chatler" */;
 			buildPhases = (
+				2C228950E8CCF00CE12D6672 /* [CP] Check Pods Manifest.lock */,
 				B1B0264326AF6608008F726F /* Sources */,
 				B1B0264426AF6608008F726F /* Frameworks */,
 				B1B0264526AF6608008F726F /* Resources */,
+				F971DF7D379F71C2090B4631 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -203,9 +304,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = B1B0267426AF660B008F726F /* Build configuration list for PBXNativeTarget "ChatlerTests" */;
 			buildPhases = (
+				CE22F3C800708A722BB5D2E8 /* [CP] Check Pods Manifest.lock */,
 				B1B0265926AF660B008F726F /* Sources */,
 				B1B0265A26AF660B008F726F /* Frameworks */,
 				B1B0265B26AF660B008F726F /* Resources */,
+				44E482D373F820D3244AE2A6 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -221,9 +324,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = B1B0267726AF660B008F726F /* Build configuration list for PBXNativeTarget "ChatlerUITests" */;
 			buildPhases = (
+				630971FD83F7BF54C0575182 /* [CP] Check Pods Manifest.lock */,
 				B1B0266426AF660B008F726F /* Sources */,
 				B1B0266526AF660B008F726F /* Frameworks */,
 				B1B0266626AF660B008F726F /* Resources */,
+				E843EC67201F7EA4840F2DB7 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -264,6 +369,7 @@
 			knownRegions = (
 				en,
 				Base,
+				"pt-BR",
 			);
 			mainGroup = B1B0263E26AF6608008F726F;
 			productRefGroup = B1B0264826AF6608008F726F /* Products */;
@@ -283,6 +389,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B1B0265726AF660B008F726F /* LaunchScreen.storyboard in Resources */,
+				B17BDAAC26B1BCDD0010CF3B /* Localizable.strings in Resources */,
 				B1B0265426AF660A008F726F /* Assets.xcassets in Resources */,
 				B1B0265226AF6609008F726F /* Main.storyboard in Resources */,
 			);
@@ -304,15 +411,145 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		2C228950E8CCF00CE12D6672 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Chatler-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		44E482D373F820D3244AE2A6 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ChatlerTests/Pods-ChatlerTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ChatlerTests/Pods-ChatlerTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ChatlerTests/Pods-ChatlerTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		630971FD83F7BF54C0575182 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Chatler-ChatlerUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		CE22F3C800708A722BB5D2E8 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-ChatlerTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E843EC67201F7EA4840F2DB7 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Chatler-ChatlerUITests/Pods-Chatler-ChatlerUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Chatler-ChatlerUITests/Pods-Chatler-ChatlerUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Chatler-ChatlerUITests/Pods-Chatler-ChatlerUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F971DF7D379F71C2090B4631 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Chatler/Pods-Chatler-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Chatler/Pods-Chatler-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Chatler/Pods-Chatler-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		B1B0264326AF6608008F726F /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B1B0264F26AF6609008F726F /* ViewController.swift in Sources */,
+				B1B026ED26B048AA008F726F /* InputContainerView.swift in Sources */,
 				B1B0264B26AF6609008F726F /* AppDelegate.swift in Sources */,
+				B17BD9D326B09ECD0010CF3B /* Images.swift in Sources */,
 				B1B0268326AF66D0008F726F /* ConversationsController.swift in Sources */,
+				B17BDAB126B2125F0010CF3B /* CustomButton.swift in Sources */,
 				B1B0264D26AF6609008F726F /* SceneDelegate.swift in Sources */,
+				B1B0268826B0314B008F726F /* RegistrationController.swift in Sources */,
+				B1B0268626B03141008F726F /* LoginController.swift in Sources */,
+				B17BD9D126B090210010CF3B /* Colors.swift in Sources */,
+				B17BDAAF26B1FCE70010CF3B /* ViewController.swift in Sources */,
+				B1B026EB26B0378C008F726F /* Extensions.swift in Sources */,
+				B17BD9E226B0AEB70010CF3B /* Fonts.swift in Sources */,
+				B17BD9E026B0A8D70010CF3B /* Strings.swift in Sources */,
+				B17BD9CF26B0886C0010CF3B /* CustomTextField.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -352,6 +589,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				B1B0265126AF6609008F726F /* Base */,
+				B17BD9D426B0A6010010CF3B /* pt-BR */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -360,6 +598,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				B1B0265626AF660B008F726F /* Base */,
+				B17BD9D526B0A6010010CF3B /* pt-BR */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -371,6 +610,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -432,6 +672,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -485,6 +726,7 @@
 		};
 		B1B0267226AF660B008F726F /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F876ABDB1A2C253BF6184429 /* Pods-Chatler.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -504,6 +746,7 @@
 		};
 		B1B0267326AF660B008F726F /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 986805C7F5E9451ECBC0323E /* Pods-Chatler.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -523,6 +766,7 @@
 		};
 		B1B0267526AF660B008F726F /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = FCB3A5936EBEA6503B2CC13F /* Pods-ChatlerTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -545,6 +789,7 @@
 		};
 		B1B0267626AF660B008F726F /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D3CC46EFE99BDEAC9AE8FE22 /* Pods-ChatlerTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -567,6 +812,7 @@
 		};
 		B1B0267826AF660B008F726F /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 46077ADC570858C6EE51FCFB /* Pods-Chatler-ChatlerUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -587,6 +833,7 @@
 		};
 		B1B0267926AF660B008F726F /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3F20A7756668B5AB356FBE62 /* Pods-Chatler-ChatlerUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;

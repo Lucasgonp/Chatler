@@ -13,7 +13,7 @@ class ConversationsController: UIViewController {
     
     // MARK:- Proprieties
     private var profileButton: UIBarButtonItem = {
-        let img = UIImage(systemName: "person.circle.fill")
+        let img = Images.Login.profile
         let item = UIBarButtonItem(image: img, style: .plain, target: self, action: #selector(showProfile))
         return item
     }()
@@ -38,26 +38,8 @@ class ConversationsController: UIViewController {
     func configureUI() {
         view.backgroundColor = .white
         
-        configureNavigationBar()
+        configureNavigationBar(withTitle: Strings.Conversations.title, prefersLargeTitles: true)
         configureTableView()
-    }
-    
-    func configureNavigationBar() {
-        let appearane = UINavigationBarAppearance()
-        appearane.configureWithOpaqueBackground()
-        appearane.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
-        appearane.backgroundColor = .systemPurple
-        
-        navigationController?.navigationBar.standardAppearance = appearane
-        navigationController?.navigationBar.compactAppearance = appearane
-        navigationController?.navigationBar.scrollEdgeAppearance = appearane
-        
-        navigationController?.navigationBar.prefersLargeTitles = true
-        navigationItem.title = "Messages"
-        navigationController?.navigationBar.tintColor = .white
-        navigationController?.navigationBar.isTranslucent = true
-        
-        navigationController?.navigationBar.overrideUserInterfaceStyle = .dark
     }
     
     func configureTableView() {
@@ -69,7 +51,7 @@ class ConversationsController: UIViewController {
     }
     
     @objc func showProfile() {
-        print("show profile")
+        
     }
 }
 

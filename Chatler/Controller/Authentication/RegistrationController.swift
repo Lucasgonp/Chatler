@@ -1,0 +1,113 @@
+//
+//  RegistrationController.swift
+//  Chatler
+//
+//  Created by Lucas Pereira on 27/07/21.
+//
+
+import UIKit
+
+class RegistrationController: ViewController {
+    
+    // MARK:- Proprieties
+    
+    private let plusPhotoButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setImage(Images.Login.addPhoto, for: .normal)
+        button.tintColor = Colors.white
+        button.addTarget(self, action: #selector(handleSelectPhoto), for: .touchUpInside)
+        
+        return button
+    }()
+    
+    private let signUpButton: PrimaryButton = {
+        let button = PrimaryButton(title: Strings.Register.signUpButton)
+        
+        return button
+    }()
+    
+    private let alreadyHaveAccountButton: UIButton = {
+        let button = SecundaryButton(textTitle: Strings.Register.alreadyHaveAccountTextButton,
+                                     textAction: Strings.Register.alreadyHaveAccountActionButton,
+                                     action: #selector(handleShowLogin),
+                                     target: self)
+        return button
+    }()
+    
+    private lazy var stackView: UIStackView = {
+        let stack = UIStackView(arrangedSubviews: [emailContainerView,
+                                                   fullNameContainerView,
+                                                   usernameContainerView,
+                                                   passwordContainerView,
+                                                   signUpButton])
+        stack.axis = .vertical
+        stack.spacing = 16
+        return stack
+    }()
+    
+    private lazy var emailContainerView = InputContainerView(image: Images.Login.envelope, textField: emailTextField)
+    
+    private lazy var fullNameContainerView = InputContainerView(image: Images.Login.profile, textField: fullNameTextField)
+    
+    private lazy var usernameContainerView = InputContainerView(image: Images.Login.profile, textField: usernameTextField)
+    
+    private lazy var passwordContainerView = InputContainerView(image: Images.Login.lock, textField: passwordTextField)
+    
+    private let emailTextField = CustomTextField(placeholder: Strings.Login.emailPlaceholder)
+    
+    private let fullNameTextField = CustomTextField(placeholder: Strings.Register.fullNamePlaceholder)
+    
+    private let usernameTextField = CustomTextField(placeholder: Strings.Register.usernamePlaceholder)
+    
+    private let passwordTextField: UITextField = {
+        let textField = CustomTextField(placeholder: Strings.Login.passwordPlaceholder)
+        textField.isSecureTextEntry = true
+        return textField
+    }()
+    
+    // MARK:- Lifecicle
+    
+   override func configureUI() {
+        configureGradientLayer()
+    }
+    
+    override func buildViewHierarchy() {
+        view.addSubview(plusPhotoButton)
+        view.addSubview(stackView)
+        view.addSubview(alreadyHaveAccountButton)
+    }
+    
+    override func configureViews() {
+        
+    }
+    
+    override func setupConstraints() {
+        plusPhotoButton.snp.makeConstraints {
+            $0.centerX.equalToSuperview()
+            $0.topMargin.equalTo(view.snp.topMargin).offset(32)
+            $0.height.width.equalTo(200)
+        }
+        
+        stackView.snp.makeConstraints {
+            $0.topMargin.equalTo(plusPhotoButton.snp.bottom).offset(32)
+            $0.leftMargin.equalTo(view.snp.left).offset(32)
+            $0.rightMargin.equalTo(view.snp.right).offset(-32)
+        }
+        
+        alreadyHaveAccountButton.snp.makeConstraints{
+            $0.bottom.equalTo(view.snp.bottomMargin)
+            $0.left.equalTo(view.snp.leftMargin).offset(32)
+            $0.right.equalTo(view.snp.rightMargin).offset(-32)
+        }
+    }
+    
+    //MARK: - Helpers
+    
+    @objc func handleSelectPhoto() {
+        
+    }
+    
+    @objc func handleShowLogin() {
+        navigationController?.popViewController(animated: true)
+    }
+}

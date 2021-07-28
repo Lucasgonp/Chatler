@@ -1,0 +1,16 @@
+// Login
+"email.placeholder" = "E-mail";
+"password.placeholder" = "Password";
+"loginButton" = "Log in";
+"dontHaveAccountTextButton" = "Don`t have an account?  ";
+"dontHaveAccountActionButton" = "Sign up";
+
+// Register
+"full.name.placeholder" = "Full name";
+"username.placeholder" = "Username";
+"signup.button" = "Register";
+"alreadyHaveAccountTextButton" = "Already have an account? ";
+"alreadyHaveAccountActionButton" = "Sign up";
+
+// Conversations
+"title" = "Messages";
