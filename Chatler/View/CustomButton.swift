@@ -8,16 +8,20 @@
 import UIKit
 
 class PrimaryButton: UIButton {
-    init(title: String) {
+    init(title: String, action: Selector, target: Any?) {
         super.init(frame: .zero)
         
         setTitle(title, for: .normal)
         layer.cornerRadius = 5
-        titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
+        titleLabel?.font = Fonts.defaultBold(size: 18)
         backgroundColor = Colors.confirmButton
         setTitleColor(.white, for: .normal)
-        setHeight(height: 50)
         
+        addTarget(target, action: action, for: .touchUpInside)
+        
+        snp.makeConstraints {
+            $0.height.equalTo(50)
+        }
     }
     
     required init?(coder: NSCoder) {
@@ -26,7 +30,7 @@ class PrimaryButton: UIButton {
 }
 
 class SecundaryButton: UIButton {
-    init(textTitle: String, textAction: String, action: Selector? = nil, target: Any?) {
+    init(textTitle: String, textAction: String, action: Selector, target: Any?) {
         super.init(frame: .zero)
         
         let attributedTitle = NSMutableAttributedString(string: textTitle,
@@ -44,11 +48,7 @@ class SecundaryButton: UIButton {
 //                                                               .foregroundColor: Colors.firstColor]))
         
         setAttributedTitle(attributedTitle, for: .normal)
-        addTarget(target, action: action  ?? #selector(defaultAction), for: .touchUpInside)
-    }
-    
-    @objc func defaultAction() {
-        
+        addTarget(target, action: action, for: .touchUpInside)
     }
     
     required init?(coder: NSCoder) {

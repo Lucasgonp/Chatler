@@ -8,9 +8,15 @@
 import SnapKit
 import UIKit
 
+protocol AuthenticationControllerProtocol {
+    func checkFormStatus()
+}
+
 class LoginController: ViewController {
     
     // MARK: - Proprieties
+    
+    private var viewModel = LoginViewModel()
     
     private let iconImage: UIImageView = {
         let imageView = UIImageView()
@@ -24,9 +30,10 @@ class LoginController: ViewController {
     
     private lazy var passwordContainerView = InputContainerView(image: Images.Login.lock, textField: passwordTextField)
     
-    private let loginButton: PrimaryButton = {
-        let button = PrimaryButton(title: Strings.Login.loginButton)
-        
+    private lazy var loginButton: PrimaryButton = {
+        let button = PrimaryButton(title: Strings.Login.loginButton, action: #selector(handleLogin), target: self)
+        button.backgroundColor = .systemGray5
+        button.isEnabled = false
         return button
     }()
     
@@ -72,7 +79,8 @@ class LoginController: ViewController {
     }
     
     override func configureViews() {
-        configureRegisterButton()
+        emailTextField.addTarget(self, action: #selector(textDidChange), for: .editingChanged)
+        passwordTextField.addTarget(self, action: #selector(textDidChange), for: .editingChanged)
     }
     
     override func setupConstraints() {
@@ -97,9 +105,23 @@ class LoginController: ViewController {
     
     // MARK: - Selectors
     
+    @objc func handleLogin() {
+        
+    }
+    
     @objc func handleShowSignUp() {
         let controller = RegistrationController()
         navigationController?.pushViewController(controller, animated: true)
+    }
+    
+    @objc func textDidChange(sender: UITextField) {
+        if sender == emailTextField {
+            viewModel.email = sender.text
+        } else {
+            viewModel.password = sender.text
+        }
+        
+        checkFormStatus()
     }
     
 
@@ -112,5 +134,17 @@ class LoginController: ViewController {
     
     func configureRegisterButton() {
      //   dontHaveAccountButton.anchor()
+    }
+}
+
+extension LoginController: AuthenticationControllerProtocol {
+    func checkFormStatus() {
+        if viewModel.formIsValid {
+            loginButton.isEnabled = true
+            loginButton.backgroundColor = .systemPurple
+        } else {
+            loginButton.isEnabled = false
+            loginButton.backgroundColor = .systemGray5
+        }
     }
 }
