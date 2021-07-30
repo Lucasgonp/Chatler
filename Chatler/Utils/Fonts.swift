@@ -7,7 +7,7 @@
 
 import UIKit
 
-class Fonts {
+struct Fonts {
     static func defaultLight(size: CGFloat) -> UIFont {
         UIFont.systemFont(ofSize: size)
     }
