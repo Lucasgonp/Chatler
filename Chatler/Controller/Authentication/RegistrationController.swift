@@ -6,12 +6,26 @@
 //
 
 import UIKit
+import FirebaseAuth
+import FirebaseStorage
+import FirebaseFirestore
+
+protocol RegistrationControllerDelegate: AnyObject {
+    func showLoading(text: String?)
+    func dismiss()
+}
 
 class RegistrationController: ViewController {
     
     // MARK:- Proprieties
     
-    private var viewModel = RegistrationViewModel()
+    private let viewModel: RegistrationViewModel
+    
+    private var profileImage: UIImage? {
+        didSet {
+            viewModel.profileImage = profileImage
+        }
+    }
     
     private let plusPhotoButton: UIButton = {
         let button = UIButton(type: .system)
@@ -73,7 +87,17 @@ class RegistrationController: ViewController {
     
     // MARK:- Lifecicle
     
-   override func configureUI() {
+    init(viewModel: RegistrationViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+        self.viewModel.controller = self
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func configureUI() {
         configureGradientLayer()
     }
     
@@ -124,6 +148,7 @@ class RegistrationController: ViewController {
     }
     
     @objc func handleSignUp() {
+        viewModel.loadSignUpUser()
         
     }
     
@@ -146,7 +171,13 @@ class RegistrationController: ViewController {
     }
 }
 
-extension RegistrationController: AuthenticationControllerProtocol {
+extension RegistrationController: RegistrationControllerDelegate {
+    func dismiss() {
+        hideLoading {
+            self.dismiss(animated: true)
+        }
+    }
+    
     func checkFormStatus() {
         if viewModel.formIsValid {
             signUpButton.isEnabled = true
@@ -163,6 +194,7 @@ extension RegistrationController: AuthenticationControllerProtocol {
 extension RegistrationController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         let image = info[.originalImage] as? UIImage
+        profileImage = image
         plusPhotoButton.setImage(image?.withRenderingMode(.alwaysOriginal), for: .normal)
         plusPhotoButton.layer.borderColor = UIColor(white: 1, alpha: 0.7).cgColor
         plusPhotoButton.layer.borderWidth = 3.0

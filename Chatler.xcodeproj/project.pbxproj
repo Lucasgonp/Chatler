@@ -10,6 +10,13 @@
 		019FC209E60C87AA085AD48B /* Pods_ChatlerTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B32AF8336502DA5C67FFDCDD /* Pods_ChatlerTests.framework */; };
 		6F3439A6995E7F1FE565F2D4 /* Pods_Chatler_ChatlerUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B7BB4CAEBCD6BD01190D34D /* Pods_Chatler_ChatlerUITests.framework */; };
 		730F5A0C3F72C5254FAB69EA /* Pods_Chatler.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F6BA2C3012B5FA06F4A80E98 /* Pods_Chatler.framework */; };
+		B1287D4B26B301BD0027E263 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B1287D4A26B301BD0027E263 /* GoogleService-Info.plist */; };
+		B1287D4E26B327070027E263 /* ValidationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1287D4D26B327070027E263 /* ValidationService.swift */; };
+		B1287D5026B327350027E263 /* RegistrationForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1287D4F26B327350027E263 /* RegistrationForm.swift */; };
+		B1287D5226B338C40027E263 /* RegistrationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1287D5126B338C40027E263 /* RegistrationService.swift */; };
+		B1287D5526B35DAD0027E263 /* RegistrationPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1287D5426B35DAD0027E263 /* RegistrationPresenter.swift */; };
+		B1287D5726B389190027E263 /* LoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1287D5626B389190027E263 /* LoginService.swift */; };
+		B1287D5926B45EE10027E263 /* LoginPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1287D5826B45EE10027E263 /* LoginPresenter.swift */; };
 		B17BD9CF26B0886C0010CF3B /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = B17BD9CE26B0886C0010CF3B /* CustomTextField.swift */; };
 		B17BD9D126B090210010CF3B /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = B17BD9D026B090210010CF3B /* Colors.swift */; };
 		B17BD9D326B09ECD0010CF3B /* Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = B17BD9D226B09ECD0010CF3B /* Images.swift */; };
@@ -56,6 +63,13 @@
 		3F20A7756668B5AB356FBE62 /* Pods-Chatler-ChatlerUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Chatler-ChatlerUITests.release.xcconfig"; path = "Target Support Files/Pods-Chatler-ChatlerUITests/Pods-Chatler-ChatlerUITests.release.xcconfig"; sourceTree = "<group>"; };
 		46077ADC570858C6EE51FCFB /* Pods-Chatler-ChatlerUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Chatler-ChatlerUITests.debug.xcconfig"; path = "Target Support Files/Pods-Chatler-ChatlerUITests/Pods-Chatler-ChatlerUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		986805C7F5E9451ECBC0323E /* Pods-Chatler.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Chatler.release.xcconfig"; path = "Target Support Files/Pods-Chatler/Pods-Chatler.release.xcconfig"; sourceTree = "<group>"; };
+		B1287D4A26B301BD0027E263 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		B1287D4D26B327070027E263 /* ValidationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationService.swift; sourceTree = "<group>"; };
+		B1287D4F26B327350027E263 /* RegistrationForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationForm.swift; sourceTree = "<group>"; };
+		B1287D5126B338C40027E263 /* RegistrationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationService.swift; sourceTree = "<group>"; };
+		B1287D5426B35DAD0027E263 /* RegistrationPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationPresenter.swift; sourceTree = "<group>"; };
+		B1287D5626B389190027E263 /* LoginService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginService.swift; sourceTree = "<group>"; };
+		B1287D5826B45EE10027E263 /* LoginPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginPresenter.swift; sourceTree = "<group>"; };
 		B17BD9CE26B0886C0010CF3B /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 		B17BD9D026B090210010CF3B /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		B17BD9D226B09ECD0010CF3B /* Images.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Images.swift; sourceTree = "<group>"; };
@@ -144,6 +158,25 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		B1287D4C26B326FB0027E263 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				B1287D4D26B327070027E263 /* ValidationService.swift */,
+				B1287D5126B338C40027E263 /* RegistrationService.swift */,
+				B1287D5626B389190027E263 /* LoginService.swift */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
+		B1287D5326B35D990027E263 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				B1287D5426B35DAD0027E263 /* RegistrationPresenter.swift */,
+				B1287D5826B45EE10027E263 /* LoginPresenter.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
 		B17BD9D626B0A62B0010CF3B /* Localizable */ = {
 			isa = PBXGroup;
 			children = (
@@ -185,6 +218,8 @@
 		B1B0264926AF6609008F726F /* Chatler */ = {
 			isa = PBXGroup;
 			children = (
+				B1287D5326B35D990027E263 /* Presenter */,
+				B1287D4C26B326FB0027E263 /* Service */,
 				B17BD9D626B0A62B0010CF3B /* Localizable */,
 				B1B0268126AF6657008F726F /* Model */,
 				B1B0268026AF6655008F726F /* View */,
@@ -198,6 +233,7 @@
 				B1B0265326AF660A008F726F /* Assets.xcassets */,
 				B1B0265526AF660B008F726F /* LaunchScreen.storyboard */,
 				B1B0265826AF660B008F726F /* Info.plist */,
+				B1287D4A26B301BD0027E263 /* GoogleService-Info.plist */,
 			);
 			path = Chatler;
 			sourceTree = "<group>";
@@ -223,12 +259,12 @@
 		B1B0267A26AF6648008F726F /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				B17BDAAD26B1FCC80010CF3B /* ViewConfiguration */,
 				B1B026EA26B0378C008F726F /* Extensions.swift */,
 				B17BD9D026B090210010CF3B /* Colors.swift */,
 				B17BD9D226B09ECD0010CF3B /* Images.swift */,
 				B17BD9DF26B0A8D70010CF3B /* Strings.swift */,
 				B17BD9E126B0AEB70010CF3B /* Fonts.swift */,
+				B17BDAAD26B1FCC80010CF3B /* ViewConfiguration */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -271,6 +307,7 @@
 		B1B0268126AF6657008F726F /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				B1287D4F26B327350027E263 /* RegistrationForm.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -396,6 +433,7 @@
 			files = (
 				B1B0265726AF660B008F726F /* LaunchScreen.storyboard in Resources */,
 				B17BDAAC26B1BCDD0010CF3B /* Localizable.strings in Resources */,
+				B1287D4B26B301BD0027E263 /* GoogleService-Info.plist in Resources */,
 				B1B0265426AF660A008F726F /* Assets.xcassets in Resources */,
 				B1B0265226AF6609008F726F /* Main.storyboard in Resources */,
 			);
@@ -543,14 +581,20 @@
 			buildActionMask = 2147483647;
 			files = (
 				B1B026ED26B048AA008F726F /* InputContainerView.swift in Sources */,
+				B1287D5526B35DAD0027E263 /* RegistrationPresenter.swift in Sources */,
 				B1B0264B26AF6609008F726F /* AppDelegate.swift in Sources */,
 				B17BD9D326B09ECD0010CF3B /* Images.swift in Sources */,
+				B1287D5926B45EE10027E263 /* LoginPresenter.swift in Sources */,
 				B1B0268326AF66D0008F726F /* ConversationsController.swift in Sources */,
 				B17BDAB126B2125F0010CF3B /* CustomButton.swift in Sources */,
 				B1B0264D26AF6609008F726F /* SceneDelegate.swift in Sources */,
+				B1287D5226B338C40027E263 /* RegistrationService.swift in Sources */,
 				B1B0268826B0314B008F726F /* RegistrationController.swift in Sources */,
 				B1B0268626B03141008F726F /* LoginController.swift in Sources */,
+				B1287D5026B327350027E263 /* RegistrationForm.swift in Sources */,
+				B1287D4E26B327070027E263 /* ValidationService.swift in Sources */,
 				B17BDAB326B21DEF0010CF3B /* LoginViewModel.swift in Sources */,
+				B1287D5726B389190027E263 /* LoginService.swift in Sources */,
 				B17BD9D126B090210010CF3B /* Colors.swift in Sources */,
 				B17BDAAF26B1FCE70010CF3B /* ViewController.swift in Sources */,
 				B1B026EB26B0378C008F726F /* Extensions.swift in Sources */,

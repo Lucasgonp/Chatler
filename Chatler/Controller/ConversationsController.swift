@@ -6,13 +6,15 @@
 //
 
 import UIKit
+import SnapKit
+import FirebaseAuth
 
 private let reuseIdentifier = "ConversationCell"
 
-class ConversationsController: UIViewController {
+class ConversationsController: ViewController {
     
-    // MARK:- Proprieties
-    private var profileButton: UIBarButtonItem = {
+    // MARK: - Proprieties
+    private lazy var profileButton: UIBarButtonItem = {
         let img = Images.Login.profile
         let item = UIBarButtonItem(image: img, style: .plain, target: self, action: #selector(showProfile))
         return item
@@ -32,26 +34,71 @@ class ConversationsController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
+        authenticateUser()
     }
     
-    // MARK:- Proprieties
-    func configureUI() {
+    override func buildViewHierarchy() {
+        view.addSubview(tableView)
+    }
+    
+    override func setupConstraints() {
+        // TODO
+    }
+    
+    // MARK: - API
+    
+    func authenticateUser() {
+        // Is user logged in?
+        if let uid = Auth.auth().currentUser?.uid {
+            print("DEBUG: User ID is \(uid)")
+        } else {
+            print("DEBUG: User is NOT logged in)")
+            presentLoginScreen()
+        }
+    }
+    
+    func logout() {
+        do {
+            try Auth.auth().signOut()
+            print("DEBUG: Signed out!")
+            
+            presentLoginScreen()
+        } catch {
+            print("DEBUG: Error signing out: \(error.localizedDescription)")
+        }
+    }
+    
+    // MARK: - Selectors
+    
+    @objc func showProfile() {
+      logout()
+    }
+    
+    // MARK: - Helpers
+    
+    override func configureUI() {
         view.backgroundColor = .white
         
         configureNavigationBar(withTitle: Strings.Conversations.title, prefersLargeTitles: true)
+        navigationItem.leftBarButtonItem = profileButton
         configureTableView()
     }
     
+    func presentLoginScreen() {
+        DispatchQueue.main.async {
+            let viewModel = LoginViewModel()
+            let controller = LoginController(viewModel: viewModel)
+            let nav = UINavigationController(rootViewController: controller)
+            nav.modalPresentationStyle = .fullScreen
+            self.present(nav, animated: true)
+        }
+    }
+    
     func configureTableView() {
-        view.addSubview(tableView)
         tableView.frame = view.frame
         
         tableView.delegate = self
         tableView.dataSource = self
-    }
-    
-    @objc func showProfile() {
-        
     }
 }
 

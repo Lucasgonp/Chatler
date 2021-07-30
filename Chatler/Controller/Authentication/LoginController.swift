@@ -6,17 +6,22 @@
 //
 
 import SnapKit
+import FirebaseAuth
+import JGProgressHUD
 import UIKit
 
-protocol AuthenticationControllerProtocol {
+protocol LoginControllerDelegate {
+    func showLoading(text: String?)
     func checkFormStatus()
+    func hideLoading()
+    func dismiss()
 }
 
 class LoginController: ViewController {
     
     // MARK: - Proprieties
     
-    private var viewModel = LoginViewModel()
+    private let viewModel: LoginViewModel
     
     private let iconImage: UIImageView = {
         let imageView = UIImageView()
@@ -61,6 +66,17 @@ class LoginController: ViewController {
     }()
     
     // MARK: - Lifecicle
+    
+    init(viewModel: LoginViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+        self.viewModel.controller = self
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -106,12 +122,26 @@ class LoginController: ViewController {
     // MARK: - Selectors
     
     @objc func handleLogin() {
+        guard let email = emailTextField.text,
+              let password = passwordTextField.text else {
+            return
+        }
         
+        viewModel.doLogin()
     }
     
     @objc func handleShowSignUp() {
-        let controller = RegistrationController()
+        
+        let controller = signUpController()
         navigationController?.pushViewController(controller, animated: true)
+    }
+    
+    func signUpController() -> ViewController {
+        let viewModel = RegistrationViewModel()
+        let controller = RegistrationController(viewModel: viewModel)
+        viewModel.controller = controller
+        
+        return controller
     }
     
     @objc func textDidChange(sender: UITextField) {
@@ -137,7 +167,13 @@ class LoginController: ViewController {
     }
 }
 
-extension LoginController: AuthenticationControllerProtocol {
+extension LoginController: LoginControllerDelegate {
+    func dismiss() {
+        hideLoading {
+            self.dismiss(animated: true)
+        }
+    }
+    
     func checkFormStatus() {
         if viewModel.formIsValid {
             loginButton.isEnabled = true

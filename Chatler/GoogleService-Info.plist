@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>1072407370167-6osbnjo05s7mrlnldvdtpcoekie94iru.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.1072407370167-6osbnjo05s7mrlnldvdtpcoekie94iru</string>
+	<key>API_KEY</key>
+	<string>AIzaSyCgmL5W2IBdwnGHgP-yauF6yUH6AAHs1ng</string>
+	<key>GCM_SENDER_ID</key>
+	<string>1072407370167</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>LucasPereira.Chatler</string>
+	<key>PROJECT_ID</key>
+	<string>chatler-be2a5</string>
+	<key>STORAGE_BUCKET</key>
+	<string>chatler-be2a5.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:1072407370167:ios:c2edd826789fd5dadbb032</string>
+</dict>
+</plist>
