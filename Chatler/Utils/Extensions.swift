@@ -82,7 +82,7 @@ extension UIView {
 }
 
 extension UIViewController {
-    static let hud = JGProgressHUD(style: .dark)
+    public static let hud = JGProgressHUD(style: .dark)
 
     func configureGradientLayer() {
         let gradient = CAGradientLayer()

@@ -1,39 +1,14 @@
 //
-//  ViewController.swift
+//  TableViewController.swift
 //  Chatler
 //
-//  Created by Lucas Pereira on 28/07/21.
+//  Created by Lucas Pereira on 01/08/21.
 //
 
 import UIKit
 import JGProgressHUD
 
-public protocol BaseProtocol: AnyObject {
-    func showLoading()
-    func showLoading(text: String)
-    func hideLoading(completion: @escaping () -> ())
-    func hideLoading()
-    
-    func dismiss()
-}
-
-public protocol ViewConfiguration: AnyObject {
-    func configureUI()
-    func buildViewHierarchy()
-    func setupConstraints()
-    func configureViews()
-}
-
-public extension ViewConfiguration {
-    func buildLayout() {
-        configureUI()
-        buildViewHierarchy()
-        setupConstraints()
-        configureViews()
-    }
-}
-
-class ViewController: UIViewController, ViewConfiguration {
+class TableViewController: UITableViewController, ViewConfiguration {
     private var keyboardHeight: CGFloat = 88
     private let hud = JGProgressHUD(style: .dark)
     
@@ -41,6 +16,8 @@ class ViewController: UIViewController, ViewConfiguration {
     
     open override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        view.backgroundColor = .white
+        
         buildLayout()
         hideKeyboardWhenTappedAround()
     }
@@ -54,18 +31,18 @@ class ViewController: UIViewController, ViewConfiguration {
     public func setupConstraints() {}
 }
 
-    // MARK: - Helpers
+// MARK: - Helpers
 
-extension ViewController: BaseProtocol {
+extension TableViewController: BaseProtocol {
     func showLoading() {
         view.endEditing(true)
         
         let text = "Loading..."
         hud.textLabel.text = text
         hud.show(in: view)
-       
+        
         return
-   }
+    }
     
     func showLoading(text: String) {
         view.endEditing(true)
@@ -90,11 +67,17 @@ extension ViewController: BaseProtocol {
     func showDialog(title: String = "Ops!", text: String) {
         let errorDialog = ""
     }
+    
+    // MARK: - Selectors
+    
+    @objc func handleDismissal() {
+        dismiss()
+    }
 }
 
-    // MARK: - Keyboard
+// MARK: - Keyboard
 
-extension ViewController {
+extension TableViewController {
     func setupViewWithKeyboardHeight(height: CGFloat = 88) {
         keyboardHeight = height
         
@@ -103,9 +86,9 @@ extension ViewController {
     }
 }
 
-    // MARK: - Private
+// MARK: - Private
 
-private extension ViewController {
+private extension TableViewController {
     func hideKeyboardWhenTappedAround() {
         let tap = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         tap.cancelsTouchesInView = false

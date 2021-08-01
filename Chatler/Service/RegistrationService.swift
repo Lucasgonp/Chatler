@@ -13,7 +13,7 @@ import FirebaseStorage
 struct RegistrationService {
     static let shared = RegistrationService()
     
-    func prepareImage(filename: String, imageData: Data, completion: @escaping (Result<String, CustomError>) -> ()) {
+    func prepareImage(filename: String, imageData: Data, completion: @escaping (Result<String, LoginError>) -> ()) {
         let ref = Storage.storage().reference(withPath: "profile_images/\(filename)")
         ref.putData(imageData, metadata: nil) { (meta,error) in
             if let error = error {
@@ -26,11 +26,12 @@ struct RegistrationService {
         }
     }
     
-    func signUpNewUser(form: RegistrationForm, completion: @escaping (CustomError?) -> ()) {
+    func signUpNewUser(form: RegistrationForm, completion: @escaping (LoginError?) -> ()) {
         Auth.auth().createUser(withEmail: form.email, password: form.password) { result, error in
-            if let error = error as? CustomError {
+            if let error = error {
                 completion(.creatingUserError)
-                print("Debug: Error while creating user image: \(error.localizedDescription)!!")
+                print("Debug: Error while creating user: \(error.localizedDescription)!!")
+                return
             }
             guard let uid = result?.user.uid else {
                 completion(.getUidError)
@@ -46,7 +47,7 @@ struct RegistrationService {
 
 private extension RegistrationService {
     
-    func handlePreparedImage(ref: StorageReference, completion: @escaping (Result<String, CustomError>) -> ()) {
+    func handlePreparedImage(ref: StorageReference, completion: @escaping (Result<String, LoginError>) -> ()) {
         ref.downloadURL { url, error in
             guard let profileImageUrl = url?.absoluteString else {
                 completion(.failure(.downloadError))
@@ -57,7 +58,7 @@ private extension RegistrationService {
         }
     }
     
-    func uploadUserData(uid: String, form: RegistrationForm, completion: ((CustomError?) -> Void)?) {
+    func uploadUserData(uid: String, form: RegistrationForm, completion: ((LoginError?) -> Void)?) {
         
         let data = ["email": form.email,
                     "fullname": form.fullName,

@@ -13,4 +13,7 @@
 "alreadyHaveAccountActionButton" = "Sign up";
 
 // Conversations
-"title" = "Messages";
+"conversations.title" = "Messages";
+
+//NewMessage
+"newMessage.title" = "New message";

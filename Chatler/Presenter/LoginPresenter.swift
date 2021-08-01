@@ -5,13 +5,17 @@
 //  Created by Lucas Pereira on 29/07/21.
 //
 
-protocol LoginPresenterDelegate {
+protocol LoginPresenterDelegate: BaseProtocol {
     var controller: LoginControllerDelegate? { get set }
     
     func dismiss()
 }
 
 final class LoginPresenter: LoginPresenterDelegate {
+    func showLoading(text: String) {}
+    
+    func hideLoading(completion: @escaping () -> ()) {}
+    
     var controller: LoginControllerDelegate?
     
     func showLoading() {}

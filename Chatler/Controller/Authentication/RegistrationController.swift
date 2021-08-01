@@ -10,10 +10,7 @@ import FirebaseAuth
 import FirebaseStorage
 import FirebaseFirestore
 
-protocol RegistrationControllerDelegate: AnyObject {
-    func showLoading(text: String?)
-    func dismiss()
-}
+protocol RegistrationControllerDelegate: BaseProtocol {}
 
 class RegistrationController: ViewController {
     
@@ -73,11 +70,23 @@ class RegistrationController: ViewController {
     
     private lazy var passwordContainerView = InputContainerView(image: Images.Login.lock, textField: passwordTextField)
     
-    private let emailTextField = CustomTextField(placeholder: Strings.Login.emailPlaceholder)
+    private let emailTextField: CustomTextField = {
+        let textField = CustomTextField(placeholder: Strings.Login.emailPlaceholder)
+        textField.keyboardType = .emailAddress
+        return textField
+    }()
     
-    private let fullNameTextField = CustomTextField(placeholder: Strings.Register.fullNamePlaceholder)
+    private let fullNameTextField: CustomTextField = {
+        let textField = CustomTextField(placeholder: Strings.Register.fullNamePlaceholder)
+        textField.keyboardType = .namePhonePad
+        return textField
+    }()
     
-    private let usernameTextField = CustomTextField(placeholder: Strings.Register.usernamePlaceholder)
+    private let usernameTextField: CustomTextField = {
+        let textField = CustomTextField(placeholder: Strings.Register.usernamePlaceholder)
+        textField.keyboardType = .default
+        return textField
+    }()
     
     private let passwordTextField: UITextField = {
         let textField = CustomTextField(placeholder: Strings.Login.passwordPlaceholder)
@@ -109,6 +118,7 @@ class RegistrationController: ViewController {
     
     override func configureViews() {
         configureNotificationObservers()
+        setupViewWithKeyboardHeight()
     }
     
     override func setupConstraints() {
@@ -172,12 +182,6 @@ class RegistrationController: ViewController {
 }
 
 extension RegistrationController: RegistrationControllerDelegate {
-    func dismiss() {
-        hideLoading {
-            self.dismiss(animated: true)
-        }
-    }
-    
     func checkFormStatus() {
         if viewModel.formIsValid {
             signUpButton.isEnabled = true
@@ -200,6 +204,7 @@ extension RegistrationController: UIImagePickerControllerDelegate, UINavigationC
         plusPhotoButton.layer.borderWidth = 3.0
         plusPhotoButton.layer.cornerRadius = 200 / 2
         
+        checkFormStatus()
         dismiss(animated: true)
     }
 }

@@ -10,11 +10,8 @@ import FirebaseAuth
 import JGProgressHUD
 import UIKit
 
-protocol LoginControllerDelegate {
-    func showLoading(text: String?)
+protocol LoginControllerDelegate: BaseProtocol {
     func checkFormStatus()
-    func hideLoading()
-    func dismiss()
 }
 
 class LoginController: ViewController {
@@ -42,7 +39,11 @@ class LoginController: ViewController {
         return button
     }()
     
-    private let emailTextField = CustomTextField(placeholder: Strings.Login.emailPlaceholder)
+    private let emailTextField: CustomTextField = {
+        let textField = CustomTextField(placeholder: Strings.Login.emailPlaceholder)
+        textField.keyboardType = .emailAddress
+        return textField
+    }()
     
     private let passwordTextField: UITextField = {
         let textField = CustomTextField(placeholder: Strings.Login.passwordPlaceholder)
@@ -122,8 +123,8 @@ class LoginController: ViewController {
     // MARK: - Selectors
     
     @objc func handleLogin() {
-        guard let email = emailTextField.text,
-              let password = passwordTextField.text else {
+        guard let _ = emailTextField.text,
+              let _ = passwordTextField.text else {
             return
         }
         
@@ -168,12 +169,6 @@ class LoginController: ViewController {
 }
 
 extension LoginController: LoginControllerDelegate {
-    func dismiss() {
-        hideLoading {
-            self.dismiss(animated: true)
-        }
-    }
-    
     func checkFormStatus() {
         if viewModel.formIsValid {
             loginButton.isEnabled = true

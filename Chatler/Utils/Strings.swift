@@ -9,7 +9,11 @@ import Foundation
 
 struct Strings {
     struct Conversations {
-        static let title = NSLocalizedString("title", comment: "")
+        static let title = NSLocalizedString("conversations.title", comment: "")
+    }
+    
+    struct NewMessage {
+        static let title = NSLocalizedString("newMessage.title", comment: "")
     }
     
     struct Login {

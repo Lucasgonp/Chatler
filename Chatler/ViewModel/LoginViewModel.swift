@@ -44,6 +44,8 @@ class LoginViewModel: LoginViewModelDelegate {
                 return
             }
             
+            self.controller?.hideLoading()
+            
             self.presenter.dismiss()
         }
     }

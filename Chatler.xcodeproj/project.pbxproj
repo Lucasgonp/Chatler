@@ -17,6 +17,13 @@
 		B1287D5526B35DAD0027E263 /* RegistrationPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1287D5426B35DAD0027E263 /* RegistrationPresenter.swift */; };
 		B1287D5726B389190027E263 /* LoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1287D5626B389190027E263 /* LoginService.swift */; };
 		B1287D5926B45EE10027E263 /* LoginPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1287D5826B45EE10027E263 /* LoginPresenter.swift */; };
+		B1287D5B26B72F6B0027E263 /* NewMessageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1287D5A26B72F6B0027E263 /* NewMessageController.swift */; };
+		B1287D5F26B732B50027E263 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1287D5E26B732B50027E263 /* TableViewController.swift */; };
+		B1287D6126B7364A0027E263 /* UserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1287D6026B7364A0027E263 /* UserCell.swift */; };
+		B1287D6326B747740027E263 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1287D6226B747740027E263 /* User.swift */; };
+		B1287D6526B747D30027E263 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1287D6426B747D30027E263 /* Service.swift */; };
+		B1287D6726B74A030027E263 /* NewMessageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1287D6626B74A030027E263 /* NewMessageViewModel.swift */; };
+		B1287D6926B74A980027E263 /* NewMessagePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1287D6826B74A980027E263 /* NewMessagePresenter.swift */; };
 		B17BD9CF26B0886C0010CF3B /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = B17BD9CE26B0886C0010CF3B /* CustomTextField.swift */; };
 		B17BD9D126B090210010CF3B /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = B17BD9D026B090210010CF3B /* Colors.swift */; };
 		B17BD9D326B09ECD0010CF3B /* Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = B17BD9D226B09ECD0010CF3B /* Images.swift */; };
@@ -70,6 +77,13 @@
 		B1287D5426B35DAD0027E263 /* RegistrationPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationPresenter.swift; sourceTree = "<group>"; };
 		B1287D5626B389190027E263 /* LoginService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginService.swift; sourceTree = "<group>"; };
 		B1287D5826B45EE10027E263 /* LoginPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginPresenter.swift; sourceTree = "<group>"; };
+		B1287D5A26B72F6B0027E263 /* NewMessageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewMessageController.swift; sourceTree = "<group>"; };
+		B1287D5E26B732B50027E263 /* TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
+		B1287D6026B7364A0027E263 /* UserCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCell.swift; sourceTree = "<group>"; };
+		B1287D6226B747740027E263 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		B1287D6426B747D30027E263 /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
+		B1287D6626B74A030027E263 /* NewMessageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewMessageViewModel.swift; sourceTree = "<group>"; };
+		B1287D6826B74A980027E263 /* NewMessagePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewMessagePresenter.swift; sourceTree = "<group>"; };
 		B17BD9CE26B0886C0010CF3B /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 		B17BD9D026B090210010CF3B /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		B17BD9D226B09ECD0010CF3B /* Images.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Images.swift; sourceTree = "<group>"; };
@@ -173,6 +187,7 @@
 			children = (
 				B1287D5426B35DAD0027E263 /* RegistrationPresenter.swift */,
 				B1287D5826B45EE10027E263 /* LoginPresenter.swift */,
+				B1287D6826B74A980027E263 /* NewMessagePresenter.swift */,
 			);
 			path = Presenter;
 			sourceTree = "<group>";
@@ -189,6 +204,7 @@
 			isa = PBXGroup;
 			children = (
 				B17BDAAE26B1FCE70010CF3B /* ViewController.swift */,
+				B1287D5E26B732B50027E263 /* TableViewController.swift */,
 			);
 			path = ViewConfiguration;
 			sourceTree = "<group>";
@@ -272,6 +288,7 @@
 		B1B0267D26AF6651008F726F /* API */ = {
 			isa = PBXGroup;
 			children = (
+				B1287D6426B747D30027E263 /* Service.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -281,6 +298,7 @@
 			children = (
 				B1B0268426B0312C008F726F /* Authentication */,
 				B1B0268226AF66D0008F726F /* ConversationsController.swift */,
+				B1287D5A26B72F6B0027E263 /* NewMessageController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -290,6 +308,7 @@
 			children = (
 				B17BDAB226B21DEF0010CF3B /* LoginViewModel.swift */,
 				B17BDAB426B230B40010CF3B /* RegistrationViewModel.swift */,
+				B1287D6626B74A030027E263 /* NewMessageViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -300,6 +319,7 @@
 				B1B026EC26B048AA008F726F /* InputContainerView.swift */,
 				B17BD9CE26B0886C0010CF3B /* CustomTextField.swift */,
 				B17BDAB026B2125F0010CF3B /* CustomButton.swift */,
+				B1287D6026B7364A0027E263 /* UserCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -308,6 +328,7 @@
 			isa = PBXGroup;
 			children = (
 				B1287D4F26B327350027E263 /* RegistrationForm.swift */,
+				B1287D6226B747740027E263 /* User.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -580,24 +601,31 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B1287D6326B747740027E263 /* User.swift in Sources */,
 				B1B026ED26B048AA008F726F /* InputContainerView.swift in Sources */,
 				B1287D5526B35DAD0027E263 /* RegistrationPresenter.swift in Sources */,
 				B1B0264B26AF6609008F726F /* AppDelegate.swift in Sources */,
 				B17BD9D326B09ECD0010CF3B /* Images.swift in Sources */,
+				B1287D6526B747D30027E263 /* Service.swift in Sources */,
 				B1287D5926B45EE10027E263 /* LoginPresenter.swift in Sources */,
 				B1B0268326AF66D0008F726F /* ConversationsController.swift in Sources */,
 				B17BDAB126B2125F0010CF3B /* CustomButton.swift in Sources */,
 				B1B0264D26AF6609008F726F /* SceneDelegate.swift in Sources */,
 				B1287D5226B338C40027E263 /* RegistrationService.swift in Sources */,
 				B1B0268826B0314B008F726F /* RegistrationController.swift in Sources */,
+				B1287D5B26B72F6B0027E263 /* NewMessageController.swift in Sources */,
 				B1B0268626B03141008F726F /* LoginController.swift in Sources */,
 				B1287D5026B327350027E263 /* RegistrationForm.swift in Sources */,
+				B1287D6126B7364A0027E263 /* UserCell.swift in Sources */,
 				B1287D4E26B327070027E263 /* ValidationService.swift in Sources */,
 				B17BDAB326B21DEF0010CF3B /* LoginViewModel.swift in Sources */,
+				B1287D6926B74A980027E263 /* NewMessagePresenter.swift in Sources */,
 				B1287D5726B389190027E263 /* LoginService.swift in Sources */,
+				B1287D6726B74A030027E263 /* NewMessageViewModel.swift in Sources */,
 				B17BD9D126B090210010CF3B /* Colors.swift in Sources */,
 				B17BDAAF26B1FCE70010CF3B /* ViewController.swift in Sources */,
 				B1B026EB26B0378C008F726F /* Extensions.swift in Sources */,
+				B1287D5F26B732B50027E263 /* TableViewController.swift in Sources */,
 				B17BD9E226B0AEB70010CF3B /* Fonts.swift in Sources */,
 				B17BDAB526B230B40010CF3B /* RegistrationViewModel.swift in Sources */,
 				B17BD9E026B0A8D70010CF3B /* Strings.swift in Sources */,

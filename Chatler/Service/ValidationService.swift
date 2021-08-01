@@ -7,7 +7,21 @@
 
 import Foundation
 
-enum CustomError: Error {
+enum CommonErrors: Error {
+    case loadImageError
+    case defaultError
+    
+    var errorDescription: String {
+        switch self {
+        case .loadImageError:
+            return "DEBUG: Error loading image"
+        case .defaultError:
+            return "DEBUG: Error default"
+        }
+    }
+}
+
+enum LoginError: Error {
     case imageIsNil
     case imageCantCompress
     case uploadError
@@ -20,25 +34,30 @@ enum CustomError: Error {
     case uploadUserDataError
     
     var errorDescription: String {
+        var description: String
         switch self {
         case .imageIsNil:
-            return "DEBUG: Profile image selected is nil"
+            description = "DEBUG: Profile image selected is nil: \(localizedDescription)"
         case .imageCantCompress:
-            return "DEBUG: Erro while compressing image"
+            description = "DEBUG: Erro while compressing image"
         case .uploadError:
-            return "DEBUG: Error while uploading image"
+            description = "DEBUG: Error while uploading image"
         case .downloadError:
-            return "DEBUG: Error while downloading imge"
+            description = "DEBUG: Error while downloading imge"
         case .missingFields:
-            return "DEBUG: There are missing fileds to fill"
+            description = "DEBUG: There are missing fileds to fill"
         case .creatingUserImageError:
-            return "DEBUG: Error while creating user image"
+            description = "DEBUG: Error while creating user image"
         case .getUidError:
-            return "DEBUG: Error while getting user ID"
+            description = "DEBUG: Error while getting user ID"
         case .uploadUserDataError:
-            return "Debug: Error while upload user data"
+            description = "Debug: Error while upload user data"
         case .creatingUserError:
-            return "Debug: Error white creating user"
+            description = "Debug: Error white creating user"
         }
+        
+        description = "\(description): \(localizedDescription)"
+        return description
+        
     }
 }

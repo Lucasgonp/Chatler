@@ -50,26 +50,28 @@ class RegistrationViewModel: RegistrationViewModelDelegate {
         
         group.notify(queue: .main) { [weak self] in
             guard let self = self else { return }
-            self.createUser(profileImageUrl: self.profileImageUrl) { result in
+            self.createUser(profileImageUrl: self.profileImageUrl) { error in
                 DispatchQueue.main.async {
-                    self.handleCreatedUser(error: result)
+                    self.handleCreatedUser(error: error)
                 }
             }
         }
     }
     
-    func handleLoadedImage(result: Result<String, CustomError>) {
+    func handleLoadedImage(result: Result<String, LoginError>) {
         switch result {
         case .success(let profileImageUrl):
             self.profileImageUrl = profileImageUrl
         
         case .failure(let error):
+            controller?.hideLoading()
             print(error.errorDescription)
         }
     }
     
-    func handleCreatedUser(error: CustomError?) {
+    func handleCreatedUser(error: LoginError?) {
         if let error = error {
+            controller?.hideLoading()
             print(error.errorDescription)
             return
         }
@@ -77,7 +79,7 @@ class RegistrationViewModel: RegistrationViewModelDelegate {
         controller?.dismiss()
     }
     
-    func prepareImage(profileImage: UIImage?, completion: @escaping (Result<String, CustomError>) -> ()) {
+    func prepareImage(profileImage: UIImage?, completion: @escaping (Result<String, LoginError>) -> ()) {
         guard let profileImage = profileImage else {
             completion(.failure(.imageIsNil))
             return
@@ -92,7 +94,7 @@ class RegistrationViewModel: RegistrationViewModelDelegate {
         service.prepareImage(filename: filename, imageData: imageData, completion: completion)
     }
     
-    func createUser(profileImageUrl: String?, completion: @escaping (CustomError?) -> ()) {
+    func createUser(profileImageUrl: String?, completion: @escaping (LoginError?) -> ()) {
         guard var registrationForm = unwrapRegistrationForm(),
               let profileImageUrl = profileImageUrl else {
             completion(.missingFields)

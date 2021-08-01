@@ -17,6 +17,7 @@ class ConversationsController: ViewController {
     private lazy var profileButton: UIBarButtonItem = {
         let img = Images.Login.profile
         let item = UIBarButtonItem(image: img, style: .plain, target: self, action: #selector(showProfile))
+        
         return item
     }()
     
@@ -30,6 +31,17 @@ class ConversationsController: ViewController {
         return tableView
     }()
     
+    let newMessageButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setImage(UIImage(systemName: "plus"), for: .normal)
+        button.backgroundColor = .systemPurple
+        button.tintColor = .white
+        button.layer.cornerRadius = 56 / 2
+        button.addTarget(self, action: #selector(showNewMessage), for: .touchUpInside)
+        
+        return button
+    }()
+    
     // MARK:- Lifecicle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,12 +49,30 @@ class ConversationsController: ViewController {
         authenticateUser()
     }
     
+    override func configureUI() {
+        view.backgroundColor = .white
+        
+        configureNavigationBar(withTitle: Strings.Conversations.title, prefersLargeTitles: true)
+        navigationItem.leftBarButtonItem = profileButton
+        configureTableView()
+    }
+    
     override func buildViewHierarchy() {
         view.addSubview(tableView)
+        view.addSubview(newMessageButton)
     }
     
     override func setupConstraints() {
         // TODO
+        newMessageButton.snp.makeConstraints {
+            $0.bottom.equalTo(view.snp_bottomMargin).inset(16)
+            $0.right.equalTo(view.snp_rightMargin).inset(24)
+            $0.height.width.equalTo(56)
+        }
+    }
+    
+    override func configureViews() {
+        //
     }
     
     // MARK: - API
@@ -76,18 +106,12 @@ class ConversationsController: ViewController {
     
     // MARK: - Helpers
     
-    override func configureUI() {
-        view.backgroundColor = .white
-        
-        configureNavigationBar(withTitle: Strings.Conversations.title, prefersLargeTitles: true)
-        navigationItem.leftBarButtonItem = profileButton
-        configureTableView()
-    }
-    
     func presentLoginScreen() {
         DispatchQueue.main.async {
             let viewModel = LoginViewModel()
             let controller = LoginController(viewModel: viewModel)
+            viewModel.controller = controller
+            
             let nav = UINavigationController(rootViewController: controller)
             nav.modalPresentationStyle = .fullScreen
             self.present(nav, animated: true)
@@ -99,6 +123,16 @@ class ConversationsController: ViewController {
         
         tableView.delegate = self
         tableView.dataSource = self
+    }
+    
+    @objc func showNewMessage() {
+        let viewModel = NewMessageViewModel()
+        let controller = NewMessageController(viewModel: viewModel)
+        viewModel.controller = controller
+        let nav = UINavigationController(rootViewController: controller)
+        nav.modalPresentationStyle = .fullScreen
+        
+        present(nav, animated: true)
     }
 }
 
