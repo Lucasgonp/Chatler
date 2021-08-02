@@ -9,16 +9,22 @@ import UIKit
 
 private let reuseIdentifier = "UserCell"
 
-protocol NewMessageControllerDelegate: BaseProtocol {
+protocol NewMessageDelegate: AnyObject {
+    func controller(_ controller: TableViewController,
+                    wantsToStartChatWith user: User)
+}
+
+protocol NewMessageDelegateOutput: BaseProtocol {
     var users: [User] { get set }
     
     func reloadTableView()
 }
 
-class NewMessageController: TableViewController, NewMessageControllerDelegate {
+class NewMessageController: TableViewController, NewMessageDelegateOutput {
     // MARK: - Properties
     
-    let viewModel: NewMessageViewModel
+    var viewModel: NewMessageViewModelDelegate?
+    weak var delegate: NewMessageDelegate?
     
     var users = [User]()
     
@@ -30,17 +36,15 @@ class NewMessageController: TableViewController, NewMessageControllerDelegate {
         getUsers()
     }
     
-    init(viewModel: NewMessageViewModel) {
+    init(viewModel: NewMessageViewModelDelegate) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
-        self.viewModel.controller = self
+        self.viewModel?.controller = self
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    
     
     // MARK: - Helpers
     
@@ -66,7 +70,7 @@ class NewMessageController: TableViewController, NewMessageControllerDelegate {
     
     // MARK: - API
     func getUsers() {
-        viewModel.loadUsers()
+        viewModel?.loadUsers()
     }
 }
 
@@ -92,8 +96,12 @@ extension NewMessageController {
         
         return cell
     }
-    
+}
+
+    // MARK: - SelectingCell
+
+extension NewMessageController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        //
+        delegate?.controller(self, wantsToStartChatWith: users[indexPath.row])
     }
 }

@@ -35,10 +35,10 @@ class SecundaryButton: UIButton {
         
         let attributedTitle = NSMutableAttributedString(string: textTitle,
                                                         attributes: [.font: Fonts.defaultLight(size: 16),
-                                                                     .foregroundColor: Colors.firstColor])
+                                                                     .foregroundColor: Colors.mainColor])
         attributedTitle.append(NSAttributedString(string: textAction,
                                                   attributes: [.font: Fonts.defaultBold(size: 18),
-                                                               .foregroundColor: Colors.firstColor]))
+                                                               .foregroundColor: Colors.mainColor]))
         
 //        let attributedTitle = NSMutableAttributedString(string: Strings.Register.alreadyHaveAccountTextButton,
 //                                                        attributes: [.font: Fonts.defaultLight(size: 16),

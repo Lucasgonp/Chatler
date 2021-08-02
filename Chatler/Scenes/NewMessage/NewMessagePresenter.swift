@@ -6,13 +6,13 @@
 //
 
 protocol NewMessagePresenterDelegate {
-    var controller: NewMessageControllerDelegate? { get set }
+    var controller: NewMessageDelegateOutput? { get set }
     
     func dismiss()
 }
 
 final class NewMessagePresenter: NewMessagePresenterDelegate {
-    internal var controller: NewMessageControllerDelegate?
+    internal var controller: NewMessageDelegateOutput?
     
     func dismiss() {
         controller?.dismiss()

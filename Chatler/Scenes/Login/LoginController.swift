@@ -23,7 +23,7 @@ class LoginController: ViewController {
     private let iconImage: UIImageView = {
         let imageView = UIImageView()
         imageView.image = Images.Login.profileBubble
-        imageView.tintColor = Colors.secondColor
+        imageView.tintColor = Colors.secundaryColor
         
         return imageView
     }()

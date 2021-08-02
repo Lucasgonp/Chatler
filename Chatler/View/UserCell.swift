@@ -8,10 +8,9 @@
 import UIKit
 import SDWebImage
 
-class UserCell: UITableViewCell {
+class UserCell: TableViewCell {
     
     // MARK: - Properties
-    
     var user: User? {
         didSet {
             configure()
@@ -54,25 +53,22 @@ class UserCell: UITableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        
-        configureUI()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configureUI() {
-        setupSubviews()
-        setupConstraints()
+    override func configureUI() {
+        
     }
     
-    func setupSubviews() {
+    override func buildViewHierarchy() {
         addSubview(profileImageView)
         addSubview(stack)
     }
     
-    func setupConstraints() {
+    override func setupConstraints() {
         profileImageView.snp.makeConstraints {
             $0.centerY.equalToSuperview()
             $0.left.equalTo(contentView.snp_leftMargin).offset(12)

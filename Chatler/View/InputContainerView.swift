@@ -12,7 +12,7 @@ class InputContainerView: UIView {
     
     let imageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.tintColor = Colors.textSecond
+        imageView.tintColor = Colors.mainWhite
         imageView.alpha = 0.87
         
         return imageView
@@ -20,7 +20,7 @@ class InputContainerView: UIView {
     
     let deviderView: UIView = {
         let deviderView = UIView()
-        deviderView.backgroundColor = Colors.secondColor
+        deviderView.backgroundColor = Colors.secundaryColor
         
         return deviderView
     }()

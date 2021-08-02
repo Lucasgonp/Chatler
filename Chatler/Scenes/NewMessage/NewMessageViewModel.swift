@@ -7,12 +7,14 @@
 
 import Foundation
 
-protocol NewMessageViewModelDelegate {
-    var controller: NewMessageControllerDelegate? { get set }
+protocol NewMessageViewModelDelegate: AnyObject {
+    var controller: NewMessageDelegateOutput? { get set }
+    
+    func loadUsers()
 }
 
 class NewMessageViewModel: NewMessageViewModelDelegate {
-    weak var controller: NewMessageControllerDelegate?
+    weak var controller: NewMessageDelegateOutput?
     
     private var users = [User]()
     

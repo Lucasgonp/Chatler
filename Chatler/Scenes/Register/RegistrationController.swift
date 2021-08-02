@@ -27,7 +27,7 @@ class RegistrationController: ViewController {
     private let plusPhotoButton: UIButton = {
         let button = UIButton(type: .system)
         button.setImage(Images.Login.addPhoto, for: .normal)
-        button.tintColor = Colors.white
+        button.tintColor = Colors.mainWhite
         button.addTarget(self, action: #selector(handleSelectPhoto), for: .touchUpInside)
         button.clipsToBounds = true
         button.imageView?.contentMode = .scaleAspectFill
