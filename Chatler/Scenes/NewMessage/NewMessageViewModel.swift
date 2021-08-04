@@ -26,7 +26,7 @@ class NewMessageViewModel: NewMessageViewModelDelegate {
     
     func loadUsers() {
         controller?.showLoading()
-        Service.fetchUsers { [weak self] users in
+        NewMessageService.shared.fetchUsers { [weak self] users in
             self?.controller?.hideLoading()
             
             self?.users = users

@@ -14,7 +14,7 @@ protocol NewMessageDelegate: AnyObject {
                     wantsToStartChatWith user: User)
 }
 
-protocol NewMessageDelegateOutput: BaseProtocol {
+protocol NewMessageDelegateOutput: BaseOutputProtocol {
     var users: [User] { get set }
     
     func reloadTableView()
@@ -23,7 +23,7 @@ protocol NewMessageDelegateOutput: BaseProtocol {
 class NewMessageController: TableViewController, NewMessageDelegateOutput {
     // MARK: - Properties
     
-    var viewModel: NewMessageViewModelDelegate?
+    private lazy var viewModel: NewMessageViewModelDelegate = NewMessageViewModel()
     weak var delegate: NewMessageDelegate?
     
     var users = [User]()
@@ -36,10 +36,9 @@ class NewMessageController: TableViewController, NewMessageDelegateOutput {
         getUsers()
     }
     
-    init(viewModel: NewMessageViewModelDelegate) {
-        self.viewModel = viewModel
+    init() {
         super.init(nibName: nil, bundle: nil)
-        self.viewModel?.controller = self
+        self.viewModel.controller = self
     }
     
     required init?(coder: NSCoder) {
@@ -70,7 +69,7 @@ class NewMessageController: TableViewController, NewMessageDelegateOutput {
     
     // MARK: - API
     func getUsers() {
-        viewModel?.loadUsers()
+        viewModel.loadUsers()
     }
 }
 

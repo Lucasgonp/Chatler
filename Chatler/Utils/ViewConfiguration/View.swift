@@ -29,9 +29,17 @@ class View: UIView, ViewConfiguration {
     public func setupConstraints() {}
 }
 
-    // MARK: - Keyboard
+    // MARK: - Helpers
 
 extension View {
+    func configureGradientLayer() {
+        let gradient = CAGradientLayer()
+        gradient.colors = [Colors.mainColor.cgColor, Colors.secundaryColor.cgColor]
+        gradient.locations = [0, 1]
+        layer.addSublayer(gradient)
+        gradient.frame = bounds
+    }
+    
     func setupViewWithKeyboardHeight(height: CGFloat = 88) {
         keyboardHeight = height
         

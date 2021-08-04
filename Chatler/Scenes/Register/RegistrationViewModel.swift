@@ -10,9 +10,18 @@ import FirebaseStorage
 import FirebaseAuth
 import FirebaseFirestore
 
-protocol RegistrationViewModelDelegate {
+protocol RegistrationViewModelDelegate: AnyObject {
     var controller: RegistrationControllerDelegate? { get set }
+    
+    var profileImage: UIImage? { get set }
+    var email: String? { get set }
+    var fullName: String? { get set }
+    var username: String? { get set }
+    var password: String? { get set }
+    
     var formIsValid: Bool { get }
+    
+    func loadSignUpUser()
 }
 
 class RegistrationViewModel: RegistrationViewModelDelegate {
@@ -58,7 +67,7 @@ class RegistrationViewModel: RegistrationViewModelDelegate {
         }
     }
     
-    func handleLoadedImage(result: Result<String, LoginError>) {
+    func handleLoadedImage(result: Result<String, CustomError>) {
         switch result {
         case .success(let profileImageUrl):
             self.profileImageUrl = profileImageUrl
@@ -69,7 +78,7 @@ class RegistrationViewModel: RegistrationViewModelDelegate {
         }
     }
     
-    func handleCreatedUser(error: LoginError?) {
+    func handleCreatedUser(error: CustomError?) {
         if let error = error {
             controller?.hideLoading()
             print(error.errorDescription)
@@ -79,7 +88,7 @@ class RegistrationViewModel: RegistrationViewModelDelegate {
         controller?.dismiss()
     }
     
-    func prepareImage(profileImage: UIImage?, completion: @escaping (Result<String, LoginError>) -> ()) {
+    func prepareImage(profileImage: UIImage?, completion: @escaping (Result<String, CustomError>) -> ()) {
         guard let profileImage = profileImage else {
             completion(.failure(.imageIsNil))
             return
@@ -94,7 +103,7 @@ class RegistrationViewModel: RegistrationViewModelDelegate {
         service.prepareImage(filename: filename, imageData: imageData, completion: completion)
     }
     
-    func createUser(profileImageUrl: String?, completion: @escaping (LoginError?) -> ()) {
+    func createUser(profileImageUrl: String?, completion: @escaping (CustomError?) -> ()) {
         guard var registrationForm = unwrapRegistrationForm(),
               let profileImageUrl = profileImageUrl else {
             completion(.missingFields)

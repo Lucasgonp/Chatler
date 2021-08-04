@@ -14,6 +14,10 @@ private let reuseIdentifier = "ConversationCell"
 class ConversationsController: ViewController {
     
     // MARK: - Proprieties
+    let viewModel: ConversationsViewModelInput = ConversationsViewModel()
+    
+    private var conversations = [Conversation]()
+    
     private lazy var profileButton: UIBarButtonItem = {
         let img = Images.Login.profile
         let item = UIBarButtonItem(image: img, style: .plain, target: self, action: #selector(showProfile))
@@ -25,9 +29,9 @@ class ConversationsController: ViewController {
         let tableView = UITableView()
         tableView.backgroundColor = .white
         tableView.rowHeight = 80
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: reuseIdentifier)
+        tableView.register(ConversationCell.self, forCellReuseIdentifier: reuseIdentifier)
         tableView.tableFooterView = UIView()
-        
+
         return tableView
     }()
     
@@ -43,10 +47,26 @@ class ConversationsController: ViewController {
     }()
     
     // MARK:- Lifecicle
+    init() {
+        super.init(nibName: nil, bundle: nil)
+        self.viewModel.output = self
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureUI()
+        buildLayout()
         authenticateUser()
+        loadConversations()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        configureNavigationBar(withTitle: "Messages", prefersLargeTitles: true)
+        
     }
     
     override func configureUI() {
@@ -87,27 +107,21 @@ class ConversationsController: ViewController {
         }
     }
     
-    func logout() {
-        do {
-            try Auth.auth().signOut()
-            print("DEBUG: Signed out!")
-            
-            presentLoginScreen()
-        } catch {
-            print("DEBUG: Error signing out: \(error.localizedDescription)")
-        }
-    }
-    
     // MARK: - Selectors
     
     @objc func showProfile() {
-      logout()
+        let controller = ProfileController()
+        let nav = UINavigationController(rootViewController: controller)
+        nav.modalPresentationStyle = .fullScreen
+        present(nav, animated: true)
     }
     
     // MARK: - Helpers
+    func loadConversations() {
+        viewModel.loadConversations()
+    }
     
     func presentLoginScreen() {
-        DispatchQueue.main.async {
             let viewModel = LoginViewModel()
             let controller = LoginController(viewModel: viewModel)
             viewModel.controller = controller
@@ -115,44 +129,58 @@ class ConversationsController: ViewController {
             let nav = UINavigationController(rootViewController: controller)
             nav.modalPresentationStyle = .fullScreen
             self.present(nav, animated: true)
-        }
     }
     
     func configureTableView() {
+        
+        
         tableView.frame = view.frame
         
         tableView.delegate = self
         tableView.dataSource = self
     }
     
+    func showChatController(forUser user: User) {
+        let controller = ChatController(user: user)
+        navigationController?.pushViewController(controller, animated: true)
+    }
+    
     @objc func showNewMessage() {
-        let viewModel = NewMessageViewModel()
-        let controller = NewMessageController(viewModel: viewModel)
+        let controller = NewMessageController()
         controller.delegate = self
-        viewModel.controller = controller
         let nav = UINavigationController(rootViewController: controller)
         nav.modalPresentationStyle = .fullScreen
         
         present(nav, animated: true)
     }
 }
-
+// MARK: - UITableViewDataSource
 extension ConversationsController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 2
+        return conversations.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath)
-        cell.textLabel?.text = "José"
+        let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as! ConversationCell
+        cell.conversation = conversations[indexPath.row]
         return cell
     }
     
 }
 
+    // MARK: - UITableViewDelegate
 extension ConversationsController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        //
+        let user = conversations[indexPath.row].user
+        showChatController(forUser: user)
+    }
+}
+
+    // MARK: - Outputs
+extension ConversationsController: ConversationsViewModelOutput {
+    func onLoadConversations(conversations: [Conversation]) {
+        self.conversations = conversations
+        self.tableView.reloadData()
     }
 }
 
@@ -163,8 +191,7 @@ extension ConversationsController: NewMessageDelegate {
         print("Username is \(user.username)")
         
         controller.dismiss(animated: true) {
-         let chat = ChatController(user: user)
-         self.navigationController?.pushViewController(chat, animated: true)
-     }
+            self.showChatController(forUser: user)
+        }
     }
 }

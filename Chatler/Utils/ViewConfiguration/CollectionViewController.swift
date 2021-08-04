@@ -32,7 +32,7 @@ class CollectionViewController: UICollectionViewController, ViewConfiguration {
 
     // MARK: - Helpers
 
-extension CollectionViewController: BaseProtocol {
+extension CollectionViewController: BaseOutputProtocol {
     func showLoading() {
         view.endEditing(true)
         
@@ -69,8 +69,13 @@ extension CollectionViewController: BaseProtocol {
 }
 
     // MARK: - Keyboard
-
 extension CollectionViewController {
+    func hideKeyboardWhenTappedAround() {
+        let tap = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        tap.cancelsTouchesInView = false
+        view.addGestureRecognizer(tap)
+    }
+    
     func setupViewWithKeyboardHeight(height: CGFloat = 88) {
         keyboardHeight = height
         
@@ -82,12 +87,6 @@ extension CollectionViewController {
     // MARK: - Private
 
 private extension CollectionViewController {
-    func hideKeyboardWhenTappedAround() {
-        let tap = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
-        tap.cancelsTouchesInView = false
-        view.addGestureRecognizer(tap)
-    }
-    
     @objc func dismissKeyboard() {
         view.endEditing(true)
     }
@@ -102,6 +101,17 @@ private extension CollectionViewController {
         if view.frame.origin.y != 0 {
             self.view.frame.origin.y = 0
         }
+    }
+    
+    func scrollToLastItem() {
+        let lastSection = collectionView.numberOfSections - 1
+
+        let lastRow = collectionView.numberOfItems(inSection: lastSection)
+
+        let indexPath = IndexPath(row: lastRow - 1, section: lastSection)
+
+        self.collectionView.scrollToItem(at: indexPath, at: .bottom, animated: true)
+
     }
 }
 

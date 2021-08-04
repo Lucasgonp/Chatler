@@ -5,43 +5,25 @@
 //  Created by Lucas Pereira on 01/08/21.
 //
 
-import Firebase
+protocol ServiceProtocol {
+    func fetchUser(withUid uid: String, completion: @escaping (Result<User, CustomError>) -> Void)
+}
 
-struct Service {
-    static func fetchUsers(completion: @escaping ([User]) -> ()) {
-        var users = [User]()
-        Firestore.firestore().collection("users").getDocuments { snapshot, error in
-            snapshot?.documents.forEach({ document in
-                let dictionary = document.data()
-                
-                if let user = User(dictionary: dictionary) {
-                    users.append(user)
-                    completion(users)
-                }
-            })
+struct Service: ServiceProtocol {
+    static let shared: ServiceProtocol = Service()
+    
+    func fetchUser(withUid uid: String, completion: @escaping (Result<User, CustomError>) -> Void) {
+        COLLECTION_USERS.document(uid).getDocument { (snapshot, error) in
+            if let error = error {
+                completion(.failure(.fetchUser))
+            }
+            guard let dictionary = snapshot?.data(),
+                  let user = User(dictionary: dictionary) else {
+                completion(.failure(.fetchUser))
+                return
+            }
+            
+            completion(.success(user))
         }
     }
-}
-
-extension Encodable {
-  /// Returns a JSON dictionary, with choice of minimal information
-  func getDictionary() -> [String: Any]? {
-    let encoder = JSONEncoder()
-
-    guard let data = try? encoder.encode(self) else { return nil }
-    return (try? JSONSerialization.jsonObject(with: data, options: .allowFragments)).flatMap { $0 as? [String: Any]
-    }
-  }
-}
-
-extension Decodable {
-  /// Initialize from JSON Dictionary. Return nil on failure
-  init?(dictionary value: [String:Any]){
-
-    guard JSONSerialization.isValidJSONObject(value) else { return nil }
-    guard let jsonData = try? JSONSerialization.data(withJSONObject: value, options: []) else { return nil }
-
-    guard let newValue = try? JSONDecoder().decode(Self.self, from: jsonData) else { return nil }
-    self = newValue
-  }
 }

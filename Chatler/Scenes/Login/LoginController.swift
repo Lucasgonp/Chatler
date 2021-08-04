@@ -10,7 +10,7 @@ import FirebaseAuth
 import JGProgressHUD
 import UIKit
 
-protocol LoginControllerDelegate: BaseProtocol {
+protocol LoginControllerDelegate: BaseOutputProtocol {
     func checkFormStatus()
 }
 
@@ -138,9 +138,7 @@ class LoginController: ViewController {
     }
     
     func signUpController() -> ViewController {
-        let viewModel = RegistrationViewModel()
-        let controller = RegistrationController(viewModel: viewModel)
-        viewModel.controller = controller
+        let controller = RegistrationController()
         
         return controller
     }

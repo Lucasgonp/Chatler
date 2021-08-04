@@ -13,7 +13,7 @@ import FirebaseStorage
 struct RegistrationService {
     static let shared = RegistrationService()
     
-    func prepareImage(filename: String, imageData: Data, completion: @escaping (Result<String, LoginError>) -> ()) {
+    func prepareImage(filename: String, imageData: Data, completion: @escaping (Result<String, CustomError>) -> ()) {
         let ref = Storage.storage().reference(withPath: "profile_images/\(filename)")
         ref.putData(imageData, metadata: nil) { (meta,error) in
             if let error = error {
@@ -26,7 +26,7 @@ struct RegistrationService {
         }
     }
     
-    func signUpNewUser(form: RegistrationForm, completion: @escaping (LoginError?) -> ()) {
+    func signUpNewUser(form: RegistrationForm, completion: @escaping (CustomError?) -> ()) {
         Auth.auth().createUser(withEmail: form.email, password: form.password) { result, error in
             if let error = error {
                 completion(.creatingUserError)
@@ -47,7 +47,7 @@ struct RegistrationService {
 
 private extension RegistrationService {
     
-    func handlePreparedImage(ref: StorageReference, completion: @escaping (Result<String, LoginError>) -> ()) {
+    func handlePreparedImage(ref: StorageReference, completion: @escaping (Result<String, CustomError>) -> ()) {
         ref.downloadURL { url, error in
             guard let profileImageUrl = url?.absoluteString else {
                 completion(.failure(.downloadError))
@@ -58,7 +58,7 @@ private extension RegistrationService {
         }
     }
     
-    func uploadUserData(uid: String, form: RegistrationForm, completion: ((LoginError?) -> Void)?) {
+    func uploadUserData(uid: String, form: RegistrationForm, completion: ((CustomError?) -> Void)?) {
         
         let data = ["email": form.email,
                     "fullname": form.fullName,
@@ -66,7 +66,7 @@ private extension RegistrationService {
                     "username": form.username,
                     "uid": uid] as [String: Any]
         
-        Firestore.firestore().collection("users").document(uid).setData(data) { error in
+        COLLECTION_USERS.document(uid).setData(data) { error in
             if let error = error {
                 
                 print("Debug: Error while upload user data: \(error.localizedDescription)!!")

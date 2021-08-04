@@ -5,7 +5,7 @@
 //  Created by Lucas Pereira on 29/07/21.
 //
 
-protocol LoginPresenterDelegate: BaseProtocol {
+protocol LoginPresenterDelegate: BaseOutputProtocol {
     var controller: LoginControllerDelegate? { get set }
     
     func dismiss()

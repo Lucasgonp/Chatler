@@ -8,7 +8,7 @@
 import UIKit
 import JGProgressHUD
 
-public protocol BaseProtocol: AnyObject {
+public protocol BaseOutputProtocol: AnyObject {
     func showLoading()
     func showLoading(text: String)
     func hideLoading(completion: @escaping () -> ())
@@ -54,9 +54,9 @@ class ViewController: UIViewController, ViewConfiguration {
     public func setupConstraints() {}
 }
 
-    // MARK: - Helpers
+    // MARK: - Outputs
 
-extension ViewController: BaseProtocol {
+extension ViewController: BaseOutputProtocol {
     func showLoading() {
         view.endEditing(true)
         
@@ -92,9 +92,17 @@ extension ViewController: BaseProtocol {
     }
 }
 
-    // MARK: - Keyboard
+    // MARK: - Helpers
 
 extension ViewController {
+    func configureGradientLayer() {
+        let gradient = CAGradientLayer()
+        gradient.colors = [Colors.mainColor.cgColor, Colors.secundaryColor.cgColor]
+        gradient.locations = [0, 1]
+        view.layer.addSublayer(gradient)
+        gradient.frame = view.frame
+    }
+    
     func setupViewWithKeyboardHeight(height: CGFloat = 88) {
         keyboardHeight = height
         

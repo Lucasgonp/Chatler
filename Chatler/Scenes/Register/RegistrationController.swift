@@ -10,13 +10,13 @@ import FirebaseAuth
 import FirebaseStorage
 import FirebaseFirestore
 
-protocol RegistrationControllerDelegate: BaseProtocol {}
+protocol RegistrationControllerDelegate: BaseOutputProtocol {}
 
 class RegistrationController: ViewController {
     
     // MARK:- Proprieties
     
-    private let viewModel: RegistrationViewModel
+    private lazy var viewModel: RegistrationViewModelDelegate = RegistrationViewModel()
     
     private var profileImage: UIImage? {
         didSet {
@@ -96,8 +96,7 @@ class RegistrationController: ViewController {
     
     // MARK:- Lifecicle
     
-    init(viewModel: RegistrationViewModel) {
-        self.viewModel = viewModel
+    init() {
         super.init(nibName: nil, bundle: nil)
         self.viewModel.controller = self
     }

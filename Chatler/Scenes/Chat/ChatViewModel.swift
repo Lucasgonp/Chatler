@@ -9,37 +9,38 @@ import Foundation
 import UIKit
 
 protocol ChatViewModelInput: AnyObject {
+    var output: ChatViewModelOutput? { get set }
     
+    func loadMessages(from contact: User)
+    func uploadMessage(message: String, user: User)
 }
 
-protocol ChatViewModelOutput: AnyObject {
-    
+protocol ChatViewModelOutput: BaseOutputProtocol {
+    func fetchMessages(messages: [Message])
 }
 
 class ChatViewModel: ChatViewModelInput {
-    private let message: Message
+    weak var output: ChatViewModelOutput?
     
-    var messageTextColor: UIColor {
-        return message.isFromCurentUser ? Colors.mainBlack : Colors.secundaryColor
+    func loadMessages(from contact: User) {
+        output?.showLoading(text: "Loading messages...")
+        
+        DispatchQueue.global(qos: .userInitiated).async {
+            ChatService.shared.fetchMessages(forUser: contact) { [weak self] messages in
+                DispatchQueue.main.async {
+                    self?.output?.hideLoading()
+                    self?.output?.fetchMessages(messages: messages)
+                }
+            }
+        }
     }
     
-    var messageBackgroundColor: UIColor {
-        return message.isFromCurentUser ? Colors.lightGray : Colors.mainColor
-    }
-    
-    var rightAncherActive: Bool {
-        return message.isFromCurentUser
-    }
-    
-    var leftAncherActive: Bool {
-        return !message.isFromCurentUser
-    }
-    
-    var shouldHideProfileImage: Bool {
-        return message.isFromCurentUser
-    }
-    
-    init(message: Message) {
-        self.message = message
+    func uploadMessage(message: String, user: User) {
+        ChatService.shared.uploadMessage(message, to: user) { error in
+            if let error = error {
+                print(error.localizedDescription)
+                return
+            }
+        }
     }
 }

@@ -16,11 +16,10 @@ class CustomInputAccessoryView: View {
     // MARK: - Properties
     weak var delegate: CustomInputAccessoryViewDelegate?
     
-    let messageInputTextView: UITextView = {
+    private lazy var messageInputTextView: UITextView = {
         let textView = UITextView()
         textView.font = Fonts.defaultLight(size: 16)
         textView.isScrollEnabled = false
-        
         return textView
     }()
     
@@ -108,5 +107,9 @@ class CustomInputAccessoryView: View {
     }
     
     // MARK: - Helpers
+    func clearMessageText() {
+        messageInputTextView.text = nil
+        placeholderLabel.isHidden = false
+    }
     
 }

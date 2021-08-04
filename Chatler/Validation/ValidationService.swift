@@ -7,21 +7,7 @@
 
 import Foundation
 
-enum CommonErrors: Error {
-    case loadImageError
-    case defaultError
-    
-    var errorDescription: String {
-        switch self {
-        case .loadImageError:
-            return "DEBUG: Error loading image"
-        case .defaultError:
-            return "DEBUG: Error default"
-        }
-    }
-}
-
-enum LoginError: Error {
+enum CustomError: Error {
     case imageIsNil
     case imageCantCompress
     case uploadError
@@ -33,11 +19,16 @@ enum LoginError: Error {
     case getUidError
     case uploadUserDataError
     
+    case loadImageError
+    case defaultError
+    
+    case fetchUser
+    
     var errorDescription: String {
         var description: String
         switch self {
         case .imageIsNil:
-            description = "DEBUG: Profile image selected is nil: \(localizedDescription)"
+            description = "DEBUG: Profile image selected is nil"
         case .imageCantCompress:
             description = "DEBUG: Erro while compressing image"
         case .uploadError:
@@ -54,6 +45,12 @@ enum LoginError: Error {
             description = "Debug: Error while upload user data"
         case .creatingUserError:
             description = "Debug: Error white creating user"
+        case .loadImageError:
+            description = "DEBUG: Error loading image"
+        case .defaultError:
+            description = "DEBUG: Error default"
+        case .fetchUser:
+            description = "DEBUG: Erro ao carregar usuario"
         }
         
         description = "\(description): \(localizedDescription)"

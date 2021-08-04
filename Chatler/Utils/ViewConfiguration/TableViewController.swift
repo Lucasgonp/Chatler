@@ -33,7 +33,7 @@ class TableViewController: UITableViewController, ViewConfiguration {
 
 // MARK: - Helpers
 
-extension TableViewController: BaseProtocol {
+extension TableViewController: BaseOutputProtocol {
     func showLoading() {
         view.endEditing(true)
         

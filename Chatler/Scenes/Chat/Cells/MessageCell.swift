@@ -12,6 +12,8 @@ class MessageCell: CollectionViewCell {
     
     // MARK: - Properties
     
+    weak var output: ChatViewModelOutput?
+    
     var message: Message? {
         didSet { configure() }
     }
@@ -74,6 +76,7 @@ class MessageCell: CollectionViewCell {
         
         bubbleContainer.snp.makeConstraints {
             $0.top.equalTo(snp.top).offset(4)
+            $0.bottom.equalTo(snp.bottomMargin)
             $0.width.lessThanOrEqualTo(250)
             
             bubbleLeftAnchor = $0.left.equalTo(profileImageView.snp.right).offset(12)
@@ -97,7 +100,7 @@ class MessageCell: CollectionViewCell {
     // MARK: - Helpers
     func configure() {
         guard let message = message else { return }
-        let viewModel = ChatViewModel(message: message)
+        let viewModel = MessageViewModel(message: message, delegate: self)
         
         bubbleContainer.backgroundColor = viewModel.messageBackgroundColor
         textView.textColor = viewModel.messageTextColor
@@ -107,6 +110,14 @@ class MessageCell: CollectionViewCell {
         bubbleRightAnchor.constraint.isActive = viewModel.rightAncherActive
         
         profileImageView.isHidden = viewModel.shouldHideProfileImage
+        profileImageView.sd_setImage(with: viewModel.profileImageUrl)
+    }
+    
+}
+
+extension MessageCell: MessageViewModelOutput {
+    func dismiss() {
+        //
     }
     
 }
