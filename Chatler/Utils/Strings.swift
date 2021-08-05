@@ -45,4 +45,9 @@ struct Strings {
         static let alreadyHaveAccountTextButton = NSLocalizedString("alreadyHaveAccountTextButton", comment: "")
         static let alreadyHaveAccountActionButton = NSLocalizedString("alreadyHaveAccountActionButton", comment: "")
     }
+    
+    struct ErrorHandling {
+        static let genericTitle = NSLocalizedString("genericTitle", comment: "")
+        static let genericButton = NSLocalizedString("genericButton", comment: "")
+    }
 }

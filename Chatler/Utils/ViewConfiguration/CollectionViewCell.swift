@@ -51,4 +51,8 @@ extension CollectionViewCell: BaseCellProtocol {
         hud.dismiss()
         completion()
     }
+    
+    func showError(_ errorMessage: String) {
+        // TODO
+    }
 }

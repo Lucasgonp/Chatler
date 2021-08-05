@@ -63,4 +63,8 @@ extension TableViewCell: BaseCellProtocol {
         hud.dismiss()
         completion()
     }
+    
+    func showError(_ errorMessage: String) {
+        // TODO
+    }
 }

@@ -14,6 +14,12 @@ protocol  AuthenticationDelegate: AnyObject {
     func authenticationComplete()
 }
 
+protocol LoginViewModelOutput: BaseOutputProtocol {
+    func checkFormStatus()
+    func dismissView()
+    func handleError(error: Error)
+}
+
 class LoginController: ViewController {
     
     // MARK: - Proprieties
@@ -126,7 +132,7 @@ class LoginController: ViewController {
               let _ = passwordTextField.text else {
             return
         }
-        
+        loginButton.loadingIndicator(true)
         viewModel.doLogin()
     }
     
@@ -164,6 +170,8 @@ class LoginController: ViewController {
     }
 }
 
+    // MARK: - Outputs
+
 extension LoginController: LoginViewModelOutput {
     func checkFormStatus() {
         if viewModel.formIsValid {
@@ -177,5 +185,10 @@ extension LoginController: LoginViewModelOutput {
     
     func dismissView() {
         delegate?.authenticationComplete()
+    }
+    
+    func handleError(error: Error) {
+        loginButton.loadingIndicator(false)
+        showError(error.localizedDescription)
     }
 }

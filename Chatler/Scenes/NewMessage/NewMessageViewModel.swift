@@ -24,9 +24,15 @@ class NewMessageViewModel: NewMessageViewModelDelegate {
     
     func loadUsers() {
         controller?.showLoading()
-        NewMessageService.shared.fetchUsers { [weak self] users in
+        NewMessageService.shared.fetchUsers { [weak self] result in
             self?.controller?.hideLoading()
-            self?.controller?.reloadTableView(withUsers: users)
+            
+            switch result {
+            case .success(let users):
+                self?.controller?.reloadTableView(withUsers: users)
+            case . failure(let error):
+                self?.controller?.showError(error.localizedDescription)
+            }
         }
     }
     

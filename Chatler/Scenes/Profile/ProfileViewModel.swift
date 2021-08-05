@@ -29,12 +29,15 @@ class ProfileViewModel: ProfileViewModelInput {
 }
 
 private extension ProfileViewModel {
-    func handleLoadUser(_ result: Result<User, CustomError>) {
+    func handleLoadUser(_ result: Result<User, Error>) {
         switch result {
         case .success(let user):
             self.output?.didLoadUser(user: user)
-        case .failure(_):
-            break
+        case .failure(let error):
+            DispatchQueue.main.async {
+                self.output?.hideLoading()
+                self.output?.showError(error.localizedDescription)
+            }
         }
     }
 }

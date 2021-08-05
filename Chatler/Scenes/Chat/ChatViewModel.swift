@@ -36,9 +36,9 @@ class ChatViewModel: ChatViewModelInput {
     }
     
     func uploadMessage(message: String, user: User) {
-        ChatService.shared.uploadMessage(message, to: user) { error in
+        ChatService.shared.uploadMessage(message, to: user) { [weak self] error in
             if let error = error {
-                print(error.localizedDescription)
+                self?.output?.showError(error.localizedDescription)
                 return
             }
         }

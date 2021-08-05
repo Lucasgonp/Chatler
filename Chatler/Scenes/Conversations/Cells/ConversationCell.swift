@@ -19,7 +19,7 @@ class ConversationCell: TableViewCell {
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
         imageView.backgroundColor = Colors.lightGray
-        imageView.layer.cornerRadius = 50 / 2
+        imageView.layer.cornerRadius = 70 / 2
         return imageView
     }()
     
@@ -27,19 +27,18 @@ class ConversationCell: TableViewCell {
        let label = UILabel()
         label.font = Fonts.defaultLight(size: 12)
         label.textColor = .darkGray
-        label.text = "14h"
         return label
     }()
     
     let usernameLabel: UILabel = {
         let label = UILabel()
-         label.font = Fonts.defaultBold(size: 14)
+         label.font = Fonts.defaultBold(size: 17)
          return label
      }()
     
     let messageTextLabel: UILabel = {
         let label = UILabel()
-         label.font = Fonts.defaultLight(size: 14)
+         label.font = Fonts.defaultLight(size: 16)
          return label
      }()
     
@@ -72,7 +71,7 @@ class ConversationCell: TableViewCell {
     override func setupConstraints() {
         profileImageView.snp.makeConstraints {
             $0.left.equalTo(snp.left).offset(12)
-            $0.width.height.equalTo(50)
+            $0.width.height.equalTo(70)
             $0.centerY.equalTo(snp.centerY)
         }
         

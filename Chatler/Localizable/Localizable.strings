@@ -28,3 +28,7 @@
 "accountLogout" = "Logout";
 "accountLogoutQuestion" = "Are you sure you want to logout?";
 
+// ErrorHandling
+"genericTitle" = "Ops!!";
+"genericButton" = "Ok";
+

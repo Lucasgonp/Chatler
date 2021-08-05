@@ -28,7 +28,7 @@ class ConversationsController: ViewController {
     private let tableView: UITableView = {
         let tableView = UITableView()
         tableView.backgroundColor = .white
-        tableView.rowHeight = 80
+        tableView.rowHeight = 100
         tableView.register(ConversationCell.self, forCellReuseIdentifier: reuseIdentifier)
         tableView.tableFooterView = UIView()
 
@@ -180,6 +180,7 @@ extension ConversationsController: UITableViewDataSource {
     // MARK: - UITableViewDelegate
 extension ConversationsController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.cellForRow(at: indexPath)?.isSelected = false
         let user = conversations[indexPath.row].user
         showChatController(forUser: user)
     }

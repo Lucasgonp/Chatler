@@ -40,13 +40,6 @@ class SecundaryButton: UIButton {
                                                   attributes: [.font: Fonts.defaultBold(size: 18),
                                                                .foregroundColor: Colors.mainColor]))
         
-//        let attributedTitle = NSMutableAttributedString(string: Strings.Register.alreadyHaveAccountTextButton,
-//                                                        attributes: [.font: Fonts.defaultLight(size: 16),
-//                                                                     .foregroundColor: Colors.firstColor])
-//        attributedTitle.append(NSAttributedString(string: Strings.Register.alreadyAccountActionButton,
-//                                                  attributes: [.font: Fonts.defaultBold(size: 18),
-//                                                               .foregroundColor: Colors.firstColor]))
-        
         setAttributedTitle(attributedTitle, for: .normal)
         addTarget(target, action: action, for: .touchUpInside)
     }

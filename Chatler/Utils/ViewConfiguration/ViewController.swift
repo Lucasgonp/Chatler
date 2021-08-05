@@ -15,6 +15,7 @@ public protocol BaseOutputProtocol: AnyObject {
     func hideLoading()
     
     func dismiss()
+    func showError(_ errorMessage: String)
 }
 
 public protocol ViewConfiguration: AnyObject {
@@ -22,6 +23,7 @@ public protocol ViewConfiguration: AnyObject {
     func buildViewHierarchy()
     func setupConstraints()
     func configureViews()
+    
 }
 
 public extension ViewConfiguration {

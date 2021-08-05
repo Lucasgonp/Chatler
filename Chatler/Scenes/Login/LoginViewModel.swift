@@ -14,11 +14,6 @@ protocol LoginViewModelInput {
     func doLogin()
 }
 
-protocol LoginViewModelOutput: BaseOutputProtocol {
-    func checkFormStatus()
-    func dismissView()
-}
-
 class LoginViewModel: LoginViewModelInput {
     var controller: LoginViewModelOutput?
     var email: String?
@@ -37,16 +32,11 @@ class LoginViewModel: LoginViewModelInput {
         guard let email = email,
               let password = password else { return }
         
-        controller?.showLoading(text: "Login in...")
         service.logUserIn(email: email, password: password) { (result, error) in
             if let error = error {
-                print("DEBUG: Erro ao logar: \(error.localizedDescription)")
-                return
-            }
-            
-            DispatchQueue.main.async {
-                self.controller?.hideLoading()
-                self.controller?.dismissView()
+                    self.controller?.handleError(error: error)
+            } else {
+                    self.controller?.dismissView()
             }
         }
     }

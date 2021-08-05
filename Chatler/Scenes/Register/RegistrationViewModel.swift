@@ -47,55 +47,44 @@ class RegistrationViewModel: RegistrationViewModelDelegate {
     
     func loadSignUpUser() {
         guard let _ = unwrapRegistrationForm() else { return }
-        let group = DispatchGroup()
-        
         controller?.showLoading(text: "Loggin in...")
         
-        group.enter()
-        prepareImage(profileImage: profileImage) { result in
-            self.handleLoadedImage(result: result)
-            group.leave()
-        }
-        
-        group.notify(queue: .main) { [weak self] in
-            guard let self = self else { return }
-            self.createUser(profileImageUrl: self.profileImageUrl) { error in
-                DispatchQueue.main.async {
-                    self.handleCreatedUser(error: error)
-                }
-            }
+        DispatchQueue.global(qos: .userInitiated).sync {
+            self.prepareImage(profileImage: self.profileImage, completion: self.handleLoadedImage(result:))
+            self.createUser(profileImageUrl: self.profileImageUrl, completion: self.handleCreatedUser(error:))
         }
     }
     
-    func handleLoadedImage(result: Result<String, CustomError>) {
+    // MARK: - Handlers
+    
+    func handleLoadedImage(result: Result<String, Error>) {
         switch result {
         case .success(let profileImageUrl):
             self.profileImageUrl = profileImageUrl
         
         case .failure(let error):
-            controller?.hideLoading()
-            print(error.errorDescription)
+            DispatchQueue.main.async {
+                self.controller?.hideLoading()
+                self.controller?.showError(error.localizedDescription)
+            }
         }
     }
     
-    func handleCreatedUser(error: CustomError?) {
+    func handleCreatedUser(error: Error?) {
         if let error = error {
-            controller?.hideLoading()
-            print(error.errorDescription)
-            return
+            DispatchQueue.main.async {
+                self.controller?.hideLoading()
+                self.controller?.showError(error.localizedDescription)
+            }
+        } else {
+            controller?.didCreateUser()
         }
-        
-        controller?.didCreateUser()
     }
     
-    func prepareImage(profileImage: UIImage?, completion: @escaping (Result<String, CustomError>) -> ()) {
-        guard let profileImage = profileImage else {
-            completion(.failure(.imageIsNil))
-            return
-        }
-        
-        guard let imageData = profileImage.jpegData(compressionQuality: 0.3) else {
-            completion(.failure(.imageCantCompress))
+    func prepareImage(profileImage: UIImage?, completion: @escaping (Result<String, Error>) -> ()) {
+        guard let profileImage = profileImage,
+              let imageData = profileImage.jpegData(compressionQuality: 0.3) else {
+            completion(.failure(CustomError.genericError))
             return
         }
         
@@ -103,15 +92,14 @@ class RegistrationViewModel: RegistrationViewModelDelegate {
         service.prepareImage(filename: filename, imageData: imageData, completion: completion)
     }
     
-    func createUser(profileImageUrl: String?, completion: @escaping (CustomError?) -> ()) {
+    func createUser(profileImageUrl: String?, completion: @escaping (Error?) -> ()) {
         guard var registrationForm = unwrapRegistrationForm(),
               let profileImageUrl = profileImageUrl else {
-            completion(.missingFields)
+            completion(CustomError.genericError)
             return
         }
         
         registrationForm.profileImageUrl = profileImageUrl
-        
         service.signUpNewUser(form: registrationForm) { error in
             if let error = error {
                 completion(error)
@@ -124,10 +112,10 @@ class RegistrationViewModel: RegistrationViewModelDelegate {
     
     func unwrapRegistrationForm() -> RegistrationForm? {
         guard let email = email, let password = password,
-              let fullName = fullName, let username = username,
+              let fullname = fullName, let username = username,
               !email.isEmpty, !password.isEmpty,
-              !fullName.isEmpty, !username.isEmpty else { return nil }
+              !fullname.isEmpty, !username.isEmpty else { return nil }
         
-        return RegistrationForm(email: email, fullName: fullName, username: username, password: password, profileImage: profileImage)
+        return RegistrationForm(email: email, fullname: fullname, username: username, password: password, profileImage: profileImage)
     }
 }
