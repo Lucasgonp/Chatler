@@ -10,13 +10,16 @@ import FirebaseAuth
 import FirebaseStorage
 import FirebaseFirestore
 
-protocol RegistrationControllerDelegate: BaseOutputProtocol {}
+protocol RegistrationControllerDelegate: BaseOutputProtocol {
+    func didCreateUser()
+}
 
 class RegistrationController: ViewController {
     
     // MARK:- Proprieties
     
-    private lazy var viewModel: RegistrationViewModelDelegate = RegistrationViewModel()
+    private let viewModel: RegistrationViewModelDelegate = RegistrationViewModel()
+    weak var delegate: AuthenticationDelegate?
     
     private var profileImage: UIImage? {
         didSet {
@@ -181,6 +184,10 @@ class RegistrationController: ViewController {
 }
 
 extension RegistrationController: RegistrationControllerDelegate {
+    func didCreateUser() {
+        delegate?.authenticationComplete()
+    }
+    
     func checkFormStatus() {
         if viewModel.formIsValid {
             signUpButton.isEnabled = true

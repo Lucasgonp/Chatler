@@ -26,7 +26,7 @@ struct ConversationsService: ConversationsServiceProtocol {
                 let dictionary = change.document.data()
                 let message = Message(dictionary: dictionary)
                 
-                Service.shared.fetchUser(withUid: message.toId) { result in
+                Service.shared.fetchUser(withUid: message.chatPartnerId) { result in
                     switch result {
                     case .success(let user):
                         let conversation = Conversation(user: user, message: message)

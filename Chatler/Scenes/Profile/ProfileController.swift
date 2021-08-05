@@ -10,8 +10,16 @@ import FirebaseAuth
 
 private let reuseIdentifier = "profileCell"
 
+protocol ProfileControllerDelegate: AnyObject {
+    func handleLogout()
+}
+
 class ProfileController: TableViewController {
+    
     //MARK: - Properties
+    
+    weak var delegate: ProfileControllerDelegate?
+    
     private let viewModel: ProfileViewModelInput = ProfileViewModel()
     
     private var user: User? {
@@ -22,10 +30,14 @@ class ProfileController: TableViewController {
                                                              width: view.frame.width,
                                                              height: 380))
     
+    private lazy var footerView: ProfileFooterView = {
+        let footer = ProfileFooterView(frame: .init(x: 0, y: 0, width: view.frame.width, height: 100))
+        return footer
+    }()
     
     //MARK: - Lifecycle
-    init() {
-        super.init(nibName: nil, bundle: nil)
+    override init(style: UITableView.Style) {
+        super.init(style: style)
         self.viewModel.output = self
     }
     
@@ -46,55 +58,78 @@ class ProfileController: TableViewController {
     
     override func configureUI() {
         view.backgroundColor = .white
-        
-        tableView.tableHeaderView = headerView
-        headerView.delegate = self
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: reuseIdentifier)
-        tableView.tableFooterView = UIView()
-        tableView.contentInsetAdjustmentBehavior = .never
-        
+        configureTableView()
     }
-    
-    
+
     //MARK: - Selectors
     
     //MARK: - API
+    
     func loadUser() {
         viewModel.loadUser()
     }
     
     //MARK: - Helpers
-    func logout() {
-        do {
-            try Auth.auth().signOut()
-            print("DEBUG: Signed out!")
-            
-            presentLoginScreen()
-        } catch {
-            print("DEBUG: Error signing out: \(error.localizedDescription)")
+    
+}
+
+// MARK: - Privates
+
+private extension ProfileController {
+    func configureTableView() {
+        tableView.tableHeaderView = headerView
+        headerView.delegate = self
+        tableView.register(ProfileCell.self, forCellReuseIdentifier: reuseIdentifier)
+        tableView.contentInsetAdjustmentBehavior = .never
+        tableView.rowHeight = 64
+        tableView.backgroundColor = .systemGroupedBackground
+        tableView.tableFooterView = footerView
+        
+        footerView.delegate = self
+    }
+    
+    func handleDidSelectRowAt(collectionModel: profileViewModelCollection) {
+        switch collectionModel {
+        case .accountInfo:
+            return
+        case .setting:
+            return
         }
     }
     
     func presentLoginScreen() {
-            let viewModel = LoginViewModel()
-            let controller = LoginController(viewModel: viewModel)
-            viewModel.controller = controller
-            
-            let nav = UINavigationController(rootViewController: controller)
-            nav.modalPresentationStyle = .fullScreen
-            self.present(nav, animated: true)
+        let controller = LoginController()
+        let nav = UINavigationController(rootViewController: controller)
+        nav.modalPresentationStyle = .fullScreen
+        self.present(nav, animated: true)
     }
 }
 
+    // MARK: - UITableViewDataSource
 extension ProfileController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 2
+        return profileViewModelCollection.allCases.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as! ProfileCell
         
+        let viewModel = profileViewModelCollection(rawValue: indexPath.row)
+        cell.collectionDelegate = viewModel
+        cell.accessoryType = .disclosureIndicator
         return cell
+    }
+}
+    // MARK: - UITableViewDataDelegate
+extension ProfileController {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let collectionViewModel = profileViewModelCollection(rawValue: indexPath.row
+        ) else { return }
+        handleDidSelectRowAt(collectionModel: collectionViewModel)
+    }
+    
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        return UIView()
     }
 }
 
@@ -102,6 +137,23 @@ extension ProfileController {
 extension ProfileController: ProfileHeaderDelegate {
     func dismissController() {
         dismiss()
+    }
+}
+
+extension ProfileController: ProfileFooterDelegate {
+    func handleLogout() {
+        
+        let alert = UIAlertController(title: nil, message: Strings.Profile.logoutQuestion, preferredStyle: .actionSheet)
+        let logoutAction = UIAlertAction(title: Strings.Profile.logout, style: .destructive) { _ in
+            self.dismiss(animated: true) {
+                self.delegate?.handleLogout()
+            }
+        }
+        let cancelAction = UIAlertAction(title: Strings.Main.cancel, style: .cancel, handler: nil)
+        
+        alert.addAction(logoutAction)
+        alert.addAction(cancelAction)
+        present(alert, animated: true, completion: nil)
     }
 }
 

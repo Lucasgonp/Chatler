@@ -1,3 +1,6 @@
+// Main
+"cancel" = "Cancel";
+
 // Login
 "email.placeholder" = "E-mail";
 "password.placeholder" = "Password";
@@ -17,3 +20,11 @@
 
 //NewMessage
 "newMessage.title" = "New message";
+"searchForUser" = "Search for a user";
+
+// Account
+"accountInfo" = "Account Info";
+"accountSettings" = "Settings";
+"accountLogout" = "Logout";
+"accountLogoutQuestion" = "Are you sure you want to logout?";
+

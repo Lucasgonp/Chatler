@@ -14,9 +14,9 @@ private let reuseIdentifier = "ConversationCell"
 class ConversationsController: ViewController {
     
     // MARK: - Proprieties
-    let viewModel: ConversationsViewModelInput = ConversationsViewModel()
-    
+    private let viewModel: ConversationsViewModelInput = ConversationsViewModel()
     private var conversations = [Conversation]()
+    private var conversationsDictionary = [String: Conversation]()
     
     private lazy var profileButton: UIBarButtonItem = {
         let img = Images.Login.profile
@@ -110,7 +110,8 @@ class ConversationsController: ViewController {
     // MARK: - Selectors
     
     @objc func showProfile() {
-        let controller = ProfileController()
+        let controller = ProfileController(style: .insetGrouped)
+        controller.delegate = self
         let nav = UINavigationController(rootViewController: controller)
         nav.modalPresentationStyle = .fullScreen
         present(nav, animated: true)
@@ -122,22 +123,30 @@ class ConversationsController: ViewController {
     }
     
     func presentLoginScreen() {
-            let viewModel = LoginViewModel()
-            let controller = LoginController(viewModel: viewModel)
-            viewModel.controller = controller
-            
+            let controller = LoginController()
+            controller.delegate = self
+        
             let nav = UINavigationController(rootViewController: controller)
             nav.modalPresentationStyle = .fullScreen
             self.present(nav, animated: true)
     }
     
     func configureTableView() {
-        
-        
         tableView.frame = view.frame
         
         tableView.delegate = self
         tableView.dataSource = self
+    }
+    
+    func logout() {
+        do {
+            try Auth.auth().signOut()
+            print("DEBUG: Signed out!")
+            
+            presentLoginScreen()
+        } catch {
+            print("DEBUG: Error signing out: \(error.localizedDescription)")
+        }
     }
     
     func showChatController(forUser user: User) {
@@ -179,19 +188,37 @@ extension ConversationsController: UITableViewDelegate {
     // MARK: - Outputs
 extension ConversationsController: ConversationsViewModelOutput {
     func onLoadConversations(conversations: [Conversation]) {
-        self.conversations = conversations
+        conversations.forEach { conversation in
+            let message = conversation.message
+            conversationsDictionary[message.chatPartnerId] = conversation
+            
+        }
+        
+        self.conversations = Array(conversationsDictionary.values)
         self.tableView.reloadData()
     }
 }
 
-    // MARK: - NewMessageDelegate
+    // MARK: - Delegates
 
 extension ConversationsController: NewMessageDelegate {
     func controller(_ controller: TableViewController, wantsToStartChatWith user: User) {
-        print("Username is \(user.username)")
-        
-        controller.dismiss(animated: true) {
+        dismiss(animated: true) {
             self.showChatController(forUser: user)
+        }
+    }
+}
+
+extension ConversationsController: ProfileControllerDelegate {
+    func handleLogout() {
+        logout()
+    }
+}
+
+extension ConversationsController: AuthenticationDelegate {
+    func authenticationComplete() {
+        dismiss(animated: true) {
+            self.viewDidLoad()
         }
     }
 }

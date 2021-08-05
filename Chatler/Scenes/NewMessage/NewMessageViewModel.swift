@@ -16,8 +16,6 @@ protocol NewMessageViewModelDelegate: AnyObject {
 class NewMessageViewModel: NewMessageViewModelDelegate {
     weak var controller: NewMessageDelegateOutput?
     
-    private var users = [User]()
-    
     private lazy var presenter: NewMessagePresenterDelegate = {
         let presenter = NewMessagePresenter()
         presenter.controller = controller
@@ -28,10 +26,7 @@ class NewMessageViewModel: NewMessageViewModelDelegate {
         controller?.showLoading()
         NewMessageService.shared.fetchUsers { [weak self] users in
             self?.controller?.hideLoading()
-            
-            self?.users = users
-            self?.controller?.users = users
-            self?.controller?.reloadTableView()
+            self?.controller?.reloadTableView(withUsers: users)
         }
     }
     

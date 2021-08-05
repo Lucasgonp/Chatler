@@ -13,7 +13,6 @@ class TableViewController: UITableViewController, ViewConfiguration {
     private let hud = JGProgressHUD(style: .dark)
     
     // MARK: - Lifecicle
-    
     open override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         view.backgroundColor = .white

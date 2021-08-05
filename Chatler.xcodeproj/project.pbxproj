@@ -10,6 +10,10 @@
 		019FC209E60C87AA085AD48B /* Pods_ChatlerTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B32AF8336502DA5C67FFDCDD /* Pods_ChatlerTests.framework */; };
 		6F3439A6995E7F1FE565F2D4 /* Pods_Chatler_ChatlerUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B7BB4CAEBCD6BD01190D34D /* Pods_Chatler_ChatlerUITests.framework */; };
 		730F5A0C3F72C5254FAB69EA /* Pods_Chatler.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F6BA2C3012B5FA06F4A80E98 /* Pods_Chatler.framework */; };
+		B11A4D3826BADF2200687981 /* ProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B11A4D3726BADF2200687981 /* ProfileCell.swift */; };
+		B11A4D3B26BAECF400687981 /* ProfileCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B11A4D3A26BAECF400687981 /* ProfileCellViewModel.swift */; };
+		B11A4D3D26BAED5600687981 /* ProfileFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B11A4D3C26BAED5600687981 /* ProfileFooterView.swift */; };
+		B11A4D3F26BAF6C000687981 /* Navigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B11A4D3E26BAF6C000687981 /* Navigator.swift */; };
 		B1287D4B26B301BD0027E263 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B1287D4A26B301BD0027E263 /* GoogleService-Info.plist */; };
 		B1287D4E26B327070027E263 /* ValidationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1287D4D26B327070027E263 /* ValidationService.swift */; };
 		B1287D5026B327350027E263 /* RegistrationForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1287D4F26B327350027E263 /* RegistrationForm.swift */; };
@@ -95,6 +99,10 @@
 		3F20A7756668B5AB356FBE62 /* Pods-Chatler-ChatlerUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Chatler-ChatlerUITests.release.xcconfig"; path = "Target Support Files/Pods-Chatler-ChatlerUITests/Pods-Chatler-ChatlerUITests.release.xcconfig"; sourceTree = "<group>"; };
 		46077ADC570858C6EE51FCFB /* Pods-Chatler-ChatlerUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Chatler-ChatlerUITests.debug.xcconfig"; path = "Target Support Files/Pods-Chatler-ChatlerUITests/Pods-Chatler-ChatlerUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		986805C7F5E9451ECBC0323E /* Pods-Chatler.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Chatler.release.xcconfig"; path = "Target Support Files/Pods-Chatler/Pods-Chatler.release.xcconfig"; sourceTree = "<group>"; };
+		B11A4D3726BADF2200687981 /* ProfileCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCell.swift; sourceTree = "<group>"; };
+		B11A4D3A26BAECF400687981 /* ProfileCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCellViewModel.swift; sourceTree = "<group>"; };
+		B11A4D3C26BAED5600687981 /* ProfileFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileFooterView.swift; sourceTree = "<group>"; };
+		B11A4D3E26BAF6C000687981 /* Navigator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Navigator.swift; sourceTree = "<group>"; };
 		B1287D4A26B301BD0027E263 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		B1287D4D26B327070027E263 /* ValidationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationService.swift; sourceTree = "<group>"; };
 		B1287D4F26B327350027E263 /* RegistrationForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationForm.swift; sourceTree = "<group>"; };
@@ -220,6 +228,15 @@
 				D3CC46EFE99BDEAC9AE8FE22 /* Pods-ChatlerTests.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		B11A4D3626BADF1900687981 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				B11A4D3A26BAECF400687981 /* ProfileCellViewModel.swift */,
+				B11A4D3726BADF2200687981 /* ProfileCell.swift */,
+			);
+			path = Cells;
 			sourceTree = "<group>";
 		};
 		B1287D4C26B326FB0027E263 /* Validation */ = {
@@ -398,6 +415,7 @@
 		B1850C1326BA22FA00F4538A /* Profile */ = {
 			isa = PBXGroup;
 			children = (
+				B11A4D3626BADF1900687981 /* Cells */,
 				B1850C1626BA247800F4538A /* Views */,
 				B1850C1426BA231F00F4538A /* ProfileController.swift */,
 				B1850C1B26BAB69300F4538A /* ProfileViewModel.swift */,
@@ -410,6 +428,7 @@
 			children = (
 				B1850C1726BA248800F4538A /* ProfileHeader.swift */,
 				B1850C1926BAB50700F4538A /* ProfileHeaderViewModel.swift */,
+				B11A4D3C26BAED5600687981 /* ProfileFooterView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -481,6 +500,7 @@
 				B1287D8C26B8B57B0027E263 /* Constants.swift */,
 				B1287D8E26B8BE160027E263 /* Snapshop+Extensions.swift */,
 				B17BDAAD26B1FCC80010CF3B /* ViewConfiguration */,
+				B11A4D3E26BAF6C000687981 /* Navigator.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -777,15 +797,18 @@
 				B1287D8226B880610027E263 /* CollectionViewCell.swift in Sources */,
 				B1850C1A26BAB50700F4538A /* ProfileHeaderViewModel.swift in Sources */,
 				B1287D7626B849FC0027E263 /* ChatController.swift in Sources */,
+				B11A4D3D26BAED5600687981 /* ProfileFooterView.swift in Sources */,
 				B1850B9326B9A4A600F4538A /* MessageViewModel.swift in Sources */,
 				B1287D5526B35DAD0027E263 /* RegistrationPresenter.swift in Sources */,
 				B1287D7E26B85E600027E263 /* View.swift in Sources */,
 				B1287D7A26B84BB70027E263 /* CollectionViewController.swift in Sources */,
 				B1287D8026B880310027E263 /* MessageCell.swift in Sources */,
+				B11A4D3B26BAECF400687981 /* ProfileCellViewModel.swift in Sources */,
 				B1850C0B26B9DBFF00F4538A /* ConversationsService.swift in Sources */,
 				B1B0264B26AF6609008F726F /* AppDelegate.swift in Sources */,
 				B1850C0026B9BBC800F4538A /* LocalStoreManager.swift in Sources */,
 				B17BD9D326B09ECD0010CF3B /* Images.swift in Sources */,
+				B11A4D3826BADF2200687981 /* ProfileCell.swift in Sources */,
 				B1850C1026BA095100F4538A /* ConversationCell.swift in Sources */,
 				B1287D6526B747D30027E263 /* Service.swift in Sources */,
 				B1287D5926B45EE10027E263 /* LoginPresenter.swift in Sources */,
@@ -822,6 +845,7 @@
 				B1B026EB26B0378C008F726F /* Extensions.swift in Sources */,
 				B1287D5F26B732B50027E263 /* TableViewController.swift in Sources */,
 				B17BD9E226B0AEB70010CF3B /* Fonts.swift in Sources */,
+				B11A4D3F26BAF6C000687981 /* Navigator.swift in Sources */,
 				B17BDAB526B230B40010CF3B /* RegistrationViewModel.swift in Sources */,
 				B17BD9E026B0A8D70010CF3B /* Strings.swift in Sources */,
 				B17BD9CF26B0886C0010CF3B /* CustomTextField.swift in Sources */,

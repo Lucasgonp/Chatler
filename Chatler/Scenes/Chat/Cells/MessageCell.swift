@@ -30,7 +30,7 @@ class MessageCell: CollectionViewCell {
         return imageView
     }()
     
-    private let textView:  UITextView = {
+    private let textView: UITextView = {
         let textView = UITextView()
         textView.backgroundColor = .clear
         textView.font = Fonts.defaultLight(size: 16)

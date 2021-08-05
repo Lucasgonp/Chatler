@@ -10,15 +10,15 @@ import FirebaseAuth
 import JGProgressHUD
 import UIKit
 
-protocol LoginControllerDelegate: BaseOutputProtocol {
-    func checkFormStatus()
+protocol  AuthenticationDelegate: AnyObject {
+    func authenticationComplete()
 }
 
 class LoginController: ViewController {
     
     // MARK: - Proprieties
-    
-    private let viewModel: LoginViewModel
+    private let viewModel = LoginViewModel()
+    weak var delegate: AuthenticationDelegate?
     
     private let iconImage: UIImageView = {
         let imageView = UIImageView()
@@ -68,8 +68,7 @@ class LoginController: ViewController {
     
     // MARK: - Lifecicle
     
-    init(viewModel: LoginViewModel) {
-        self.viewModel = viewModel
+    init() {
         super.init(nibName: nil, bundle: nil)
         self.viewModel.controller = self
     }
@@ -132,14 +131,13 @@ class LoginController: ViewController {
     }
     
     @objc func handleShowSignUp() {
-        
         let controller = signUpController()
         navigationController?.pushViewController(controller, animated: true)
     }
     
     func signUpController() -> ViewController {
         let controller = RegistrationController()
-        
+        controller.delegate = delegate
         return controller
     }
     
@@ -166,7 +164,7 @@ class LoginController: ViewController {
     }
 }
 
-extension LoginController: LoginControllerDelegate {
+extension LoginController: LoginViewModelOutput {
     func checkFormStatus() {
         if viewModel.formIsValid {
             loginButton.isEnabled = true
@@ -175,5 +173,9 @@ extension LoginController: LoginControllerDelegate {
             loginButton.isEnabled = false
             loginButton.backgroundColor = .systemGray5
         }
+    }
+    
+    func dismissView() {
+        delegate?.authenticationComplete()
     }
 }

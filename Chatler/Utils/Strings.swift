@@ -8,12 +8,17 @@
 import Foundation
 
 struct Strings {
+    struct Main {
+        static let cancel = NSLocalizedString("cancel", comment: "")
+    }
+    
     struct Conversations {
         static let title = NSLocalizedString("conversations.title", comment: "")
     }
     
     struct NewMessage {
         static let title = NSLocalizedString("newMessage.title", comment: "")
+        static let searchForUser = NSLocalizedString("searchForUser", comment: "")
     }
     
     struct Login {
@@ -23,6 +28,13 @@ struct Strings {
         static let loginButton = NSLocalizedString("loginButton", comment: "")
         static let dontHaveAccountTextButton = NSLocalizedString("dontHaveAccountTextButton", comment: "")
         static let dontHaveAccountActionButton = NSLocalizedString("dontHaveAccountActionButton", comment: "")
+    }
+    
+    struct Profile {
+        static let accountInfo = NSLocalizedString("accountInfo", comment: "")
+        static let accountSettings = NSLocalizedString("accountSettings", comment: "")
+        static let logout = NSLocalizedString("accountLogout", comment: "")
+        static let logoutQuestion = NSLocalizedString("accountLogoutQuestion", comment: "")
     }
     
     struct Register {

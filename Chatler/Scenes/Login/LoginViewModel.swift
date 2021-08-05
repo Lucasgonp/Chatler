@@ -7,24 +7,24 @@
 
 import Foundation
 
-protocol LoginViewModelDelegate {
-    var controller: LoginControllerDelegate? { get set }
+protocol LoginViewModelInput {
+    var controller: LoginViewModelOutput? { get set }
     var formIsValid: Bool { get }
     
     func doLogin()
 }
 
-class LoginViewModel: LoginViewModelDelegate {
-    var controller: LoginControllerDelegate?
+protocol LoginViewModelOutput: BaseOutputProtocol {
+    func checkFormStatus()
+    func dismissView()
+}
+
+class LoginViewModel: LoginViewModelInput {
+    var controller: LoginViewModelOutput?
     var email: String?
     var password: String?
     
     let service = LoginService.shared
-    private lazy var presenter: LoginPresenter = {
-        let presenter = LoginPresenter()
-        presenter.controller = controller
-        return presenter
-    }()
     
     var formIsValid: Bool {
         guard let email = email, let password = password,
@@ -44,9 +44,10 @@ class LoginViewModel: LoginViewModelDelegate {
                 return
             }
             
-            self.controller?.hideLoading()
-            
-            self.presenter.dismiss()
+            DispatchQueue.main.async {
+                self.controller?.hideLoading()
+                self.controller?.dismissView()
+            }
         }
     }
 }

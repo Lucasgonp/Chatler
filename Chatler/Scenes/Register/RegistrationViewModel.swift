@@ -85,7 +85,7 @@ class RegistrationViewModel: RegistrationViewModelDelegate {
             return
         }
         
-        controller?.dismiss()
+        controller?.didCreateUser()
     }
     
     func prepareImage(profileImage: UIImage?, completion: @escaping (Result<String, CustomError>) -> ()) {
