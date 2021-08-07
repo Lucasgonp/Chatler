@@ -16,9 +16,10 @@ protocol NewMessageDelegate: AnyObject {
 
 protocol NewMessageDelegateOutput: BaseOutputProtocol {
     func reloadTableView(withUsers users: [User])
+    func loadingIndicator(_ show: Bool)
 }
 
-class NewMessageController: TableViewController, NewMessageDelegateOutput {
+class NewMessageController: TableViewController {
     // MARK: - Properties
     
     private lazy var viewModel: NewMessageViewModelDelegate = NewMessageViewModel()
@@ -67,6 +68,8 @@ class NewMessageController: TableViewController, NewMessageDelegateOutput {
         tableView.register(UserCell.self, forCellReuseIdentifier: reuseIdentifier)
         
         tableView.rowHeight = 80
+        
+        tableView.backgroundView = activityIndicator
     }
     
     func configureSearchController() {
@@ -106,8 +109,17 @@ extension NewMessageController: UISearchResultsUpdating {
 
     // MARK: Output
 
-extension NewMessageController {
+extension NewMessageController: NewMessageDelegateOutput {
+    func loadingIndicator(_ show: Bool) {
+        if show {
+            activityIndicator.startAnimating()
+        } else {
+            activityIndicator.stopAnimating()
+        }
+    }
+    
     func reloadTableView(withUsers users: [User]) {
+        
         self.users = users
         tableView.reloadData()
     }

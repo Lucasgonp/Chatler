@@ -9,6 +9,8 @@ import UIKit
 import SnapKit
 import JGProgressHUD
 
+private let activityIndicator = ActivityIndicator()
+
 extension UIViewController {
     public static let hud = JGProgressHUD(style: .dark)
     
@@ -39,6 +41,19 @@ extension UIViewController {
         navigationController?.navigationBar.isTranslucent = true
         
         navigationController?.navigationBar.overrideUserInterfaceStyle = .dark
+    }
+    
+    func showLoadingIndicatorActivity() {
+        addChild(activityIndicator)
+        activityIndicator.view.frame = view.frame
+        view.addSubview(activityIndicator.view)
+        activityIndicator.didMove(toParent: self)
+    }
+    
+    func hideLoadingIndicatorActivity() {
+        activityIndicator.willMove(toParent: nil)
+        activityIndicator.view.removeFromSuperview()
+        activityIndicator.removeFromParent()
     }
     
     func showError(_ errorMessage: String) {

@@ -18,6 +18,7 @@ protocol BaseCellProtocol: AnyObject {
 class TableViewCell: UITableViewCell, ViewConfiguration {
     private var keyboardHeight: CGFloat = 88
     private let hud = JGProgressHUD(style: .dark)
+    let activityIndicator = ActivityIndicator().spinner
     
     // MARK: - Lifecicle
     
@@ -65,6 +66,6 @@ extension TableViewCell: BaseCellProtocol {
     }
     
     func showError(_ errorMessage: String) {
-        // TODO
+        // 
     }
 }

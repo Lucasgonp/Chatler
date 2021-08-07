@@ -35,6 +35,14 @@ class ProfileController: TableViewController {
         return footer
     }()
     
+    private lazy var childViewController: UIViewController = {
+        let controller = UIViewController()
+        controller.view.backgroundColor = .black
+        let tap = UITapGestureRecognizer(target: self, action: #selector(dismissFullscreenImage))
+        controller.view.addGestureRecognizer(tap)
+        return controller
+    }()
+    
     //MARK: - Lifecycle
     override init(style: UITableView.Style) {
         super.init(style: style)
@@ -58,9 +66,20 @@ class ProfileController: TableViewController {
     
     override func configureUI() {
         view.backgroundColor = .white
+        let tap = UITapGestureRecognizer(target: self, action: #selector(dismissFullscreenImage))
+        view.addGestureRecognizer(tap)
+        
         configureTableView()
     }
 
+    override func buildViewHierarchy() {
+        
+    }
+    
+    override func setupConstraints() {
+        
+    }
+    
     //MARK: - Selectors
     
     //MARK: - API
@@ -137,6 +156,74 @@ extension ProfileController {
 extension ProfileController: ProfileHeaderDelegate {
     func dismissController() {
         dismiss()
+    }
+    
+    func imageTapped(imageView: UIImageView) {
+        let controller = ImageViewFullscreen(imageView: imageView)
+        controller.modalTransitionStyle = .crossDissolve
+        controller.modalPresentationStyle = .overFullScreen
+        
+        present(controller, animated: true)
+        
+//        childViewController.view.addSubview(imageView)
+//
+//
+//
+//        childViewController.modalTransitionStyle = .crossDissolve
+//        childViewController.modalPresentationStyle = .fullScreen
+//        present(childViewController, animated: true) {
+//            imageView.snp.makeConstraints {
+//                $0.center.equalToSuperview()
+//            }
+//        }
+        
+        /*func imageTapped(imageView: UIImageView) {
+         let newImageView = UIImageView(image: imageView.image)
+         newImageView.frame = UIScreen.main.bounds
+         newImageView.backgroundColor = .clear
+         newImageView.contentMode = .scaleAspectFit
+         newImageView.isUserInteractionEnabled = true
+         let tap = UITapGestureRecognizer(target: self, action: #selector(dismissFullscreenImage))
+         newImageView.addGestureRecognizer(tap)
+         self.view.addSubview(newImageView)
+     }
+
+     @objc func dismissFullscreenImage(_ sender: UITapGestureRecognizer) {
+         sender.view?.removeFromSuperview()
+     }*/
+        
+        
+//
+//        imageView.snp.makeConstraints {
+//            $0.center.equalTo(imageView.center)
+//        }
+
+//        self.view.addSubview(imageView3)
+//        imageView.center = view.center
+//
+//
+//        animate(newImageView)
+    }
+    
+    func animate(_ image: UIImageView) {
+        image.alpha = 0
+        
+        UIView.animate(withDuration: 1, delay: 0, options: .curveLinear, animations: {
+            image.snp.remakeConstraints {
+                $0.center.equalTo(self.view.snp.center)
+            }
+            
+            image.center = self.view.center
+            image.alpha = 1
+        }) { (success: Bool) in
+            print("Done moving image")
+        }
+        
+        
+    }
+
+    @objc func dismissFullscreenImage(_ sender: UITapGestureRecognizer) {
+        sender.view?.removeFromSuperview()
     }
 }
 

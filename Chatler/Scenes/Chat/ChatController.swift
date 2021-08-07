@@ -10,6 +10,12 @@ import SnapKit
 
 private let reuseIdentifier = "MessageCell"
 
+protocol ChatViewModelOutput: BaseOutputProtocol {
+    func fetchMessages(messages: [Message])
+    
+    func loadingIndicator(_ show: Bool)
+}
+
 class ChatController: CollectionViewController {
     
     //MARK: - Properties
@@ -120,6 +126,14 @@ extension ChatController: UICollectionViewDelegateFlowLayout {
 
     // MARK: - Outputs
 extension ChatController: ChatViewModelOutput {
+    func loadingIndicator(_ show: Bool) {
+        if show {
+            activityIndicator.startAnimating()
+        } else {
+            activityIndicator.stopAnimating()
+        }
+    }
+    
     func fetchMessages(messages: [Message]) {
         self.messages = messages
         

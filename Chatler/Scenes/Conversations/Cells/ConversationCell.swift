@@ -14,11 +14,11 @@ class ConversationCell: TableViewCell {
         didSet { configure() }
     }
     
-    let profileImageView: UIImageView = {
+    private lazy var profileImageView: UIImageView = {
        let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
-        imageView.backgroundColor = Colors.lightGray
+        imageView.addSubview(activityIndicator)
         imageView.layer.cornerRadius = 70 / 2
         return imageView
     }()
@@ -84,6 +84,11 @@ class ConversationCell: TableViewCell {
         timestampLabel.snp.makeConstraints {
             $0.top.equalTo(snp.top).offset(20)
             $0.right.equalTo(snp.right).offset(-12)
+        }
+        
+        activityIndicator.snp.makeConstraints {
+            $0.centerX.equalTo(profileImageView.snp.centerX)
+            $0.centerY.equalTo(profileImageView.snp.centerY)
         }
     }
     

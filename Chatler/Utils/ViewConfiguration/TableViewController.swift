@@ -11,6 +11,7 @@ import JGProgressHUD
 class TableViewController: UITableViewController, ViewConfiguration {
     private var keyboardHeight: CGFloat = 88
     private let hud = JGProgressHUD(style: .dark)
+    let activityIndicator = ActivityIndicator().spinner
     
     // MARK: - Lifecicle
     open override func viewWillAppear(_ animated: Bool) {
@@ -64,7 +65,7 @@ extension TableViewController: BaseOutputProtocol {
     }
     
     func showDialog(title: String = "Ops!", text: String) {
-        let errorDialog = ""
+        //
     }
     
     // MARK: - Selectors

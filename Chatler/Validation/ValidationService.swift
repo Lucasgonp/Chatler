@@ -11,14 +11,9 @@ enum CustomError: Error {
     case genericError
     
     var errorDescription: String {
-        var description: String
         switch self {
         case .genericError:
-            description = "DEBUG: Profile image selected is nil"
+            return "Algo deu errado! D:"
         }
-        
-        description = "\(description): \(localizedDescription)"
-        return description
-        
     }
 }

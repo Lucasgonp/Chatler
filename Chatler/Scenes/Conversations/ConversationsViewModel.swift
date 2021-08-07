@@ -13,18 +13,25 @@ protocol ConversationsViewModelInput: AnyObject {
     func loadConversations()
 }
 
-protocol ConversationsViewModelOutput: BaseOutputProtocol {
-    func onLoadConversations(conversations: [Conversation])
-}
-
 class ConversationsViewModel: ConversationsViewModelInput {
     weak var output: ConversationsViewModelOutput?
     
     let service = ConversationsService.shared
     
+    private let activityIndicator = ActivityIndicator().spinner
+    
     func loadConversations() {
-        service.fetchConversations { conversations in
-            self.output?.onLoadConversations(conversations: conversations)
+        output?.tableView.backgroundView = activityIndicator
+        
+        service.fetchConversations { result in
+            self.activityIndicator.stopAnimating()
+            
+            switch result {
+            case .success(let conversations):
+                self.output?.onLoadConversations(conversations: conversations)
+            case .failure(let error):
+                self.output?.showError(error.localizedDescription)
+            }
         }
     }
 }

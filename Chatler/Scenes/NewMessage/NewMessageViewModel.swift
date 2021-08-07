@@ -23,9 +23,9 @@ class NewMessageViewModel: NewMessageViewModelDelegate {
     }()
     
     func loadUsers() {
-        controller?.showLoading()
+        controller?.loadingIndicator(true)
         NewMessageService.shared.fetchUsers { [weak self] result in
-            self?.controller?.hideLoading()
+            self?.controller?.loadingIndicator(false)
             
             switch result {
             case .success(let users):

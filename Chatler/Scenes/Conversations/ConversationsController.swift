@@ -11,6 +11,12 @@ import FirebaseAuth
 
 private let reuseIdentifier = "ConversationCell"
 
+protocol ConversationsViewModelOutput: BaseOutputProtocol {
+    var tableView: UITableView { get set }
+    
+    func onLoadConversations(conversations: [Conversation])
+}
+
 class ConversationsController: ViewController {
     
     // MARK: - Proprieties
@@ -25,7 +31,7 @@ class ConversationsController: ViewController {
         return item
     }()
     
-    private let tableView: UITableView = {
+    internal var tableView: UITableView = {
         let tableView = UITableView()
         tableView.backgroundColor = .white
         tableView.rowHeight = 100
@@ -50,6 +56,7 @@ class ConversationsController: ViewController {
     init() {
         super.init(nibName: nil, bundle: nil)
         self.viewModel.output = self
+        self.viewModel.output?.tableView = tableView
     }
     
     required init?(coder: NSCoder) {
@@ -119,6 +126,7 @@ class ConversationsController: ViewController {
     
     // MARK: - Helpers
     func loadConversations() {
+        //TODO Loading
         viewModel.loadConversations()
     }
     
@@ -188,6 +196,7 @@ extension ConversationsController: UITableViewDelegate {
 
     // MARK: - Outputs
 extension ConversationsController: ConversationsViewModelOutput {
+    
     func onLoadConversations(conversations: [Conversation]) {
         conversations.forEach { conversation in
             let message = conversation.message

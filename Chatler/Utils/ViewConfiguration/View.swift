@@ -11,6 +11,7 @@ import JGProgressHUD
 class View: UIView, ViewConfiguration {
     private var keyboardHeight: CGFloat = 88
     private let hud = JGProgressHUD(style: .dark)
+    let activityIndicator = ActivityIndicator().spinner
     
     // MARK: - Lifecicle
     

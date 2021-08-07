@@ -23,13 +23,16 @@ class ProfileHeader: View {
         return button
     }()
     
-    private let profileImageView: UIImageView = {
+    lazy var profileImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.clipsToBounds = true
         imageView.layer.cornerRadius = 200 / 2
         imageView.contentMode = .scaleAspectFill
         imageView.layer.borderWidth = 4.0
         imageView.layer.borderColor = Colors.mainWhite.cgColor
+        activityIndicator.style = .large
+        imageView.addSubview(activityIndicator)
+
         return imageView
     }()
     
@@ -74,6 +77,13 @@ class ProfileHeader: View {
         addSubview(stack)
     }
     
+    override func configureUI() {
+        let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(selectPhoto))
+        profileImageView.isUserInteractionEnabled = true
+        profileImageView.addGestureRecognizer(gestureRecognizer)
+        
+    }
+    
     override func setupConstraints() {
         dismissButton.imageView?.snp.makeConstraints {
             $0.height.width.equalTo(22)
@@ -95,6 +105,11 @@ class ProfileHeader: View {
             $0.centerX.equalTo(snp.centerX)
             $0.top.equalTo(profileImageView.snp.bottom).offset(16)
         }
+        
+        activityIndicator.snp.makeConstraints {
+            $0.centerX.equalTo(profileImageView.snp.centerX)
+            $0.centerY.equalTo(profileImageView.snp.centerY)
+        }
     }
     
     // MARK: - Selectors
@@ -105,6 +120,12 @@ class ProfileHeader: View {
     // MARK: - API
     
     // MARK: - Helpers
+    
+    @objc func selectPhoto() {
+        delegate?.imageTapped(imageView: profileImageView)
+        print("clique")
+    }
+    
     private func populateUserData() {
         guard let user = user else { return }
         
@@ -112,7 +133,13 @@ class ProfileHeader: View {
         usernameLabel.text = "@" + user.username
         
         guard let url = URL(string: user.profileImageUrl) else { return }
-        profileImageView.sd_setImage(with: url)
+        profileImageView.sd_setImage(with: url) { image, error, _, _ in
+            if let error = error {
+                print("DEBUG: Error - \(error.localizedDescription)")
+            } else {
+                self.activityIndicator.stopAnimating()
+            }
+        }
     }
 }
 

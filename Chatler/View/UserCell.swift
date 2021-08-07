@@ -19,9 +19,9 @@ class UserCell: TableViewCell {
     
     private lazy var profileImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.backgroundColor = .systemPurple
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
+        imageView.addSubview(activityIndicator)
         imageView.layer.cornerRadius = 64 / 2
         return imageView
     }()
@@ -78,6 +78,11 @@ class UserCell: TableViewCell {
         stack.snp.makeConstraints {
             $0.centerY.equalToSuperview()
             $0.left.equalTo(profileImageView.snp.right).offset(12)
+        }
+        
+        activityIndicator.snp.makeConstraints {
+            $0.centerX.equalTo(profileImageView.snp.centerX)
+            $0.centerY.equalTo(profileImageView.snp.centerY)
         }
     }
 

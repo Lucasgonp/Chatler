@@ -21,6 +21,8 @@ protocol RegistrationViewModelDelegate: AnyObject {
     
     var formIsValid: Bool { get }
     
+    var signUpButton: PrimaryButton { get }
+    
     func loadSignUpUser()
 }
 
@@ -30,6 +32,8 @@ class RegistrationViewModel: RegistrationViewModelDelegate {
     var email, fullName, username, password: String?
     var profileImage: UIImage?
     var profileImageUrl: String?
+    
+    let signUpButton: PrimaryButton
     
     private let service = RegistrationService.shared
     private lazy var presenter: RegisterPresenterDelegate = {
@@ -45,9 +49,13 @@ class RegistrationViewModel: RegistrationViewModelDelegate {
         return true
     }
     
+    init(signUpButton: PrimaryButton) {
+        self.signUpButton = signUpButton
+    }
+    
     func loadSignUpUser() {
         guard let _ = unwrapRegistrationForm() else { return }
-        controller?.showLoading(text: "Loggin in...")
+        signUpButton.loadingIndicator(true)
         
         DispatchQueue.global(qos: .userInitiated).sync {
             self.prepareImage(profileImage: self.profileImage, completion: self.handleLoadedImage(result:))
@@ -64,18 +72,17 @@ class RegistrationViewModel: RegistrationViewModelDelegate {
         
         case .failure(let error):
             DispatchQueue.main.async {
-                self.controller?.hideLoading()
+                self.signUpButton.loadingIndicator(false)
                 self.controller?.showError(error.localizedDescription)
             }
         }
     }
     
     func handleCreatedUser(error: Error?) {
+        signUpButton.loadingIndicator(false)
+        
         if let error = error {
-            DispatchQueue.main.async {
-                self.controller?.hideLoading()
-                self.controller?.showError(error.localizedDescription)
-            }
+            self.controller?.showError(error.localizedDescription)
         } else {
             controller?.didCreateUser()
         }

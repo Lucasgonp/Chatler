@@ -18,7 +18,11 @@ class RegistrationController: ViewController {
     
     // MARK:- Proprieties
     
-    private let viewModel: RegistrationViewModelDelegate = RegistrationViewModel()
+    private lazy var viewModel: RegistrationViewModelDelegate = {
+        let viewModel = RegistrationViewModel(signUpButton: signUpButton)
+        return viewModel
+    }()
+    
     weak var delegate: AuthenticationDelegate?
     
     private var profileImage: UIImage? {

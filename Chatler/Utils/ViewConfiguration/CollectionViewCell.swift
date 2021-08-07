@@ -11,6 +11,7 @@ import JGProgressHUD
 class CollectionViewCell: UICollectionViewCell, ViewConfiguration {
     private var keyboardHeight: CGFloat = 88
     private let hud = JGProgressHUD(style: .dark)
+    private let activityIndicator = ActivityIndicator()
     
     // MARK: - Lifecicle
     
@@ -47,12 +48,21 @@ extension CollectionViewCell: BaseCellProtocol {
         hud.dismiss()
     }
     
+    func showLoadingIndicatorActivity() {
+        //
+    }
+    
+    func hideLoadingIndicatorActivity() {
+        //
+    }
+    
+    
     func hideLoading(completion: @escaping () -> ()) {
         hud.dismiss()
         completion()
     }
     
     func showError(_ errorMessage: String) {
-        // TODO
+        // 
     }
 }

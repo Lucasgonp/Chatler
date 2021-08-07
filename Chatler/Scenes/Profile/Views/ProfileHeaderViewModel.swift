@@ -9,4 +9,6 @@ import UIKit
 
 protocol ProfileHeaderDelegate: AnyObject {
     func dismissController()
+    
+    func imageTapped(imageView: UIImageView)
 }

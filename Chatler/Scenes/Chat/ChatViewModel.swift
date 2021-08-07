@@ -15,20 +15,16 @@ protocol ChatViewModelInput: AnyObject {
     func uploadMessage(message: String, user: User)
 }
 
-protocol ChatViewModelOutput: BaseOutputProtocol {
-    func fetchMessages(messages: [Message])
-}
-
 class ChatViewModel: ChatViewModelInput {
     weak var output: ChatViewModelOutput?
     
     func loadMessages(from contact: User) {
-        output?.showLoading(text: "Loading messages...")
+        output?.loadingIndicator(true)
         
         DispatchQueue.global(qos: .userInitiated).async {
             ChatService.shared.fetchMessages(forUser: contact) { [weak self] messages in
                 DispatchQueue.main.async {
-                    self?.output?.hideLoading()
+                    self?.output?.loadingIndicator(false)
                     self?.output?.fetchMessages(messages: messages)
                 }
             }
