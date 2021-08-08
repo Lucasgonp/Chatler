@@ -105,6 +105,8 @@ class ConversationCell: TableViewCell {
         messageTextLabel.text = conversation.message.text
         
         timestampLabel.text = viewModel.timestamp
-        profileImageView.sd_setImage(with: viewModel.profileImageUrl)
+        profileImageView.sd_setImage(with: viewModel.profileImageUrl, placeholderImage: nil, options: .continueInBackground) { image, error, type, _ in
+            self.activityIndicator.stopAnimating()
+        }
     }
 }

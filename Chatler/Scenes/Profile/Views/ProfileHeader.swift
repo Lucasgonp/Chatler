@@ -41,7 +41,6 @@ class ProfileHeader: View {
         label.font = Fonts.defaultBold(size: 20)
         label.textColor = Colors.mainBlack
         label.textAlignment = .center
-        label.text = "Jorge Castro"
         return label
     }()
     
@@ -50,7 +49,6 @@ class ProfileHeader: View {
         label.font = Fonts.defaultLight(size: 16)
         label.textColor = Colors.mainBlack
         label.textAlignment = .center
-        label.text = "JorgeCastro"
         return label
     }()
     
@@ -123,7 +121,6 @@ class ProfileHeader: View {
     
     @objc func selectPhoto() {
         delegate?.imageTapped(imageView: profileImageView)
-        print("clique")
     }
     
     private func populateUserData() {
@@ -133,7 +130,7 @@ class ProfileHeader: View {
         usernameLabel.text = "@" + user.username
         
         guard let url = URL(string: user.profileImageUrl) else { return }
-        profileImageView.sd_setImage(with: url) { image, error, _, _ in
+        profileImageView.sd_setImage(with: url, placeholderImage: Images.Login.profileBubble, options: .transformAnimatedImage) { image, error, _, _ in
             if let error = error {
                 print("DEBUG: Error - \(error.localizedDescription)")
             } else {

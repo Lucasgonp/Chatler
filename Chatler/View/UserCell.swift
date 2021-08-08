@@ -94,7 +94,9 @@ class UserCell: TableViewCell {
         usernameLabel.text = user.username
         
         guard let url = URL(string: user.profileImageUrl) else { return }
-        profileImageView.sd_setImage(with: url)
+        profileImageView.sd_setImage(with: url, placeholderImage: nil, options: .continueInBackground) { image, error, type, _ in
+            self.activityIndicator.stopAnimating()
+        }
         
     }
 
