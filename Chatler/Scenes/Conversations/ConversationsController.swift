@@ -90,7 +90,6 @@ class ConversationsController: ViewController {
     }
     
     override func setupConstraints() {
-        // TODO
         newMessageButton.snp.makeConstraints {
             $0.bottom.equalTo(view.snp_bottomMargin).inset(16)
             $0.right.equalTo(view.snp_rightMargin).inset(24)
@@ -125,8 +124,8 @@ class ConversationsController: ViewController {
     }
     
     // MARK: - Helpers
+    
     func loadConversations() {
-        //TODO Loading
         viewModel.loadConversations()
     }
     

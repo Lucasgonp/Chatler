@@ -36,10 +36,6 @@ class ImageViewFullscreen: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         buildLayout()
-        
-        dragGestureFinish = UIPanGestureRecognizer(target: self, action: #selector(dragged))
-        dragGestureFinish.delegate = self
-        imageView.addGestureRecognizer(dragGestureFinish)
     }
     
     func buildLayout() {
@@ -59,6 +55,10 @@ class ImageViewFullscreen: UIViewController {
     }
     
     func configureViews() {
+        dragGestureFinish.delegate = self
+        dragGestureFinish = UIPanGestureRecognizer(target: self, action: #selector(dragged))
+        imageView.addGestureRecognizer(dragGestureFinish)
+        
         let tap = UITapGestureRecognizer(target: self, action: #selector(dismissView))
         view.addGestureRecognizer(tap)
         

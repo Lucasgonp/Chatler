@@ -59,7 +59,7 @@ class RegistrationViewModel: RegistrationViewModelDelegate {
         
         DispatchQueue.global(qos: .userInitiated).sync {
             self.prepareImage(profileImage: self.profileImage, completion: self.handleLoadedImage(result:))
-            self.createUser(profileImageUrl: self.profileImageUrl, completion: self.handleCreatedUser(error:))
+            self.createUser(profileImageUrl: self.profileImageUrl, completion: self.handleCreatedUser(result:))
         }
     }
     
@@ -78,13 +78,14 @@ class RegistrationViewModel: RegistrationViewModelDelegate {
         }
     }
     
-    func handleCreatedUser(error: Error?) {
+    func handleCreatedUser(result: Result<AuthDataResult, Error>) {
         signUpButton.loadingIndicator(false)
         
-        if let error = error {
-            self.controller?.showError(error.localizedDescription)
-        } else {
+        switch result {
+        case .success(let result):
             controller?.didCreateUser()
+        case .failure(let error):
+            self.controller?.showError(error.localizedDescription)
         }
     }
     
@@ -99,22 +100,15 @@ class RegistrationViewModel: RegistrationViewModelDelegate {
         service.prepareImage(filename: filename, imageData: imageData, completion: completion)
     }
     
-    func createUser(profileImageUrl: String?, completion: @escaping (Error?) -> ()) {
+    func createUser(profileImageUrl: String?, completion: @escaping (Result<AuthDataResult, Error>) -> ()) {
         guard var registrationForm = unwrapRegistrationForm(),
               let profileImageUrl = profileImageUrl else {
-            completion(CustomError.genericError)
+            completion(.failure(CustomError.genericError))
             return
         }
         
         registrationForm.profileImageUrl = profileImageUrl
-        service.signUpNewUser(form: registrationForm) { error in
-            if let error = error {
-                completion(error)
-                return
-            }
-            
-            completion(nil)
-        }
+        service.signUpNewUser(form: registrationForm, completion: completion)
     }
     
     func unwrapRegistrationForm() -> RegistrationForm? {

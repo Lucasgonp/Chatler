@@ -164,10 +164,6 @@ class LoginController: ViewController {
         navigationController?.navigationBar.isHidden = true
         navigationController?.navigationBar.barStyle = .black
     }
-    
-    func configureRegisterButton() {
-     //   dontHaveAccountButton.anchor()
-    }
 }
 
     // MARK: - Outputs

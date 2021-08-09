@@ -26,18 +26,28 @@ struct RegistrationService {
         }
     }
     
-    func signUpNewUser(form: RegistrationForm, completion: @escaping (Error?) -> ()) {
+    func signUpNewUser(form: RegistrationForm, completion: @escaping (Result<AuthDataResult, Error>) -> ()) {
         Auth.auth().createUser(withEmail: form.email, password: form.password) { result, error in
             if let error = error {
-                completion(error)
+                completion(.failure(error))
                 return
             }
             guard let uid = result?.user.uid else {
-                completion(CustomError.genericError)
+                completion(.failure(CustomError.genericError))
                 return
             }
             
-            uploadUserData(uid: uid, form: form, completion: completion)
+            var data = form.dictionary
+            data["uid"] = uid
+            
+            COLLECTION_USERS.document(uid).setData(data) { error in
+                if let error = error {
+                    completion(.failure(error))
+                } else if let result = result {
+                    print("Debug: User created!!")
+                    completion(.success(result))
+                }
+            }
         }
     }
 }
@@ -61,16 +71,6 @@ private extension RegistrationService {
     }
     
     func uploadUserData(uid: String, form: RegistrationForm, completion: ((Error?) -> Void)?) {
-        var data = form.dictionary
-        data["uid"] = uid
         
-        COLLECTION_USERS.document(uid).setData(data) { error in
-            if let error = error {
-                completion?(error)
-            } else {
-                print("Debug: User created!!")
-                completion?(nil)
-            }
-        }
     }
 }

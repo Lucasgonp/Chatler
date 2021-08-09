@@ -12,6 +12,10 @@ struct Images {
         static var xMark = UIImage(systemName: "xmark")
     }
     
+    struct Chat {
+        static var background = UIImage(named: "chat.background")
+    }
+    
     struct Login {
         static var envelope: UIImage = #imageLiteral(resourceName: "ic_mail_outline_white_2x")
         static var lock: UIImage = #imageLiteral(resourceName: "ic_lock_outline_white_2x")

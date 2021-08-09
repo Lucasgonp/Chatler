@@ -164,45 +164,6 @@ extension ProfileController: ProfileHeaderDelegate {
         controller.modalPresentationStyle = .overFullScreen
         
         present(controller, animated: true)
-        
-//        childViewController.view.addSubview(imageView)
-//
-//
-//
-//        childViewController.modalTransitionStyle = .crossDissolve
-//        childViewController.modalPresentationStyle = .fullScreen
-//        present(childViewController, animated: true) {
-//            imageView.snp.makeConstraints {
-//                $0.center.equalToSuperview()
-//            }
-//        }
-        
-        /*func imageTapped(imageView: UIImageView) {
-         let newImageView = UIImageView(image: imageView.image)
-         newImageView.frame = UIScreen.main.bounds
-         newImageView.backgroundColor = .clear
-         newImageView.contentMode = .scaleAspectFit
-         newImageView.isUserInteractionEnabled = true
-         let tap = UITapGestureRecognizer(target: self, action: #selector(dismissFullscreenImage))
-         newImageView.addGestureRecognizer(tap)
-         self.view.addSubview(newImageView)
-     }
-
-     @objc func dismissFullscreenImage(_ sender: UITapGestureRecognizer) {
-         sender.view?.removeFromSuperview()
-     }*/
-        
-        
-//
-//        imageView.snp.makeConstraints {
-//            $0.center.equalTo(imageView.center)
-//        }
-
-//        self.view.addSubview(imageView3)
-//        imageView.center = view.center
-//
-//
-//        animate(newImageView)
     }
     
     func animate(_ image: UIImageView) {
@@ -246,7 +207,6 @@ extension ProfileController: ProfileFooterDelegate {
 
 extension ProfileController: ProfileViewModelOutput {
     func didLoadUser(user: User) {
-        print("username is \(user.username)")
         self.user = user
     }
 }

@@ -27,6 +27,29 @@ class ChatController: CollectionViewController {
     
     private lazy var viewModel: ChatViewModelInput = ChatViewModel()
     
+    private lazy var stack: UIStackView = {
+        let stack = UIStackView(arrangedSubviews: [userImage, usernameLabel])
+        stack.axis = .horizontal
+        stack.spacing = 6
+        return stack
+    }()
+    
+    private lazy var userImage: UIImageView = {
+        let imageView = UIImageView()
+        activityIndicator.style = .medium
+        activityIndicator.startAnimating()
+        imageView.addSubview(activityIndicator)
+        imageView.layer.cornerRadius = 32 / 2
+        imageView.clipsToBounds = true
+        return imageView
+    }()
+    
+    private var usernameLabel: UILabel {
+        let label = UILabel()
+        label.text = user.fullname
+        return label
+    }
+    
     private lazy var customInputView: CustomInputAccessoryView = {
         let customInputView = CustomInputAccessoryView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 0))
         
@@ -54,21 +77,41 @@ class ChatController: CollectionViewController {
     
     
     override func buildViewHierarchy() {
+        let gesture = UITapGestureRecognizer(target: self, action: #selector(openFriendController))
+        stack.addGestureRecognizer(gesture)
+        navigationItem.titleView = stack
         
+        let rightButtomItem = UIBarButtonItem(image: UIImage(systemName: "info.circle"), style: .plain, target: self, action: #selector(openFriendController))
+        navigationItem.rightBarButtonItem = rightButtomItem
     }
     
     override func setupConstraints() {
-        
+        userImage.snp.makeConstraints {
+            $0.height.width.equalTo(32)
+        }
+    }
+    
+    @objc func openFriendController() {
+        print("testeed")
     }
     
     override func configureUI() {
         collectionView.backgroundColor = .white
+        
+        let backImg = UIImageView(image: Images.Chat.background)
+        backImg.contentMode = .scaleAspectFill
+        collectionView.backgroundView = backImg
+        
         configureNavigationBar(withTitle: user.fullname, prefersLargeTitles: false)
         
         collectionView.register(MessageCell.self, forCellWithReuseIdentifier: reuseIdentifier)
         collectionView.alwaysBounceVertical = true
         collectionView.keyboardDismissMode = .interactive
         
+        guard let url = URL(string: user.profileImageUrl) else { return }
+        userImage.sd_setImage(with: url) { image, error, _, _ in
+            self.activityIndicator.stopAnimating()
+        }
     }
     
     override var inputAccessoryView: UIView? {

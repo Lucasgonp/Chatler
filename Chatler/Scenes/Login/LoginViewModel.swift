@@ -34,9 +34,9 @@ class LoginViewModel: LoginViewModelInput {
         
         service.logUserIn(email: email, password: password) { (result, error) in
             if let error = error {
-                    self.controller?.handleError(error: error)
-            } else {
-                    self.controller?.dismissView()
+                self.controller?.handleError(error: error)
+            } else if let result = result {
+                self.controller?.dismissView()
             }
         }
     }
