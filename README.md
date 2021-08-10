@@ -5,17 +5,19 @@
 ![GitHub repo size](https://img.shields.io/github/repo-size/lucasgonp/chatler?style=for-the-badge)
 ![GitHub language count](https://img.shields.io/github/languages/count/lucasgonp/chatler?style=for-the-badge)
 
-App de chat usando firebase
+Chat app 
 
-### Ajustes e melhorias
+### Improvements and features
 
 O projeto ainda está em desenvolvimento com muitas atualizações por vir
+Project done or sort of, with huge updates comming up
 
-## 💻 Pré-requisitos
+## 💻 Requires
 
-Antes de começar:
+Getting started:
 <!---Estes são apenas requisitos de exemplo. Adicionar, duplicar ou remover conforme necessário--->
-* Ter o `cocoapods` e rodar "pod install" no repositório local
+* Make sure you have `cocoapods` installed.
+* Run `pod install` at the local repository.
 
 
-[⬆ Voltar ao topo](#nome-do-projeto)<br>
+[⬆ Back to top](#nome-do-projeto)<br>
