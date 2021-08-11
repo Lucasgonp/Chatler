@@ -35,7 +35,15 @@ class View: UIView, ViewConfiguration {
 extension View {
     func configureGradientLayer() {
         let gradient = CAGradientLayer()
-        gradient.colors = [Colors.mainColor.cgColor, Colors.secundaryColor.cgColor]
+        gradient.colors = [Colors.veryLightGray.cgColor, Colors.mainWhite.cgColor]
+        gradient.locations = [0, 1]
+        layer.addSublayer(gradient)
+        gradient.frame = bounds
+    }
+    
+    func configureGradientLayerSecundary() {
+        let gradient = CAGradientLayer()
+        gradient.colors = [Colors.veryLightGray.cgColor, Colors.mainWhite.cgColor]
         gradient.locations = [0, 1]
         layer.addSublayer(gradient)
         gradient.frame = bounds

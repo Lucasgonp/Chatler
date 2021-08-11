@@ -12,7 +12,7 @@ import FirebaseAuth
 private let reuseIdentifier = "ConversationCell"
 
 protocol ConversationsViewModelOutput: BaseOutputProtocol {
-    var tableView: UITableView { get set }
+    var tableView: UITableView { get }
     
     func onLoadConversations(conversations: [Conversation])
 }
@@ -27,7 +27,7 @@ class ConversationsController: ViewController {
     private lazy var profileButton: UIBarButtonItem = {
         let img = Images.Login.profile
         let item = UIBarButtonItem(image: img, style: .plain, target: self, action: #selector(showProfile))
-        
+        item.tintColor = Colors.gray
         return item
     }()
     
@@ -56,7 +56,6 @@ class ConversationsController: ViewController {
     init() {
         super.init(nibName: nil, bundle: nil)
         self.viewModel.output = self
-        self.viewModel.output?.tableView = tableView
     }
     
     required init?(coder: NSCoder) {
@@ -70,10 +69,9 @@ class ConversationsController: ViewController {
         loadConversations()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        configureNavigationBar(withTitle: "Messages", prefersLargeTitles: true)
-        
+    override func viewWillDisappear(_ animated: Bool) {
+        navigationController?.navigationBar.prefersLargeTitles = false
+        navigationController?.navigationBar.layoutIfNeeded()
     }
     
     override func configureUI() {
@@ -153,6 +151,7 @@ class ConversationsController: ViewController {
             presentLoginScreen()
         } catch {
             print("DEBUG: Error signing out: \(error.localizedDescription)")
+            showError(error.localizedDescription)
         }
     }
     

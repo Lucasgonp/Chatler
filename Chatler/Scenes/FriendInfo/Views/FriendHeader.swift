@@ -1,29 +1,19 @@
 //
-//  ProfileHeader.swift
+//  FriendHeader.swift
 //  Chatler
 //
-//  Created by Lucas Pereira on 03/08/21.
+//  Created by Lucas Pereira on 10/08/21.
 //
 
 import UIKit
 
-class ProfileHeader: View {
-    
+class FriendHeader: View {
     // MARK: - Properties
-    
     weak var delegate: ProfileHeaderDelegate?
     
     var user: User? {
         didSet { populateUserData() }
     }
-    
-    private let dismissButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.setImage(Images.Common.xMark, for: .normal)
-        button.addTarget(self, action: #selector(handleDismissal), for: .touchUpInside)
-        button.tintColor = Colors.mainBlack
-        return button
-    }()
     
     lazy var profileImageView: UIImageView = {
         let imageView = UIImageView()
@@ -31,7 +21,7 @@ class ProfileHeader: View {
         imageView.layer.cornerRadius = 200 / 2
         imageView.contentMode = .scaleAspectFill
         imageView.layer.borderWidth = 4.0
-        imageView.layer.borderColor = Colors.veryLightGray.cgColor
+        imageView.layer.borderColor = Colors.mainWhite.cgColor
         activityIndicator.style = .large
         imageView.addSubview(activityIndicator)
 
@@ -62,17 +52,18 @@ class ProfileHeader: View {
     }()
     
     // MARK: - Lifecycle
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
-        configureGradientLayer()
+        
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+
     
     override func buildViewHierarchy() {
-        addSubview(dismissButton)
         addSubview(profileImageView)
         addSubview(stack)
     }
@@ -82,18 +73,10 @@ class ProfileHeader: View {
         profileImageView.isUserInteractionEnabled = true
         profileImageView.addGestureRecognizer(gestureRecognizer)
         
+        configureGradientLayerSecundary()
     }
     
     override func setupConstraints() {
-        dismissButton.imageView?.snp.makeConstraints {
-            $0.height.width.equalTo(22)
-        }
-        
-        dismissButton.snp.makeConstraints {
-            $0.top.equalTo(snp.top).offset(44)
-            $0.left.equalTo(snp.left).offset(12)
-            $0.height.width.equalTo(48)
-        }
         
         profileImageView.snp.makeConstraints {
             $0.centerX.equalTo(snp.centerX)
@@ -113,9 +96,6 @@ class ProfileHeader: View {
     }
     
     // MARK: - Selectors
-    @objc func handleDismissal() {
-        delegate?.dismissController()
-    }
     
     // MARK: - API
     
@@ -141,14 +121,3 @@ class ProfileHeader: View {
         }
     }
 }
-
-// SuperMARK
-// MARK: - Properties
-
-// MARK: - Lifecycle
-
-// MARK: - Selectors
-
-// MARK: - API
-
-// MARK: - Helpers

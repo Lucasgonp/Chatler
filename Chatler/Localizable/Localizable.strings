@@ -28,6 +28,10 @@
 "accountLogout" = "Logout";
 "accountLogoutQuestion" = "Are you sure you want to logout?";
 
+// Friend
+"friend.sharedImages" = "Shared images";
+"friend.mute" = "Mute";
+
 // ErrorHandling
 "genericTitle" = "Ops!!";
 "genericButton" = "Ok";

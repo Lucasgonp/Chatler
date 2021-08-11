@@ -1,16 +1,16 @@
 //
-//  ProfileCell.swift
+//  FriendCell.swift
 //  Chatler
 //
-//  Created by Lucas Pereira on 04/08/21.
+//  Created by Lucas Pereira on 11/08/21.
 //
 
 import UIKit
 
-class ProfileCell: TableViewCell {
+class FriendCell: TableViewCell {
     
     // MARK: - Properties
-    var collectionDelegate: ProfileViewModelCollection? {
+    var collectionDelegate: FriendViewModelCollection? {
         didSet {
             configure()
         }
@@ -82,7 +82,7 @@ class ProfileCell: TableViewCell {
     // MARK: - Helpers
 }
 
-private extension ProfileCell {
+private extension FriendCell {
     func configure() {
         guard let viewModel = collectionDelegate else { return }
         iconImage.image = viewModel.iconImage

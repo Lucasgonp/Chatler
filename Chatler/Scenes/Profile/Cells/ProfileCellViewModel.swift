@@ -6,9 +6,10 @@
 //
 
 import Foundation
+import UIKit
 
 // MARK: - Populate Profile Cells
-enum profileViewModelCollection: Int, CaseIterable {
+enum ProfileViewModelCollection: Int, CaseIterable {
     case accountInfo
     case setting
     
@@ -21,12 +22,12 @@ enum profileViewModelCollection: Int, CaseIterable {
         }
     }
     
-    var iconImageName: String {
+    var iconImage: UIImage? {
         switch self {
         case .accountInfo:
-            return "person.circle"
+            return Images.Profile.personCircle
         case .setting:
-            return "gear"
+            return Images.Profile.gear
         }
     }
 }

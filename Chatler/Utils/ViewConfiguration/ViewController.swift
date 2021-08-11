@@ -39,6 +39,11 @@ class ViewController: UIViewController, ViewConfiguration {
     private var keyboardHeight: CGFloat = 88
     private let hud = JGProgressHUD(style: .dark)
     let activityIndicator = ActivityIndicator().spinner
+    var isDark = false {
+        didSet {
+            setNeedsStatusBarAppearanceUpdate()
+        }
+    }
     
     // MARK: - Lifecicle
     
@@ -98,9 +103,25 @@ extension ViewController: BaseOutputProtocol {
     // MARK: - Helpers
 
 extension ViewController {
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return isDark ? .lightContent : .default
+    }
+
+    func toggleAppearance() {
+       isDark.toggle()
+    }
+    
     func configureGradientLayer() {
         let gradient = CAGradientLayer()
-        gradient.colors = [Colors.mainColor.cgColor, Colors.secundaryColor.cgColor]
+        gradient.colors = [Colors.veryLightGray.cgColor, Colors.mainWhite.cgColor]
+        gradient.locations = [0, 1]
+        view.layer.addSublayer(gradient)
+        gradient.frame = view.frame
+    }
+    
+    func configureGradientLayerSecundary() {
+        let gradient = CAGradientLayer()
+        gradient.colors = [Colors.veryLightGray.cgColor, Colors.mainWhite.cgColor]
         gradient.locations = [0, 1]
         view.layer.addSublayer(gradient)
         gradient.frame = view.frame

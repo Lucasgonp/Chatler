@@ -40,9 +40,14 @@
 		B1287D8826B88FB60027E263 /* ChatPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1287D8726B88FB60027E263 /* ChatPresenter.swift */; };
 		B1287D8D26B8B57B0027E263 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1287D8C26B8B57B0027E263 /* Constants.swift */; };
 		B1287D8F26B8BE160027E263 /* Snapshop+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1287D8E26B8BE160027E263 /* Snapshop+Extensions.swift */; };
+		B1308EBC26C1F9A500EA5605 /* FriendInfoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1308EBB26C1F9A500EA5605 /* FriendInfoController.swift */; };
+		B1308EBE26C2009B00EA5605 /* FriendInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1308EBD26C2009B00EA5605 /* FriendInfoViewModel.swift */; };
+		B1308EC126C2B8D900EA5605 /* FriendHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1308EC026C2B8D900EA5605 /* FriendHeader.swift */; };
 		B162FA5826BDE76A0024C7A9 /* TapGestureRecognizerHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B162FA5726BDE76A0024C7A9 /* TapGestureRecognizerHelper.swift */; };
 		B162FA5A26BE0D080024C7A9 /* ImageViewFullscreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = B162FA5926BE0D080024C7A9 /* ImageViewFullscreen.swift */; };
 		B162FA5C26C04DD30024C7A9 /* ProfileImageContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B162FA5B26C04DD30024C7A9 /* ProfileImageContainer.swift */; };
+		B1639CC726C42D2F003CDBF9 /* FriendViewModelCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1639CC626C42D2F003CDBF9 /* FriendViewModelCollection.swift */; };
+		B1639CC926C435DF003CDBF9 /* FriendCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1639CC826C435DF003CDBF9 /* FriendCell.swift */; };
 		B17BD9CF26B0886C0010CF3B /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = B17BD9CE26B0886C0010CF3B /* CustomTextField.swift */; };
 		B17BD9D126B090210010CF3B /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = B17BD9D026B090210010CF3B /* Colors.swift */; };
 		B17BD9D326B09ECD0010CF3B /* Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = B17BD9D226B09ECD0010CF3B /* Images.swift */; };
@@ -132,9 +137,14 @@
 		B1287D8726B88FB60027E263 /* ChatPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatPresenter.swift; sourceTree = "<group>"; };
 		B1287D8C26B8B57B0027E263 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		B1287D8E26B8BE160027E263 /* Snapshop+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Snapshop+Extensions.swift"; sourceTree = "<group>"; };
+		B1308EBB26C1F9A500EA5605 /* FriendInfoController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendInfoController.swift; sourceTree = "<group>"; };
+		B1308EBD26C2009B00EA5605 /* FriendInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendInfoViewModel.swift; sourceTree = "<group>"; };
+		B1308EC026C2B8D900EA5605 /* FriendHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendHeader.swift; sourceTree = "<group>"; };
 		B162FA5726BDE76A0024C7A9 /* TapGestureRecognizerHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapGestureRecognizerHelper.swift; sourceTree = "<group>"; };
 		B162FA5926BE0D080024C7A9 /* ImageViewFullscreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewFullscreen.swift; sourceTree = "<group>"; };
 		B162FA5B26C04DD30024C7A9 /* ProfileImageContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageContainer.swift; sourceTree = "<group>"; };
+		B1639CC626C42D2F003CDBF9 /* FriendViewModelCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendViewModelCollection.swift; sourceTree = "<group>"; };
+		B1639CC826C435DF003CDBF9 /* FriendCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendCell.swift; sourceTree = "<group>"; };
 		B17BD9CE26B0886C0010CF3B /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 		B17BD9D026B090210010CF3B /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		B17BD9D226B09ECD0010CF3B /* Images.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Images.swift; sourceTree = "<group>"; };
@@ -256,11 +266,11 @@
 		B1287D6C26B846850027E263 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				B1308EBA26C1F98F00EA5605 /* FriendInfo */,
 				B1850C1326BA22FA00F4538A /* Profile */,
 				B1287D7226B846DB0027E263 /* Chat */,
 				B1287D7126B846CA0027E263 /* NewMessage */,
 				B1287D7026B846B90027E263 /* Conversations */,
-				B1850C0326B9D49D00F4538A /* Models */,
 				B1287D6F26B846A70027E263 /* Register */,
 				B1287D6D26B8469A0027E263 /* Login */,
 			);
@@ -372,6 +382,34 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
+		B1308EBA26C1F98F00EA5605 /* FriendInfo */ = {
+			isa = PBXGroup;
+			children = (
+				B1639CC526C42D1D003CDBF9 /* Cells */,
+				B1308EBF26C2B8C600EA5605 /* Views */,
+				B1308EBB26C1F9A500EA5605 /* FriendInfoController.swift */,
+				B1308EBD26C2009B00EA5605 /* FriendInfoViewModel.swift */,
+			);
+			path = FriendInfo;
+			sourceTree = "<group>";
+		};
+		B1308EBF26C2B8C600EA5605 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				B1308EC026C2B8D900EA5605 /* FriendHeader.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		B1639CC526C42D1D003CDBF9 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				B1639CC626C42D2F003CDBF9 /* FriendViewModelCollection.swift */,
+				B1639CC826C435DF003CDBF9 /* FriendCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
 		B17BD9D626B0A62B0010CF3B /* Localizable */ = {
 			isa = PBXGroup;
 			children = (
@@ -399,14 +437,6 @@
 				B1850BFF26B9BBC800F4538A /* LocalStoreManager.swift */,
 			);
 			path = Storage;
-			sourceTree = "<group>";
-		};
-		B1850C0326B9D49D00F4538A /* Models */ = {
-			isa = PBXGroup;
-			children = (
-				B1850C0126B9D49800F4538A /* Conversation.swift */,
-			);
-			path = Models;
 			sourceTree = "<group>";
 		};
 		B1850C0E26BA094100F4538A /* Cells */ = {
@@ -538,6 +568,7 @@
 			isa = PBXGroup;
 			children = (
 				B1287D6226B747740027E263 /* User.swift */,
+				B1850C0126B9D49800F4538A /* Conversation.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -815,6 +846,7 @@
 				B1287D8026B880310027E263 /* MessageCell.swift in Sources */,
 				B11A4D3B26BAECF400687981 /* ProfileCellViewModel.swift in Sources */,
 				B1850C0B26B9DBFF00F4538A /* ConversationsService.swift in Sources */,
+				B1308EC126C2B8D900EA5605 /* FriendHeader.swift in Sources */,
 				B1B0264B26AF6609008F726F /* AppDelegate.swift in Sources */,
 				B1850C0026B9BBC800F4538A /* LocalStoreManager.swift in Sources */,
 				B17BD9D326B09ECD0010CF3B /* Images.swift in Sources */,
@@ -832,6 +864,7 @@
 				B1B0268826B0314B008F726F /* RegistrationController.swift in Sources */,
 				B1287D7C26B85AED0027E263 /* CustomInputAccessoryView.swift in Sources */,
 				B1287D5B26B72F6B0027E263 /* NewMessageController.swift in Sources */,
+				B1308EBC26C1F9A500EA5605 /* FriendInfoController.swift in Sources */,
 				B1850C0526B9DA3C00F4538A /* ChatService.swift in Sources */,
 				B1B0268626B03141008F726F /* LoginController.swift in Sources */,
 				B1287D5026B327350027E263 /* RegistrationForm.swift in Sources */,
@@ -841,6 +874,7 @@
 				B1287D4E26B327070027E263 /* ValidationService.swift in Sources */,
 				B17BDAB326B21DEF0010CF3B /* LoginViewModel.swift in Sources */,
 				B162FA5826BDE76A0024C7A9 /* TapGestureRecognizerHelper.swift in Sources */,
+				B1639CC726C42D2F003CDBF9 /* FriendViewModelCollection.swift in Sources */,
 				B1287D6926B74A980027E263 /* NewMessagePresenter.swift in Sources */,
 				B1850C0D26B9EBF100F4538A /* ConversationsViewModel.swift in Sources */,
 				B1850C1226BA1D6C00F4538A /* ConversationCellViewModel.swift in Sources */,
@@ -848,10 +882,12 @@
 				B1287D8826B88FB60027E263 /* ChatPresenter.swift in Sources */,
 				B162FA5C26C04DD30024C7A9 /* ProfileImageContainer.swift in Sources */,
 				B1287D6726B74A030027E263 /* NewMessageViewModel.swift in Sources */,
+				B1308EBE26C2009B00EA5605 /* FriendInfoViewModel.swift in Sources */,
 				B1287D8426B88F5B0027E263 /* Message.swift in Sources */,
 				B17BD9D126B090210010CF3B /* Colors.swift in Sources */,
 				B1287D8626B88FAD0027E263 /* ChatViewModel.swift in Sources */,
 				B17BDAAF26B1FCE70010CF3B /* ViewController.swift in Sources */,
+				B1639CC926C435DF003CDBF9 /* FriendCell.swift in Sources */,
 				B1287D8F26B8BE160027E263 /* Snapshop+Extensions.swift in Sources */,
 				B1850C1826BA248800F4538A /* ProfileHeader.swift in Sources */,
 				B1B026EB26B0378C008F726F /* Extensions.swift in Sources */,

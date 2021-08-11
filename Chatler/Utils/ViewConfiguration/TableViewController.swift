@@ -12,6 +12,11 @@ class TableViewController: UITableViewController, ViewConfiguration {
     private var keyboardHeight: CGFloat = 88
     private let hud = JGProgressHUD(style: .dark)
     let activityIndicator = ActivityIndicator().spinner
+    var isDark = false {
+        didSet {
+            setNeedsStatusBarAppearanceUpdate()
+        }
+    }
     
     // MARK: - Lifecicle
     open override func viewWillAppear(_ animated: Bool) {
@@ -34,6 +39,14 @@ class TableViewController: UITableViewController, ViewConfiguration {
 // MARK: - Helpers
 
 extension TableViewController: BaseOutputProtocol {
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return isDark ? .lightContent : .default
+    }
+
+    func toggleAppearance() {
+       isDark.toggle()
+    }
+    
     func showLoading() {
         view.endEditing(true)
         

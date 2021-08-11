@@ -80,9 +80,6 @@ class ChatController: CollectionViewController {
         let gesture = UITapGestureRecognizer(target: self, action: #selector(openFriendController))
         stack.addGestureRecognizer(gesture)
         navigationItem.titleView = stack
-        
-        let rightButtomItem = UIBarButtonItem(image: UIImage(systemName: "info.circle"), style: .plain, target: self, action: #selector(openFriendController))
-        navigationItem.rightBarButtonItem = rightButtomItem
     }
     
     override func setupConstraints() {
@@ -92,7 +89,9 @@ class ChatController: CollectionViewController {
     }
     
     @objc func openFriendController() {
-        print("testeed")
+        let controller = FriendInfoController()
+        controller.user = user
+        navigationController?.pushViewController(controller, animated: true)
     }
     
     override func configureUI() {

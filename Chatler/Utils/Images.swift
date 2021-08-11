@@ -25,6 +25,17 @@ struct Images {
         static var profileBubble = UIImage(systemName: "bubble.right")
     }
     
+    struct Profile {
+        static var pencil = UIImage(named: "pencil")
+        static var profile2 = UIImage(named: "user-2")
+        static var personCircle = UIImage(systemName: "person.circle")
+        static var gear = UIImage(systemName: "gear")
+    }
+    
+    struct Friend {
+        static var sharedImages = UIImage(systemName: "photo")
+    }
+    
     struct Register {
         static var defaultProfileImage = #imageLiteral(resourceName: "user-2")
         static var defaultProfileImageUrl = "https://ibb.co/FnfgFP6"

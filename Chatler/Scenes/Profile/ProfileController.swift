@@ -19,13 +19,11 @@ class ProfileController: TableViewController {
     //MARK: - Properties
     
     weak var delegate: ProfileControllerDelegate?
-    
     private let viewModel: ProfileViewModelInput = ProfileViewModel()
     
     private var user: User? {
         didSet { headerView.user = user }
     }
-    
     private lazy var headerView = ProfileHeader(frame: .init(x: 0, y: 0,
                                                              width: view.frame.width,
                                                              height: 380))
@@ -33,14 +31,6 @@ class ProfileController: TableViewController {
     private lazy var footerView: ProfileFooterView = {
         let footer = ProfileFooterView(frame: .init(x: 0, y: 0, width: view.frame.width, height: 100))
         return footer
-    }()
-    
-    private lazy var childViewController: UIViewController = {
-        let controller = UIViewController()
-        controller.view.backgroundColor = .black
-        let tap = UITapGestureRecognizer(target: self, action: #selector(dismissFullscreenImage))
-        controller.view.addGestureRecognizer(tap)
-        return controller
     }()
     
     //MARK: - Lifecycle
@@ -61,13 +51,10 @@ class ProfileController: TableViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.navigationBar.isHidden = true
-        navigationController?.navigationBar.barStyle = .black
     }
     
     override func configureUI() {
         view.backgroundColor = .white
-        let tap = UITapGestureRecognizer(target: self, action: #selector(dismissFullscreenImage))
-        view.addGestureRecognizer(tap)
         
         configureTableView()
     }
@@ -107,7 +94,7 @@ private extension ProfileController {
         footerView.delegate = self
     }
     
-    func handleDidSelectRowAt(collectionModel: profileViewModelCollection) {
+    func handleDidSelectRowAt(collectionModel: ProfileViewModelCollection) {
         switch collectionModel {
         case .accountInfo:
             return
@@ -125,24 +112,27 @@ private extension ProfileController {
 }
 
     // MARK: - UITableViewDataSource
+
 extension ProfileController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return profileViewModelCollection.allCases.count
+        return ProfileViewModelCollection.allCases.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as! ProfileCell
         
-        let viewModel = profileViewModelCollection(rawValue: indexPath.row)
+        let viewModel = ProfileViewModelCollection(rawValue: indexPath.row)
         cell.collectionDelegate = viewModel
         cell.accessoryType = .disclosureIndicator
         return cell
     }
 }
+
     // MARK: - UITableViewDataDelegate
+
 extension ProfileController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let collectionViewModel = profileViewModelCollection(rawValue: indexPath.row
+        guard let collectionViewModel = ProfileViewModelCollection(rawValue: indexPath.row
         ) else { return }
         handleDidSelectRowAt(collectionModel: collectionViewModel)
     }
@@ -153,6 +143,7 @@ extension ProfileController {
 }
 
     // MARK: - Outputs
+
 extension ProfileController: ProfileHeaderDelegate {
     func dismissController() {
         dismiss()
@@ -164,27 +155,6 @@ extension ProfileController: ProfileHeaderDelegate {
         controller.modalPresentationStyle = .overFullScreen
         
         present(controller, animated: true)
-    }
-    
-    func animate(_ image: UIImageView) {
-        image.alpha = 0
-        
-        UIView.animate(withDuration: 1, delay: 0, options: .curveLinear, animations: {
-            image.snp.remakeConstraints {
-                $0.center.equalTo(self.view.snp.center)
-            }
-            
-            image.center = self.view.center
-            image.alpha = 1
-        }) { (success: Bool) in
-            print("Done moving image")
-        }
-        
-        
-    }
-
-    @objc func dismissFullscreenImage(_ sender: UITapGestureRecognizer) {
-        sender.view?.removeFromSuperview()
     }
 }
 

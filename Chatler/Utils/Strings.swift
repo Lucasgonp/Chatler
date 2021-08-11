@@ -37,6 +37,11 @@ struct Strings {
         static let logoutQuestion = NSLocalizedString("accountLogoutQuestion", comment: "")
     }
     
+    struct Friend {
+        static let sharedImages = NSLocalizedString("friend.sharedImages", comment: "")
+        static let mute = NSLocalizedString("friend.mute", comment: "")
+    }
+    
     struct Register {
         static let fullNamePlaceholder = NSLocalizedString("full.name.placeholder", comment: "")
         static let usernamePlaceholder = NSLocalizedString("username.placeholder", comment: "")
