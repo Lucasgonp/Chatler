@@ -9,7 +9,6 @@ Chat app
 
 ### Improvements and features
 
-O projeto ainda está em desenvolvimento com muitas atualizações por vir
 Project done or sort of, with huge updates comming up
 
 ## 💻 Requires
