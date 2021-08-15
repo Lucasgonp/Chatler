@@ -10,7 +10,7 @@ import XCTest
 
 class ConversationsViewModelTests: XCTestCase {
     private let service = ConversationsServiceMock()
-    private let controller = ConversationsViewModelMock()
+    private let controller = ConversationsControllerMock()
     private lazy var sut: ConversationsViewModelInput = {
         let sut = ConversationsViewModel()
         sut.output = controller
@@ -18,15 +18,22 @@ class ConversationsViewModelTests: XCTestCase {
         return sut
     }()
     
-    func testExample() throws {
+    func testLoadConversations_WhenOpenConversations_ShouldLoadConversations() throws {
         sut.loadConversations()
         
         XCTAssertEqual(controller.loadConversationsCount, 1)
     }
+    
+    func testErrorLoadConversations_WhenOpenConversations_ShouldShowError() throws {
+        service.result = .failure(CustomError.genericError)
+        sut.loadConversations()
+
+        XCTAssertEqual(controller.showErrorCount, 1)
+    }
 
 }
 
-final class ConversationsViewModelMock: ConversationsViewModelOutput {
+final class ConversationsControllerMock: ConversationsViewModelOutput {
     var tableView: UITableView = UITableView()
     
     var loadConversationsCount = 0
@@ -68,8 +75,9 @@ final class ConversationsViewModelMock: ConversationsViewModelOutput {
 }
 
 final class ConversationsServiceMock: ConversationsServiceProtocol {
+    var result: (Result<[Conversation], Error>) = .success([])
+    
     func fetchConversations(completion: @escaping (Result<[Conversation], Error>) -> ()) {
-        let result: (Result<[Conversation], Error>) = .success([])
         completion(result)
     }
 }

@@ -14,15 +14,17 @@ private let reuseIdentifier = "ConversationCell"
 protocol ConversationsViewModelOutput: BaseOutputProtocol {
     var tableView: UITableView { get }
     
+    func presentLoginScreen()
+    func onAuthenticate()
     func onLoadConversations(conversations: [Conversation])
+    func onOpenChat(with user: User)
 }
 
 class ConversationsController: ViewController {
     
     // MARK: - Proprieties
+    
     private let viewModel: ConversationsViewModelInput = ConversationsViewModel()
-    private var conversations = [Conversation]()
-    private var conversationsDictionary = [String: Conversation]()
     
     private lazy var profileButton: UIBarButtonItem = {
         let img = Images.Login.profile
@@ -65,8 +67,7 @@ class ConversationsController: ViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         buildLayout()
-        authenticateUser()
-        loadConversations()
+        viewModel.authenticate()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -97,18 +98,6 @@ class ConversationsController: ViewController {
     
     override func configureViews() {
         //
-    }
-    
-    // MARK: - API
-    
-    func authenticateUser() {
-        // Is user logged in?
-        if let uid = Auth.auth().currentUser?.uid {
-            print("DEBUG: User ID is \(uid)")
-        } else {
-            print("DEBUG: User is NOT logged in)")
-            presentLoginScreen()
-        }
     }
     
     // MARK: - Selectors
@@ -143,18 +132,6 @@ class ConversationsController: ViewController {
         tableView.dataSource = self
     }
     
-    func logout() {
-        do {
-            try Auth.auth().signOut()
-            print("DEBUG: Signed out!")
-            
-            presentLoginScreen()
-        } catch {
-            print("DEBUG: Error signing out: \(error.localizedDescription)")
-            showError(error.localizedDescription)
-        }
-    }
-    
     func showChatController(forUser user: User) {
         let controller = ChatController(user: user)
         navigationController?.pushViewController(controller, animated: true)
@@ -169,16 +146,18 @@ class ConversationsController: ViewController {
         present(nav, animated: true)
     }
 }
-// MARK: - UITableViewDataSource
+
+    // MARK: - UITableViewDataSource
+
 extension ConversationsController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return conversations.count
+        return viewModel.conversations.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as! ConversationCell
-        cell.conversation = conversations[indexPath.row]
-        return cell
+        let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as? ConversationCell
+        cell?.conversation = viewModel.conversations[indexPath.row]
+        return cell ?? UITableViewCell()
     }
     
 }
@@ -186,24 +165,33 @@ extension ConversationsController: UITableViewDataSource {
     // MARK: - UITableViewDelegate
 extension ConversationsController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.cellForRow(at: indexPath)?.isSelected = false
-        let user = conversations[indexPath.row].user
-        showChatController(forUser: user)
+        viewModel.selectConversation(indexPath.row)
     }
 }
 
     // MARK: - Outputs
 extension ConversationsController: ConversationsViewModelOutput {
+    func onAuthenticate() {
+        loadConversations()
+    }
+    
+    func onPresentLoginScreen() {
+        presentLoginScreen()
+    }
+    
+    func onOpenChat(with user: User) {
+        showChatController(forUser: user)
+    }
     
     func onLoadConversations(conversations: [Conversation]) {
         conversations.forEach { conversation in
             let message = conversation.message
-            conversationsDictionary[message.chatPartnerId] = conversation
+            viewModel.conversationsDictionary[message.chatPartnerId] = conversation
             
         }
         
-        self.conversations = Array(conversationsDictionary.values)
-        self.tableView.reloadData()
+        viewModel.conversations = Array(viewModel.conversationsDictionary.values)
+        tableView.reloadData()
     }
 }
 
@@ -219,7 +207,7 @@ extension ConversationsController: NewMessageDelegate {
 
 extension ConversationsController: ProfileControllerDelegate {
     func handleLogout() {
-        logout()
+        viewModel.logout()
     }
 }
 
