@@ -9,11 +9,13 @@ import UIKit
 
 protocol CustomInputAccessoryViewDelegate: AnyObject {
     func inputView(_ inputView: CustomInputAccessoryView, wantsToSend message: String)
+    func showPlusActions()
 }
 
 class CustomInputAccessoryView: View {
     
     // MARK: - Properties
+    
     weak var delegate: CustomInputAccessoryViewDelegate?
     
     private lazy var messageInputTextView: UITextView = {
@@ -21,6 +23,15 @@ class CustomInputAccessoryView: View {
         textView.font = Fonts.defaultLight(size: 16)
         textView.isScrollEnabled = false
         return textView
+    }()
+    
+    private lazy var plusButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setImage(.add, for: .normal)
+        button.tintColor = Colors.mainColor
+        button.addTarget(self, action: #selector(handlePlusButton), for: .touchUpInside)
+        
+        return button
     }()
     
     private lazy var sendButton: UIButton = {
@@ -56,6 +67,7 @@ class CustomInputAccessoryView: View {
     
     override func buildViewHierarchy() {
         addSubview(sendButton)
+        addSubview(plusButton)
         addSubview(messageInputTextView)
         addSubview(placeholderLabel)
     }
@@ -78,10 +90,16 @@ class CustomInputAccessoryView: View {
             $0.height.width.equalTo(50)
         }
         
+        plusButton.snp.makeConstraints {
+            $0.top.equalTo(snp.top).offset(4)
+            $0.right.equalTo(sendButton.snp.left).offset(-8)
+            $0.height.width.equalTo(50)
+        }
+        
         messageInputTextView.snp.makeConstraints {
             $0.top.equalTo(snp.top).offset(12)
             $0.left.equalTo(snp.left).inset(8)
-            $0.right.equalTo(sendButton.snp.left).offset(-8)
+            $0.right.equalTo(plusButton.snp.left).offset(-8)
             $0.bottom.equalTo(snp.bottomMargin).inset(10)
         }
         
@@ -97,6 +115,10 @@ class CustomInputAccessoryView: View {
     
     // MARK: - Selectors
     
+    @objc func handlePlusButton() {
+        delegate?.showPlusActions()
+    }
+    
     @objc func handleSendMessage() {
         guard let text = messageInputTextView.text else { return }
         delegate?.inputView(self, wantsToSend: text)
@@ -104,12 +126,15 @@ class CustomInputAccessoryView: View {
     
     @objc func handleTextInputChange() {
         placeholderLabel.isHidden = !messageInputTextView.text.isEmpty
+        plusButton.isHidden = !messageInputTextView.text.isEmpty
     }
     
     // MARK: - Helpers
+    
     func clearMessageText() {
         messageInputTextView.text = nil
         placeholderLabel.isHidden = false
+        plusButton.isHidden = false
     }
     
 }

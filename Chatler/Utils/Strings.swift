@@ -37,6 +37,10 @@ struct Strings {
         static let logoutQuestion = NSLocalizedString("accountLogoutQuestion", comment: "")
     }
     
+    struct Chat {
+        static let sendPhoto = NSLocalizedString("chat.sendPhoto", comment: "")
+    }
+    
     struct Friend {
         static let sharedImages = NSLocalizedString("friend.sharedImages", comment: "")
         static let mute = NSLocalizedString("friend.mute", comment: "")

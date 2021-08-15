@@ -23,6 +23,8 @@ class ImageViewFullscreen: UIViewController {
     
     private var dragGestureFinish = UIPanGestureRecognizer()
     
+    var centerY = 196
+    
     init(imageView: UIImageView) {
         super.init(nibName: nil, bundle: nil)
         self.imageView.image = imageView.image
@@ -95,7 +97,7 @@ class ImageViewFullscreen: UIViewController {
             self.imageView.layer.cornerRadius = 200 / 2
             self.imageView.frame.size = CGSize(width: 200, height: 200)
             self.imageView.center.x = self.view.center.x
-            self.imageView.center.y = 196
+            self.imageView.center.y = CGFloat(self.centerY)
         } completion: { finish in
             self.dismiss(animated: true)
         }

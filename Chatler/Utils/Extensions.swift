@@ -57,6 +57,18 @@ extension UIViewController {
         activityIndicator.removeFromParent()
     }
     
+    func showInteractiveModal(title: String? = nil, message: String? = nil, actions: [UIAlertAction]) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .actionSheet)
+        let cancel = UIAlertAction(title: Strings.Main.cancel, style: .cancel, handler: nil)
+        alert.addAction(cancel)
+        
+        actions.forEach { action in
+            alert.addAction(action)
+        }
+        
+        present(alert, animated: true, completion: nil)
+    }
+    
     func showError(_ errorMessage: String) {
         let title = Strings.ErrorHandling.genericTitle
         let alert = UIAlertController(title: title, message: errorMessage, preferredStyle: .alert)

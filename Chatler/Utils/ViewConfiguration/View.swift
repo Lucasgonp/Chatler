@@ -49,6 +49,16 @@ extension View {
         gradient.frame = bounds
     }
     
+    func configureGradientLayerThird() {
+        let gradient = CAGradientLayer()
+        gradient.frame = bounds
+        gradient.colors = [Colors.mainColor.withAlphaComponent(0.1).cgColor, Colors.mainWhite.cgColor, Colors.mainWhite.cgColor, Colors.mainColor.withAlphaComponent(0.1).cgColor]
+        gradient.startPoint = CGPoint(x: 0.0, y: 0.5)
+        gradient.endPoint = CGPoint(x: 1.0, y: 0.5)
+        gradient.locations = [-0.7, 0.25, 0.75, 1.7]
+        layer.addSublayer(gradient)
+    }
+    
     func setupViewWithKeyboardHeight(height: CGFloat = 88) {
         keyboardHeight = height
         
