@@ -14,7 +14,6 @@ target 'Chatler' do
 	pod 'Firebase/Auth'
 	pod 'Firebase/Firestore'
 	pod 'SDWebImage', '~>4.4.2'
-	pod 'JGProgressHUD', '~>2.0.3'
 
   target 'ChatlerTests' do
     inherit! :search_paths

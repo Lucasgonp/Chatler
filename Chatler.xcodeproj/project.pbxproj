@@ -76,13 +76,13 @@
 		B1B0265226AF6609008F726F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B1B0265026AF6609008F726F /* Main.storyboard */; };
 		B1B0265426AF660A008F726F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B1B0265326AF660A008F726F /* Assets.xcassets */; };
 		B1B0265726AF660B008F726F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B1B0265526AF660B008F726F /* LaunchScreen.storyboard */; };
-		B1B0266226AF660B008F726F /* ChatlerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1B0266126AF660B008F726F /* ChatlerTests.swift */; };
 		B1B0266D26AF660B008F726F /* ChatlerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1B0266C26AF660B008F726F /* ChatlerUITests.swift */; };
 		B1B0268326AF66D0008F726F /* ConversationsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1B0268226AF66D0008F726F /* ConversationsController.swift */; };
 		B1B0268626B03141008F726F /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1B0268526B03141008F726F /* LoginController.swift */; };
 		B1B0268826B0314B008F726F /* RegistrationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1B0268726B0314B008F726F /* RegistrationController.swift */; };
 		B1B026EB26B0378C008F726F /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1B026EA26B0378C008F726F /* Extensions.swift */; };
 		B1B026ED26B048AA008F726F /* InputContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1B026EC26B048AA008F726F /* InputContainerView.swift */; };
+		B1E533DE26C95607004A668F /* ConversationsViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1E533DD26C95607004A668F /* ConversationsViewModelTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -178,7 +178,6 @@
 		B1B0265626AF660B008F726F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B1B0265826AF660B008F726F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B1B0265D26AF660B008F726F /* ChatlerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ChatlerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		B1B0266126AF660B008F726F /* ChatlerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatlerTests.swift; sourceTree = "<group>"; };
 		B1B0266326AF660B008F726F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B1B0266826AF660B008F726F /* ChatlerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ChatlerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B1B0266C26AF660B008F726F /* ChatlerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatlerUITests.swift; sourceTree = "<group>"; };
@@ -188,6 +187,7 @@
 		B1B0268726B0314B008F726F /* RegistrationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationController.swift; sourceTree = "<group>"; };
 		B1B026EA26B0378C008F726F /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		B1B026EC26B048AA008F726F /* InputContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputContainerView.swift; sourceTree = "<group>"; };
+		B1E533DD26C95607004A668F /* ConversationsViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationsViewModelTests.swift; sourceTree = "<group>"; };
 		B32AF8336502DA5C67FFDCDD /* Pods_ChatlerTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChatlerTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D3CC46EFE99BDEAC9AE8FE22 /* Pods-ChatlerTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChatlerTests.release.xcconfig"; path = "Target Support Files/Pods-ChatlerTests/Pods-ChatlerTests.release.xcconfig"; sourceTree = "<group>"; };
 		F6BA2C3012B5FA06F4A80E98 /* Pods_Chatler.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Chatler.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -510,7 +510,7 @@
 		B1B0266026AF660B008F726F /* ChatlerTests */ = {
 			isa = PBXGroup;
 			children = (
-				B1B0266126AF660B008F726F /* ChatlerTests.swift */,
+				B1E533DB26C955B7004A668F /* Scenes */,
 				B1B0266326AF660B008F726F /* Info.plist */,
 			);
 			path = ChatlerTests;
@@ -571,6 +571,22 @@
 				B1850C0126B9D49800F4538A /* Conversation.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		B1E533DB26C955B7004A668F /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				B1E533DC26C955C3004A668F /* Conversations */,
+			);
+			path = Scenes;
+			sourceTree = "<group>";
+		};
+		B1E533DC26C955C3004A668F /* Conversations */ = {
+			isa = PBXGroup;
+			children = (
+				B1E533DD26C95607004A668F /* ConversationsViewModelTests.swift */,
+			);
+			path = Conversations;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -905,7 +921,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B1B0266226AF660B008F726F /* ChatlerTests.swift in Sources */,
+				B1E533DE26C95607004A668F /* ConversationsViewModelTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1173,6 +1189,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = LucasPereira.ChatlerUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = Chatler;
@@ -1194,6 +1211,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = LucasPereira.ChatlerUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = Chatler;

@@ -34,10 +34,7 @@ private extension FriendInfoViewModel {
         case .success(let user):
             self.output?.didLoadUser(user: user)
         case .failure(let error):
-            DispatchQueue.main.async {
-                self.output?.hideLoading()
-                self.output?.showError(error.localizedDescription)
-            }
+            self.output?.showError(error.localizedDescription)
         }
     }
 }

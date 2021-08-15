@@ -6,12 +6,10 @@
 //
 
 import UIKit
-import JGProgressHUD
 
 
 class CollectionViewController: UICollectionViewController, ViewConfiguration {
     private var keyboardHeight: CGFloat = 88
-    private let hud = JGProgressHUD(style: .dark)
     let activityIndicator = ActivityIndicator().spinner
     
     // MARK: - Lifecicle
@@ -34,32 +32,6 @@ class CollectionViewController: UICollectionViewController, ViewConfiguration {
     // MARK: - Helpers
 
 extension CollectionViewController: BaseOutputProtocol {
-    func showLoading() {
-        view.endEditing(true)
-        
-        let text = "Loading..."
-        hud.textLabel.text = text
-        hud.show(in: view)
-       
-        return
-   }
-    
-    func showLoading(text: String) {
-        view.endEditing(true)
-        hud.textLabel.text = text
-        hud.show(in: view)
-        return
-    }
-    
-    func hideLoading() {
-        hud.dismiss()
-    }
-    
-    func hideLoading(completion: @escaping () -> ()) {
-        hud.dismiss()
-        completion()
-    }
-    
     func dismiss() {
         dismiss(animated: true)
     }

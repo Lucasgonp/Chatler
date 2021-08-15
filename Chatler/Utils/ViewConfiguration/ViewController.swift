@@ -6,14 +6,8 @@
 //
 
 import UIKit
-import JGProgressHUD
 
 public protocol BaseOutputProtocol: AnyObject {
-    func showLoading()
-    func showLoading(text: String)
-    func hideLoading(completion: @escaping () -> ())
-    func hideLoading()
-    
     func dismiss()
     func showError(_ errorMessage: String)
 }
@@ -37,7 +31,6 @@ public extension ViewConfiguration {
 
 class ViewController: UIViewController, ViewConfiguration {
     private var keyboardHeight: CGFloat = 88
-    private let hud = JGProgressHUD(style: .dark)
     let activityIndicator = ActivityIndicator().spinner
     var isDark = false {
         didSet {
@@ -65,32 +58,6 @@ class ViewController: UIViewController, ViewConfiguration {
     // MARK: - Outputs
 
 extension ViewController: BaseOutputProtocol {
-    func showLoading() {
-        view.endEditing(true)
-        
-        let text = "Loading..."
-        hud.textLabel.text = text
-        hud.show(in: view)
-       
-        return
-   }
-    
-    func showLoading(text: String) {
-        view.endEditing(true)
-        hud.textLabel.text = text
-        hud.show(in: view)
-        return
-    }
-    
-    func hideLoading() {
-        hud.dismiss()
-    }
-    
-    func hideLoading(completion: @escaping () -> ()) {
-        hud.dismiss()
-        completion()
-    }
-    
     func dismiss() {
         dismiss(animated: true)
     }

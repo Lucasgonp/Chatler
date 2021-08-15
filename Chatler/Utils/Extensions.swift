@@ -7,24 +7,10 @@
 
 import UIKit
 import SnapKit
-import JGProgressHUD
 
 private let activityIndicator = ActivityIndicator()
 
 extension UIViewController {
-    public static let hud = JGProgressHUD(style: .dark)
-    
-    func showLoader(_ show: Bool, withText text: String? = "Loading") {
-        view.endEditing(true)
-        UIViewController.hud.textLabel.text = text
-
-        if show {
-            UIViewController.hud.show(in: view)
-        } else {
-            UIViewController.hud.dismiss()
-        }
-    }
-    
     func configureNavigationBar(withTitle title: String, prefersLargeTitles: Bool) {
         let appearance = UINavigationBarAppearance()
         appearance.configureWithOpaqueBackground()
@@ -40,8 +26,6 @@ extension UIViewController {
         navigationItem.title = title
         navigationController?.navigationBar.tintColor = .black
         navigationController?.navigationBar.isTranslucent = true
-        
-        //navigationController?.navigationBar.overrideUserInterfaceStyle = .dark
     }
     
     func showLoadingIndicatorActivity() {

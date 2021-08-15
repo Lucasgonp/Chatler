@@ -7,7 +7,6 @@
 
 import SnapKit
 import FirebaseAuth
-import JGProgressHUD
 import UIKit
 
 protocol  AuthenticationDelegate: AnyObject {

@@ -6,11 +6,9 @@
 //
 
 import UIKit
-import JGProgressHUD
 
 class TableViewController: UITableViewController, ViewConfiguration {
     private var keyboardHeight: CGFloat = 88
-    private let hud = JGProgressHUD(style: .dark)
     let activityIndicator = ActivityIndicator().spinner
     var isDark = false {
         didSet {
@@ -45,32 +43,6 @@ extension TableViewController: BaseOutputProtocol {
 
     func toggleAppearance() {
        isDark.toggle()
-    }
-    
-    func showLoading() {
-        view.endEditing(true)
-        
-        let text = "Loading..."
-        hud.textLabel.text = text
-        hud.show(in: view)
-        
-        return
-    }
-    
-    func showLoading(text: String) {
-        view.endEditing(true)
-        hud.textLabel.text = text
-        hud.show(in: view)
-        return
-    }
-    
-    func hideLoading() {
-        hud.dismiss()
-    }
-    
-    func hideLoading(completion: @escaping () -> ()) {
-        hud.dismiss()
-        completion()
     }
     
     func dismiss() {

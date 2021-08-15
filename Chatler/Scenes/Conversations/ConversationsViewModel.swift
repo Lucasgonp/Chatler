@@ -16,7 +16,7 @@ protocol ConversationsViewModelInput: AnyObject {
 class ConversationsViewModel: ConversationsViewModelInput {
     weak var output: ConversationsViewModelOutput?
     
-    let service = ConversationsService.shared
+    var service = ConversationsService.shared
     
     private let activityIndicator = ActivityIndicator().spinner
     

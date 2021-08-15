@@ -65,7 +65,7 @@ class RegistrationViewModel: RegistrationViewModelDelegate {
             group.leave()
         }
         
-        group.notify(queue: .main) {
+        group.notify(queue: .global(qos: .userInitiated)) {
             self.createUser(profileImageUrl: self.profileImageUrl, completion: self.handleCreatedUser(result:))
         }
     }
