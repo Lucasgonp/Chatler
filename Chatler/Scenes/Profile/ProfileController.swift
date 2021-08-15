@@ -160,18 +160,13 @@ extension ProfileController: ProfileHeaderDelegate {
 
 extension ProfileController: ProfileFooterDelegate {
     func handleLogout() {
-        
-        let alert = UIAlertController(title: nil, message: Strings.Profile.logoutQuestion, preferredStyle: .actionSheet)
         let logoutAction = UIAlertAction(title: Strings.Profile.logout, style: .destructive) { _ in
             self.dismiss(animated: true) {
                 self.delegate?.handleLogout()
             }
         }
-        let cancelAction = UIAlertAction(title: Strings.Main.cancel, style: .cancel, handler: nil)
         
-        alert.addAction(logoutAction)
-        alert.addAction(cancelAction)
-        present(alert, animated: true, completion: nil)
+        showInteractiveModal(message: Strings.Profile.logoutQuestion,actions: [logoutAction])
     }
 }
 

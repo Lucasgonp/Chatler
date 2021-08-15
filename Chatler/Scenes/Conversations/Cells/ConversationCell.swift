@@ -101,7 +101,7 @@ class ConversationCell: TableViewCell {
         guard let conversation = conversation else { return }
         let viewModel = ConversationCellViewModel(conversation: conversation)
         
-        usernameLabel.text = conversation.user.username
+        usernameLabel.text = conversation.user.fullname
         messageTextLabel.text = conversation.message.text
         
         timestampLabel.text = viewModel.timestamp

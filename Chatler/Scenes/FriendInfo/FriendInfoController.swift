@@ -47,7 +47,7 @@ private extension FriendInfoController {
         tableView.tableHeaderView = headerView
         headerView.delegate = self
         tableView.register(FriendCell.self, forCellReuseIdentifier: reuseIdentifier)
-        tableView.contentInsetAdjustmentBehavior = .never
+        //tableView.contentInsetAdjustmentBehavior = .never
         tableView.rowHeight = 64
         tableView.backgroundColor = .systemGroupedBackground
         tableView.tableFooterView = UIView()
@@ -107,6 +107,7 @@ extension FriendInfoController: ProfileHeaderDelegate {
     
     func imageTapped(imageView: UIImageView) {
         let controller = ImageViewFullscreen(imageView: imageView)
+        controller.centerY = 220
         controller.modalTransitionStyle = .crossDissolve
         controller.modalPresentationStyle = .overFullScreen
         

@@ -73,7 +73,7 @@ class FriendHeader: View {
         profileImageView.isUserInteractionEnabled = true
         profileImageView.addGestureRecognizer(gestureRecognizer)
         
-        configureGradientLayerSecundary()
+        configureGradientLayerThird()
     }
     
     override func setupConstraints() {
@@ -81,7 +81,7 @@ class FriendHeader: View {
         profileImageView.snp.makeConstraints {
             $0.centerX.equalTo(snp.centerX)
             $0.height.width.equalTo(200)
-            $0.top.equalTo(snp.top).offset(96)
+            $0.top.equalTo(snp.top).offset(26)
         }
         
         stack.snp.makeConstraints {

@@ -25,7 +25,7 @@ class ChatController: CollectionViewController {
     
     lazy var autoScrollAnimated: Bool = false
     
-    private lazy var viewModel: ChatViewModelInput = ChatViewModel()
+    private lazy var viewModel: ChatViewModelInput = ChatViewModel(user: user)
     
     private lazy var stack: UIStackView = {
         let stack = UIStackView(arrangedSubviews: [userImage, usernameLabel])
@@ -50,6 +50,12 @@ class ChatController: CollectionViewController {
         return label
     }
     
+    private var imageToSend: UIImage? {
+        didSet {
+            sendImage()
+        }
+    }
+    
     private lazy var customInputView: CustomInputAccessoryView = {
         let customInputView = CustomInputAccessoryView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 0))
         
@@ -57,8 +63,8 @@ class ChatController: CollectionViewController {
         return customInputView
     }()
     
-    
     //MARK: - Lifecicle
+    
     init(user: User) {
         self.user = user
         super.init(collectionViewLayout: UICollectionViewFlowLayout())
@@ -123,12 +129,26 @@ class ChatController: CollectionViewController {
     
     // MARK: - API
     func loadMessages() {
-        viewModel.loadMessages(from: user)
+        viewModel.loadMessages()
     }
     
-    //MARK: - Helpers
+}
+
+    //MARK: - Private Helpers
+
+private extension ChatController {
+    func handleSelectPhoto() {
+        let imagePickerController = UIImagePickerController()
+        imagePickerController.delegate = self
+        imagePickerController.allowsEditing = true
+        
+        present(imagePickerController, animated: true)
+    }
     
-    
+    func sendImage() {
+        guard let image = imageToSend else { return }
+        viewModel.sendImage(image: image)
+    }
 }
 
 extension ChatController {
@@ -166,7 +186,19 @@ extension ChatController: UICollectionViewDelegateFlowLayout {
     }
 }
 
+    // MARK: - UIImagePickerControllerDelegate
+
+extension ChatController: UINavigationControllerDelegate, UIImagePickerControllerDelegate {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        let image = (info[.editedImage] ?? info[.originalImage]) as? UIImage
+        imageToSend = image
+        
+        dismiss(animated: true)
+    }
+}
+
     // MARK: - Outputs
+
 extension ChatController: ChatViewModelOutput {
     func loadingIndicator(_ show: Bool) {
         if show {
@@ -187,8 +219,18 @@ extension ChatController: ChatViewModelOutput {
 }
 
 extension ChatController: CustomInputAccessoryViewDelegate {
+    func showPlusActions() {
+        let sendPhoto = UIAlertAction(title: Strings.Chat.sendPhoto, style: .default) { _ in
+            self.dismiss(animated: true) {
+                self.handleSelectPhoto()
+            }
+        }
+
+        showInteractiveModal(actions: [sendPhoto])
+    }
+    
     func inputView(_ inputView: CustomInputAccessoryView, wantsToSend message: String) {
         inputView.clearMessageText()
-        viewModel.uploadMessage(message: message, user: user)
+        viewModel.uploadMessage(message: message)
     }
 }

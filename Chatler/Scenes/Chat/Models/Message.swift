@@ -9,6 +9,7 @@ import Firebase
 
 struct Message {
     let text: String
+    let image: String?
     let toId: String
     let fromId: String
     let timestamp: Timestamp
@@ -22,6 +23,7 @@ struct Message {
     
     init(dictionary: [String : Any]) {
         self.text = dictionary["text"] as? String ?? ""
+        self.image = dictionary["photoUrl"] as? String
         self.toId = dictionary["toId"] as? String ?? ""
         self.fromId = dictionary["fromId"] as? String ?? ""
         self.timestamp = dictionary["timestamp"] as? Timestamp ?? Timestamp(date: Date())

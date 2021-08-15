@@ -18,8 +18,8 @@ class MessageCell: CollectionViewCell {
         didSet { configure() }
     }
     
-    var bubbleLeftAnchor: ConstraintMakerEditable!
-    var bubbleRightAnchor: ConstraintMakerEditable!
+    var bubbleLeftAnchor: ConstraintMakerEditable?
+    var bubbleRightAnchor: ConstraintMakerEditable?
     
     private let profileImageView: UIImageView = {
         let imageView = UIImageView()
@@ -37,7 +37,6 @@ class MessageCell: CollectionViewCell {
         textView.isScrollEnabled = false
         textView.isEditable = false
         textView.textColor = .white
-        textView.text = "sdfasdfasdfazxczxcZXcsdf"
         return textView
     }()
     
@@ -45,8 +44,14 @@ class MessageCell: CollectionViewCell {
         let view = UIView()
         view.layer.cornerRadius = 12
         view.clipsToBounds = true
-        view.backgroundColor = .purple
         return view
+    }()
+    
+    private lazy var photoView: UIImageView = {
+        let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 250, height: 250))
+        imageView.layer.cornerRadius = 12
+        imageView.clipsToBounds = true
+        return imageView
     }()
     
     // MARK: - Lifecicle
@@ -82,8 +87,8 @@ class MessageCell: CollectionViewCell {
             bubbleLeftAnchor = $0.left.equalTo(profileImageView.snp.right).offset(12)
             bubbleRightAnchor = $0.right.equalTo(snp.right).offset(-12)
             
-            bubbleLeftAnchor.constraint.isActive = false
-            bubbleRightAnchor.constraint.isActive = false
+            bubbleLeftAnchor?.constraint.isActive = false
+            bubbleRightAnchor?.constraint.isActive = false
         }
         
         textView.snp.makeConstraints {
@@ -98,26 +103,59 @@ class MessageCell: CollectionViewCell {
     // MARK: - Selectors
     
     // MARK: - Helpers
+    
+}
+
+    // MARK: - Private helpers
+
+private extension MessageCell {
     func configure() {
         guard let message = message else { return }
         let viewModel = MessageViewModel(message: message, delegate: self)
         
+        /// Checking if message is a image or photo
+        if let imageUrl = message.image {
+            loadImageIfNeeded(photoUrl: imageUrl)
+        } else {
+            photoView.removeFromSuperview()
+            textView.text = message.text
+        }
+        
         bubbleContainer.backgroundColor = viewModel.messageBackgroundColor
         textView.textColor = viewModel.messageTextColor
-        textView.text = message.text
         
-        bubbleLeftAnchor.constraint.isActive = viewModel.leftAncherActive
-        bubbleRightAnchor.constraint.isActive = viewModel.rightAncherActive
+        bubbleLeftAnchor?.constraint.isActive = viewModel.leftAncherActive
+        bubbleRightAnchor?.constraint.isActive = viewModel.rightAncherActive
         
         profileImageView.isHidden = viewModel.shouldHideProfileImage
         profileImageView.sd_setImage(with: viewModel.profileImageUrl)
     }
     
+    func loadImageIfNeeded(photoUrl: String) {
+        guard let url = URL(string: photoUrl) else { return }
+        bubbleContainer.addSubview(photoView)
+        buildImageConstraint()
+        photoView.sd_setImage(with: url) { _,_,_,_ in
+            self.layoutIfNeeded()
+        }
+    }
+    
+    func buildImageConstraint() {
+        photoView.snp.makeConstraints {
+            $0.center.equalTo(bubbleContainer.snp.center)
+            $0.top.equalTo(bubbleContainer.snp.top).offset(4)
+            $0.bottom.equalTo(bubbleContainer.snp.bottom).offset(-4)
+            $0.left.equalTo(bubbleContainer.snp.left).offset(4)
+            $0.right.equalTo(bubbleContainer.snp.right).offset(-4)
+            $0.height.equalTo(250)
+        }
+    }
 }
+
+    // MARK: - Outputs
 
 extension MessageCell: MessageViewModelOutput {
     func dismiss() {
         //
     }
-    
 }

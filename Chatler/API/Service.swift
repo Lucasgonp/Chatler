@@ -9,6 +9,7 @@ import Foundation
 
 protocol ServiceProtocol {
     func fetchUser(withUid uid: String, completion: @escaping (Result<User, Error>) -> Void)
+    //func prepareImage()
 }
 
 struct Service: ServiceProtocol {

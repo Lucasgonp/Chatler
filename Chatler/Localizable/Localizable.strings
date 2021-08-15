@@ -28,6 +28,9 @@
 "accountLogout" = "Logout";
 "accountLogoutQuestion" = "Are you sure you want to logout?";
 
+// Chat
+"chat.sendPhoto" = "Send photo";
+
 // Friend
 "friend.sharedImages" = "Shared images";
 "friend.mute" = "Mute";
