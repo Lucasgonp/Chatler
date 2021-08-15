@@ -18,6 +18,7 @@ protocol ConversationsViewModelOutput: BaseOutputProtocol {
     func onAuthenticate()
     func onLoadConversations(conversations: [Conversation])
     func onOpenChat(with user: User)
+    func reloadTableView()
 }
 
 class ConversationsController: ViewController {
@@ -96,10 +97,6 @@ class ConversationsController: ViewController {
         }
     }
     
-    override func configureViews() {
-        //
-    }
-    
     // MARK: - Selectors
     
     @objc func showProfile() {
@@ -163,6 +160,7 @@ extension ConversationsController: UITableViewDataSource {
 }
 
     // MARK: - UITableViewDelegate
+
 extension ConversationsController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         viewModel.selectConversation(indexPath.row)
@@ -170,7 +168,12 @@ extension ConversationsController: UITableViewDelegate {
 }
 
     // MARK: - Outputs
+
 extension ConversationsController: ConversationsViewModelOutput {
+    func reloadTableView() {
+        tableView.reloadData()
+    }
+    
     func onAuthenticate() {
         loadConversations()
     }

@@ -30,11 +30,9 @@ class ConversationsViewModel: ConversationsViewModelInput {
     private let activityIndicator = ActivityIndicator().spinner
     
     func authenticate() {
-        if let uid = Auth.auth().currentUser?.uid {
-            print("DEBUG: User ID is \(uid)")
+        if let _ = Auth.auth().currentUser?.uid {
             output?.onAuthenticate()
         } else {
-            print("DEBUG: User is NOT logged in)")
             output?.presentLoginScreen()
         }
     }
@@ -42,11 +40,11 @@ class ConversationsViewModel: ConversationsViewModelInput {
     func logout() {
         do {
             try Auth.auth().signOut()
-            print("DEBUG: Signed out!")
-            
+            conversations = []
+            conversationsDictionary = [:]
+            output?.reloadTableView()
             output?.presentLoginScreen()
         } catch {
-            print("DEBUG: Error signing out: \(error.localizedDescription)")
             output?.showError(error.localizedDescription)
         }
     }
