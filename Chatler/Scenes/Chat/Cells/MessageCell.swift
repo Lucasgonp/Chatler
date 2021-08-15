@@ -113,7 +113,7 @@ private extension MessageCell {
         guard let message = message else { return }
         let viewModel = MessageViewModel(message: message, delegate: self)
         
-        /// Checking if message is a image or photo
+        /// Checking if message is a image or text
         if let imageUrl = message.image {
             loadImageIfNeeded(photoUrl: imageUrl)
         } else {

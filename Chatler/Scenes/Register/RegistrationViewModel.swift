@@ -56,9 +56,16 @@ class RegistrationViewModel: RegistrationViewModelDelegate {
     func loadSignUpUser() {
         guard let _ = unwrapRegistrationForm() else { return }
         signUpButton.loadingIndicator(true)
+            
+        let group = DispatchGroup()
         
-        DispatchQueue.global(qos: .userInitiated).sync {
-            self.prepareImage(profileImage: self.profileImage, completion: self.handleLoadedImage(result:))
+        group.enter()
+        self.prepareImage(profileImage: self.profileImage) { result in
+            self.handleLoadedImage(result: result)
+            group.leave()
+        }
+        
+        group.notify(queue: .main) {
             self.createUser(profileImageUrl: self.profileImageUrl, completion: self.handleCreatedUser(result:))
         }
     }
