@@ -86,13 +86,15 @@ class RegistrationViewModel: RegistrationViewModelDelegate {
     }
     
     func handleCreatedUser(result: Result<AuthDataResult, Error>) {
-        signUpButton.loadingIndicator(false)
-        
-        switch result {
-        case .success(let result):
-            controller?.didCreateUser()
-        case .failure(let error):
-            self.controller?.showError(error.localizedDescription)
+        DispatchQueue.main.async {
+            self.signUpButton.loadingIndicator(false)
+            
+            switch result {
+            case .success(let result):
+                self.controller?.didCreateUser()
+            case .failure(let error):
+                self.controller?.showError(error.localizedDescription)
+            }
         }
     }
     
